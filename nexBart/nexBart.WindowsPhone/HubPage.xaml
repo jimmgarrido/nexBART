@@ -43,7 +43,7 @@
                     <Border Background="{ThemeResource ListViewItemPlaceholderBackgroundThemeBrush}" Margin="0,9.5,0,0" Grid.Column="0" HorizontalAlignment="Left">
                         <Image Source="{Binding ImagePath}" Stretch="UniformToFill" AutomationProperties.Name="{Binding Title}" Height="79" Width="79"/>
                     </Border>
-                    <StackPanel Grid.Column="1" Margin="14.5,0,0,0">
+                    <StackPanel Grid.Column="1" Margin="14.5,0,0,10">
                         <TextBlock Text="{Binding Title}" Style="{ThemeResource ListViewItemTextBlockStyle}"/>
                         <TextBlock Text="{Binding Description}" Style="{ThemeResource ListViewItemContentTextBlockStyle}" Foreground="{ThemeResource PhoneMidBrush}" />
                         <TextBlock Text="{Binding Subtitle}" Style="{ThemeResource ListViewItemSubheaderTextBlockStyle}" />
@@ -67,23 +67,144 @@
                     </StackPanel>
                 </Grid>
             </DataTemplate>
+            <x:Int32 x:Key="HubHeaderCharacterSpacing">-22</x:Int32>
+            <x:Double x:Key="HubHeaderFontSize">52</x:Double>
+            <FontFamily x:Key="PhoneFontFamilyNormal">Segoe WP</FontFamily>
+            <Thickness x:Key="HubHeaderMarginThickness">15,1,0,00</Thickness>
+            <Style x:Key="MainHubStyle" TargetType="Hub">
+            	<Setter Property="Template">
+            		<Setter.Value>
+            			<ControlTemplate TargetType="Hub">
+            				<Grid x:Name="HubRoot">
+            					<Grid.Projection>
+            						<PlaneProjection x:Name="EntranceAnimationProjection"/>
+            					</Grid.Projection>
+            					<Grid.RowDefinitions>
+            						<RowDefinition Height="auto"/>
+            						<RowDefinition Height="*"/>
+            					</Grid.RowDefinitions>
+            					<VisualStateManager.VisualStateGroups>
+            						<VisualStateGroup x:Name="BackgroundImageLoadStates">
+            							<VisualState x:Name="BackgroundHidden">
+            								<Storyboard>
+            									<FadeOutThemeAnimation Storyboard.TargetName="Background"/>
+            								</Storyboard>
+            							</VisualState>
+            							<VisualState x:Name="BackgroundImageFadingIn">
+            								<Storyboard>
+            									<FadeInThemeAnimation Storyboard.TargetName="Background"/>
+            								</Storyboard>
+            							</VisualState>
+            							<VisualState x:Name="BackgroundShowing">
+            								<Storyboard>
+            									<DoubleAnimation To="1" Storyboard.TargetProperty="Opacity" Storyboard.TargetName="Background"/>
+            								</Storyboard>
+            							</VisualState>
+            						</VisualStateGroup>
+            					</VisualStateManager.VisualStateGroups>
+            					<Canvas Grid.RowSpan="2">
+            						<Canvas.Clip>
+            							<RectangleGeometry x:Name="BackgroundClipRect"/>
+            						</Canvas.Clip>
+            						<Grid x:Name="Background">
+            							<Grid.RenderTransform>
+            								<CompositeTransform x:Name="BackgroundParallaxTransform"/>
+            							</Grid.RenderTransform>
+            							<Border x:Name="WrapBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+            								<Border.RenderTransform>
+            									<CompositeTransform x:Name="WrapBackgroundParallaxTransform"/>
+            								</Border.RenderTransform>
+            							</Border>
+            							<Border x:Name="MainBackground" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"/>
+            						</Grid>
+            					</Canvas>
+            					<ScrollViewer x:Name="ScrollViewer" HorizontalScrollMode="Auto" HorizontalSnapPointsType="None" HorizontalAlignment="Left" HorizontalScrollBarVisibility="Hidden" Grid.RowSpan="2" Template="{StaticResource ScrollViewerScrollBarlessTemplate}" VerticalScrollBarVisibility="Disabled" VerticalScrollMode="Disabled" ZoomMode="Disabled">
+            						<ItemsStackPanel x:Name="Panel" CacheLength="6" Orientation="{TemplateBinding Orientation}"/>
+            					</ScrollViewer>
+            					<Canvas Grid.Row="0">
+            						<Canvas.Clip>
+            							<RectangleGeometry x:Name="HeaderClipRect"/>
+            						</Canvas.Clip>
+            						<ContentControl x:Name="HeaderHost" CharacterSpacing="{StaticResource HubHeaderCharacterSpacing}" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" FontWeight="Light" FontSize="{StaticResource HubHeaderFontSize}" FontFamily="{StaticResource PhoneFontFamilyNormal}" Margin="{StaticResource HubHeaderMarginThickness}">
+            							<ContentControl.RenderTransform>
+            								<TransformGroup>
+            									<CompositeTransform x:Name="HeaderParallaxTransform"/>
+            									<TranslateTransform x:Name="HeaderFlyinFlyoutTransform"/>
+            								</TransformGroup>
+            							</ContentControl.RenderTransform>
+            						</ContentControl>
+            					</Canvas>
+            				</Grid>
+            			</ControlTemplate>
+            		</Setter.Value>
+            	</Setter>
+            </Style>
+            <x:Int32 x:Key="HubSectionHeaderCharacterSpacing">-10</x:Int32>
+            <x:Double x:Key="HubSectionHeaderFontSize">19</x:Double>
+            <Thickness x:Key="HubSectionHeaderMarginThickness">-1,5,0,25</Thickness>
+            <Thickness x:Key="HubSectionMarginThickness">15,10,0,15</Thickness>
+            <Style x:Key="HubSectionStyle" TargetType="HubSection">
+            	<Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+            	<Setter Property="VerticalContentAlignment" Value="Stretch"/>
+            	<Setter Property="Template">
+            		<Setter.Value>
+            			<ControlTemplate TargetType="HubSection">
+            				<Grid Background="{TemplateBinding Background}" Margin="{StaticResource HubSectionMarginThickness}">
+            					<Grid.RowDefinitions>
+            						<RowDefinition Height="auto"/>
+            						<RowDefinition Height="auto"/>
+            						<RowDefinition Height="*"/>
+            					</Grid.RowDefinitions>
+            					<Grid.RenderTransform>
+            						<CompositeTransform x:Name="WrappingTransform"/>
+            					</Grid.RenderTransform>
+            					<Rectangle x:Name="HubHeaderPlaceholder" Grid.Row="0"/>
+            					<ContentControl x:Name="Header" CharacterSpacing="{StaticResource HubSectionHeaderCharacterSpacing}" ContentTemplate="{TemplateBinding HeaderTemplate}" Content="{TemplateBinding Header}" FontWeight="SemiBold" FontSize="{StaticResource HubSectionHeaderFontSize}" FontFamily="{StaticResource PhoneFontFamilyNormal}" HorizontalAlignment="Left" Margin="{StaticResource HubSectionHeaderMarginThickness}" Grid.Row="1">
+            						<ContentControl.RenderTransform>
+            							<CompositeTransform x:Name="StickyHeaderTransform"/>
+            						</ContentControl.RenderTransform>
+            					</ContentControl>
+            					<ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" Grid.Row="2" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+            				</Grid>
+            			</ControlTemplate>
+            		</Setter.Value>
+            	</Setter>
+            </Style>
         </ResourceDictionary>
     </Page.Resources>
 
     <Grid x:Name="LayoutRoot">
-        <Hub x:Name="MainPageHub" Header="nexBart" Background="{ThemeResource HubBackgroundImageBrush}">
-            <HubSection x:Name="FavoritesSection" Header="my stations" DataContext="{Binding Groups}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}">
+    	<Grid.Background>
+    		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+    			<GradientStop Color="#FFFAFAFA" Offset="0"/>
+    			<GradientStop Color="#FFEDEDED" Offset="1"/>
+    		</LinearGradientBrush>
+    	</Grid.Background>
+        <Hub x:Name="MainPageHub" Header="nexBart" Margin="0 25 0 0" Style="{StaticResource MainHubStyle}" Foreground="#FF37ACE4">
+            <HubSection x:Name="FavoritesSection" Header="my stations" DataContext="{Binding Favorites}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}">
                 <DataTemplate>
                     <ListView
                         ItemsSource="{Binding}"
                         IsItemClickEnabled="True"
-                        ItemClick="GroupSection_ItemClick"
+                        ItemClick="StopClicked"
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <StackPanel Margin="0,0,0,27.5">
-                                    <TextBlock Text="{Binding Title}" Style="{ThemeResource ListViewItemTextBlockStyle}" />
-                                </StackPanel>
+                                
+                                    <Grid Background="Transparent" Margin="0 15 0 15" VerticalAlignment="Center">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="180"/>
+                                            <ColumnDefinition Width="*"/>
+                                        </Grid.ColumnDefinitions>
+
+                                        <TextBlock Text="{Binding Name}" FontSize="21" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" TextWrapping="WrapWholeWords" Foreground="#FF575757" />
+                                        <Ellipse Fill="Red" Stroke="#65575757" StrokeThickness="2" Height="20" Width="20" Margin="25 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1"/>
+                                        <Ellipse Fill="Green" Stroke="#65575757" StrokeThickness="2" Height="20" Width="20" Margin="55 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1"/>
+                                        <Ellipse Fill="#ffff33" Stroke="#65575757" StrokeThickness="2" Height="20" Width="20" Margin="85 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <Ellipse Fill="Orange" Stroke="#65575757" StrokeThickness="2" Height="20" Width="20" Margin="115 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1"/>
+                                    <!--<Border BorderThickness="0,0,0,1" Height="10" Width="200" BorderBrush="Gray" Opacity="1.0" HorizontalAlignment="Center"/>-->
+                                </Grid>
+                                
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

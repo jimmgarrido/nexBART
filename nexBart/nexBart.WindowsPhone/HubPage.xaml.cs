@@ -1,6 +1,6 @@
 ﻿using nexBart.Common;
 using nexBart.Data;
-
+using nexBart.DataModel;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -21,8 +21,6 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-// The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
-
 namespace nexBart
 {
     /// <summary>
@@ -42,6 +40,10 @@ namespace nexBart
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
+
+            StationGroup.StationItems.Add(new Station("12th St. Oakland City Center", "M L L"));
+            StationGroup.StationItems.Add(new Station("16th St. Mission", "M L L"));
+            StationGroup.StationItems.Add(new Station("Hayward", "M L L"));
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
@@ -79,8 +81,9 @@ namespace nexBart
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var sampleDataGroups = await SampleDataSource.GetGroupsAsync();
-            this.DefaultViewModel["Groups"] = sampleDataGroups;
+            var stations = StationGroup.GetStations();
+            this.DefaultViewModel["Favorites"] = stations;
+            
         }
 
         /// <summary>
@@ -101,7 +104,7 @@ namespace nexBart
         /// </summary>
         /// <param name="sender">The source of the click event.</param>
         /// <param name="e">Details about the click event.</param>
-        private void GroupSection_ItemClick(object sender, ItemClickEventArgs e)
+        private void StopClicked(object sender, ItemClickEventArgs e)
         {
             var groupId = ((SampleDataGroup)e.ClickedItem).UniqueId;
             if (!Frame.Navigate(typeof(SectionPage), groupId))
