@@ -21,6 +21,96 @@
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
 
+            <!--DataTemplates for the station list-->
+            <DataTemplate x:Key="OneLine">
+                <Grid Background="Transparent" Margin="0 -15 0 20" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="{Binding Name}" FontSize="22" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" TextWrapping="WrapWholeWords" Foreground="#FF575757" />
+                    <Grid Grid.Row="1" Background="Transparent" VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Rectangle Fill="{Binding RouteColor}" Height="40" Width="3" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                                Grid.Row="0" Grid.Column="0" />
+
+                        <StackPanel Grid.Row="0" Grid.Column="1">
+                            <TextBlock Text="{Binding Destination1}" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <TextBlock Text="5, 15, 25 mins"  FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0" Grid.Column="2">
+                            <TextBlock Text="{Binding Destination2}" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                            <TextBlock Text="8, 23, 38 mins" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+            
+            <DataTemplate x:Key="TwoLines">
+                <Grid Background="Transparent" Margin="0 -15 0 20" VerticalAlignment="Top">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="{Binding Name}" FontSize="22" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" TextWrapping="WrapWholeWords" Foreground="#FF575757" />
+                    <Grid Grid.Row="1" Background="Transparent" VerticalAlignment="Top">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                            <RowDefinition Height="55"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15"/>
+                            <ColumnDefinition Width="150"/>
+                            <ColumnDefinition Width="150"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Rectangle Fill="{Binding RouteColor}" Height="40" Width="3" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                                Grid.Row="0" Grid.Column="0" />
+
+                        <StackPanel Grid.Row="0" Grid.Column="1">
+                            <TextBlock Text="{Binding Destination[0]}" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <TextBlock Text="5, 15, 25 mins"  FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0" Grid.Column="2">
+                            <TextBlock Text="{Binding Destination[1]}" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                            <TextBlock Text="8, 23, 38 mins" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                        </StackPanel>
+                        
+                        <Rectangle Fill="{Binding RouteColor}" Height="40" Width="3" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                                Grid.Row="0" Grid.Column="0" />
+
+                        <StackPanel Grid.Row="0" Grid.Column="1">
+                            <TextBlock Text="{Binding Destination[0]}" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                            <TextBlock Text="5, 15, 25 mins"  FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                        </StackPanel>
+
+                        <StackPanel Grid.Row="0" Grid.Column="2">
+                            <TextBlock Text="{Binding Destination[1]}" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                            <TextBlock Text="8, 23, 38 mins" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </DataTemplate>
+            
             <DataTemplate x:Key="HubSectionHeaderTemplate">
                 <TextBlock Margin="0,0,0,-9.5" Text="{Binding}"/>
             </DataTemplate>
@@ -190,21 +280,81 @@
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True">
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                
-                                    <Grid Background="Transparent" Margin="0 15 0 15" VerticalAlignment="Center">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="180"/>
-                                            <ColumnDefinition Width="*"/>
-                                        </Grid.ColumnDefinitions>
+                                <Grid Background="Transparent" Margin="0 -15 0 20" VerticalAlignment="Top">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="50"/>
+                                        <RowDefinition Height="auto"/>
+                                    </Grid.RowDefinitions>
 
-                                        <TextBlock Text="{Binding Name}" FontSize="21" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="0" TextWrapping="WrapWholeWords" Foreground="#FF575757" />
-                                        <Ellipse Fill="Red" Stroke="#65575757" StrokeThickness="2" Height="20" Width="20" Margin="25 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1"/>
-                                        <Ellipse Fill="Green" Stroke="#65575757" StrokeThickness="2" Height="20" Width="20" Margin="55 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1"/>
-                                        <Ellipse Fill="#ffff33" Stroke="#65575757" StrokeThickness="2" Height="20" Width="20" Margin="85 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1"/>
-                                    <Ellipse Fill="Orange" Stroke="#65575757" StrokeThickness="2" Height="20" Width="20" Margin="115 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="1"/>
-                                    <!--<Border BorderThickness="0,0,0,1" Height="10" Width="200" BorderBrush="Gray" Opacity="1.0" HorizontalAlignment="Center"/>-->
+                                    <TextBlock Text="{Binding Name}" FontSize="22" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Row="0" TextWrapping="WrapWholeWords" Foreground="#FF575757" />
+                                    <Grid Grid.Row="1" Background="Transparent" VerticalAlignment="Top" DataContext="{Binding}">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="55"/>
+                                            <RowDefinition Height="55"/>
+                                            <RowDefinition Height="55"/>
+                                            <RowDefinition Height="55"/>
+                                        </Grid.RowDefinitions>
+                                        
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="15"/>
+                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="150"/>
+                                        </Grid.ColumnDefinitions>
+                                        
+                                        <Rectangle Fill="Yellow" Height="40" Width="3" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                                   Grid.Row="0" Grid.Column="0" />
+                                        
+                                        <StackPanel Grid.Row="0" Grid.Column="1">
+                                            <TextBlock Text="{Binding LinesList[0].Destinations[0]}" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                            <TextBlock Text="5, 15, 25 mins"  FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                        </StackPanel>
+                                        
+                                        <StackPanel Grid.Row="0" Grid.Column="2">
+                                            <TextBlock Text="{Binding Destinations[1]}" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                            <TextBlock Text="8, 23, 38 mins" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                        </StackPanel>
+                                        
+                                        
+                                        <Rectangle Fill="Red" Height="40" Width="3" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                                   Grid.Row="1" Grid.Column="0" />
+                                        
+                                        <StackPanel Grid.Row="1" Grid.Column="1">
+                                            <TextBlock Text="Richmond" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                            <TextBlock Text="3, 23, 43 mins"  FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                        </StackPanel>
+                                        
+                                        <StackPanel Grid.Row="1" Grid.Column="2">
+                                            <TextBlock Text="Daly City" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                            <TextBlock Text="1, 16, 31 mins" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                        </StackPanel>
+                                        
+                                        <Rectangle Fill="#0099cc" Height="40" Width="3" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                                   Grid.Row="2" Grid.Column="0" />
+                                        
+                                        <StackPanel Grid.Row="2" Grid.Column="1">
+                                            <TextBlock Text="Dublin/Pleasanton" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                            <TextBlock Text="3, 23, 43 mins"  FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                        </StackPanel>
+                                        
+                                        <StackPanel Grid.Row="2" Grid.Column="2">
+                                            <TextBlock Text="Daly City" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                            <TextBlock Text="1, 16, 31 mins" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                        </StackPanel>
+                                        
+                                        <Rectangle Fill="#339933" Height="40" Width="3" Margin="0 0 0 0" HorizontalAlignment="Left" VerticalAlignment="Top" 
+                                                   Grid.Row="3" Grid.Column="0" />
+                                        
+                                        <StackPanel Grid.Row="3" Grid.Column="1">
+                                            <TextBlock Text="Fremont" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                                            <TextBlock Text="3, 23, 43 mins"  FontSize="14" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                                        </StackPanel>
+                                        
+                                        <StackPanel Grid.Row="3" Grid.Column="2">
+                                            <TextBlock Text="Daly City" Foreground="#FF575757" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Top" />
+                                            <TextBlock Text="1, 16, 31 mins" FontSize="14" HorizontalAlignment="Right" VerticalAlignment="Top"/>
+                                        </StackPanel>
+                                    </Grid>
                                 </Grid>
-                                
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

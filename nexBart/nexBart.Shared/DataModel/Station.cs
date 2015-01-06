@@ -7,12 +7,15 @@ namespace nexBart.DataModel
     public class Station
     {
         public string Name { get; set; }
-        public string Lines { get; set; }
+        public List<Line> LinesList { get; set; }
 
-        public Station(string _name, string _lines)
+        public int numLines;
+
+        public Station(string _name)
         {
             this.Name = _name;
-            this.Lines = _lines;
+
+            LinesList = new List<Line>();
         }
     }
 }

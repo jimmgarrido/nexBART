@@ -41,9 +41,14 @@ namespace nexBart
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
-            StationGroup.StationItems.Add(new Station("12th St. Oakland City Center", "M L L"));
-            StationGroup.StationItems.Add(new Station("16th St. Mission", "M L L"));
-            StationGroup.StationItems.Add(new Station("Hayward", "M L L"));
+            StationGroup.StationItems.Add(new Station("12th St. Oakland City Center"));
+            StationGroup.StationItems.Add(new Station("16th St. Mission"));
+            StationGroup.StationItems.Add(new Station("Hayward"));
+
+            foreach (Station s in StationGroup.StationItems)
+            {
+                s.LinesList.Add(new Line("Pittsburg/ Bay Point"));
+            }
 
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
@@ -78,7 +83,7 @@ namespace nexBart
         /// <see cref="Frame.Navigate(Type, object)"/> when this page was initially requested and
         /// a dictionary of state preserved by this page during an earlier
         /// session.  The state will be null the first time a page is visited.</param>
-        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data
             var stations = StationGroup.GetStations();
@@ -106,11 +111,11 @@ namespace nexBart
         /// <param name="e">Details about the click event.</param>
         private void StopClicked(object sender, ItemClickEventArgs e)
         {
-            var groupId = ((SampleDataGroup)e.ClickedItem).UniqueId;
-            if (!Frame.Navigate(typeof(SectionPage), groupId))
-            {
-                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
-            }
+            //var groupId = ((SampleDataGroup)e.ClickedItem).UniqueId;
+            //if (!Frame.Navigate(typeof(SectionPage), groupId))
+            //{
+            //    throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
+            //}
         }
 
         /// <summary>
