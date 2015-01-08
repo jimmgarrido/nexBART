@@ -7,7 +7,7 @@ namespace nexBart.DataModels
     public class StationData
     {
         public string Name { get; set; }
-        private string abbrv;
+        public string abbrv;
 
         public StationData(string _name, string _abbrv)
         {

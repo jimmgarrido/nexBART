@@ -22,6 +22,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\StationGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DeparturesHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Requests.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\XmlParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FavoritesModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\HubPageModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SchedulesModel.cs" />

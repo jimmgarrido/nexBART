@@ -396,7 +396,7 @@
                 <DataTemplate>
                     <Grid>
                         <StackPanel>
-                            <ComboBox x:Name="StationComboBox" ItemsSource="{Binding stationList}" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                            <ComboBox x:Name="StationComboBox" ItemsSource="{Binding stationsList}" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
                                       BorderBrush="#FF575757" BorderThickness="1" Foreground="Black" PlaceholderText="Select a station" 
                                       Background="Transparent" SelectionChanged="StationSelected">
                                 <ComboBox.ItemTemplate>
@@ -427,7 +427,7 @@
                                         <ColumnDefinition Width="140"/>
                                     </Grid.ColumnDefinitions>
 
-                                    <Rectangle Fill="{Binding LinesList[0].Destinations[0]}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
+                                    <Rectangle Fill="{Binding selectedStation.LinesList[0].RouteColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
 
                                     <StackPanel Grid.Row="0" Grid.Column="1">
                                         <TextBlock Text="{Binding LinesList[0].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>

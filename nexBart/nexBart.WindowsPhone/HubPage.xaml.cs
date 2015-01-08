@@ -44,34 +44,34 @@ namespace nexBart
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
-            StationGroup.StationItems.Add(new Station("12th St. Oakland City Center"));
-            StationGroup.StationItems.Add(new Station("16th St. Mission"));
-            StationGroup.StationItems.Add(new Station("Hayward"));
+            //StationGroup.StationItems.Add(new Station("12th St. Oakland City Center"));
+            //StationGroup.StationItems.Add(new Station("16th St. Mission"));
+            //StationGroup.StationItems.Add(new Station("Hayward"));
 
-            StationGroup.StationItems[0].LinesList.Add(new Line("Pittsburg/Bay Point"));
-            StationGroup.StationItems[0].LinesList[0].Destinations[0] = "Pittsburg/Bay Point";
-            StationGroup.StationItems[0].LinesList[0].Destinations[1] = "SF Int'l Airport";
+            //StationGroup.StationItems[0].LinesList.Add(new Line("Pittsburg/Bay Point"));
+            //StationGroup.StationItems[0].LinesList[0].Destinations[0] = "Pittsburg/Bay Point";
+            //StationGroup.StationItems[0].LinesList[0].Destinations[1] = "SF Int'l Airport";
             
 
-            StationGroup.StationItems[0].LinesList.Add(new Line("Richmond"));
-            StationGroup.StationItems[0].LinesList[1].Destinations[0] = "Richmond";
-            StationGroup.StationItems[0].LinesList[1].Destinations[1] = "Daly City";
+            //StationGroup.StationItems[0].LinesList.Add(new Line("Richmond"));
+            //StationGroup.StationItems[0].LinesList[1].Destinations[0] = "Richmond";
+            //StationGroup.StationItems[0].LinesList[1].Destinations[1] = "Daly City";
 
-            StationGroup.StationItems[0].LinesList.Add(new Line("Dublin/Pleasaton"));
-            StationGroup.StationItems[0].LinesList[2].Destinations[0] = "Dublin/Pleasaton";
-            StationGroup.StationItems[0].LinesList[2].Destinations[1] = "Daly City";
+            //StationGroup.StationItems[0].LinesList.Add(new Line("Dublin/Pleasaton"));
+            //StationGroup.StationItems[0].LinesList[2].Destinations[0] = "Dublin/Pleasaton";
+            //StationGroup.StationItems[0].LinesList[2].Destinations[1] = "Daly City";
 
-            StationGroup.StationItems[1].LinesList.Add(new Line("Richmond"));
-            StationGroup.StationItems[1].LinesList[0].Destinations[0] = "Richmond";
-            StationGroup.StationItems[1].LinesList[0].Destinations[1] = "Fremont";
+            //StationGroup.StationItems[1].LinesList.Add(new Line("Richmond"));
+            //StationGroup.StationItems[1].LinesList[0].Destinations[0] = "Richmond";
+            //StationGroup.StationItems[1].LinesList[0].Destinations[1] = "Fremont";
 
-            StationGroup.StationItems[2].LinesList.Add(new Line("Richmond"));
-            StationGroup.StationItems[2].LinesList[0].Destinations[0] = "Pittsburg/Bay Point";
-            StationGroup.StationItems[2].LinesList[0].Destinations[1] = "SF Int'l Airport";
+            //StationGroup.StationItems[2].LinesList.Add(new Line("Richmond"));
+            //StationGroup.StationItems[2].LinesList[0].Destinations[0] = "Pittsburg/Bay Point";
+            //StationGroup.StationItems[2].LinesList[0].Destinations[1] = "SF Int'l Airport";
 
-            StationGroup.StationItems[2].LinesList.Add(new Line("Dublin/Pleasaton"));
-            StationGroup.StationItems[2].LinesList[1].Destinations[0] = "Fremont";
-            StationGroup.StationItems[2].LinesList[1].Destinations[1] = "Daly City";
+            //StationGroup.StationItems[2].LinesList.Add(new Line("Dublin/Pleasaton"));
+            //StationGroup.StationItems[2].LinesList[1].Destinations[0] = "Fremont";
+            //StationGroup.StationItems[2].LinesList[1].Destinations[1] = "Daly City";
 
 
         }
@@ -138,7 +138,7 @@ namespace nexBart
         {
             StationData selected = (StationData)(((ComboBox)sender).SelectedItem);
 
-            HubPageModel.StationSelected(selected, ref scheduleData);
+            HubPageModel.StationSelected(selected, scheduleData);
         }
 
         #region NavigationHelper registration

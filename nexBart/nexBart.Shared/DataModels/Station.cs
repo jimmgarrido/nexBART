@@ -1,5 +1,7 @@
-﻿using System;
+﻿using nexBart.DataModels;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace nexBart.DataModel
@@ -7,9 +9,9 @@ namespace nexBart.DataModel
     public class Station
     {
         public string Name { get; set; }
-        public List<Line> LinesList { get; set; }
+        public ObservableCollection<Line> LinesList { get; set; }
 
-        private string abbrv;
+        public string abbrv;
 
         private Dictionary<string, string> abbreviations = new Dictionary<string, string>()
         {
@@ -18,11 +20,11 @@ namespace nexBart.DataModel
 
         public Station() { }
 
-        public Station(string _name)
+        public Station(StationData _station)
         {
-            this.Name = _name;
-
-            LinesList = new List<Line>();
+            this.Name = _station.Name;
+            this.abbrv = _station.abbrv;
+            LinesList = new ObservableCollection<Line>();
         }
     }
 }
