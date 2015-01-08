@@ -1,6 +1,7 @@
 ﻿using nexBart.Common;
-using nexBart.Data;
 using nexBart.DataModel;
+using nexBart.DataModels;
+using nexBart.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -23,14 +24,12 @@ using Windows.UI.Xaml.Navigation;
 
 namespace nexBart
 {
-    /// <summary>
-    /// A page that displays a grouped collection of items.
-    /// </summary>
     public sealed partial class HubPage : Page
     {
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
-        private readonly ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
+
+        public ScheduleGroup scheduleData;
 
         public HubPage()
         {
@@ -41,32 +40,47 @@ namespace nexBart
 
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
+            this.navigationHelper = new NavigationHelper(this);
+            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
+            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
             StationGroup.StationItems.Add(new Station("12th St. Oakland City Center"));
             StationGroup.StationItems.Add(new Station("16th St. Mission"));
             StationGroup.StationItems.Add(new Station("Hayward"));
 
-            foreach (Station s in StationGroup.StationItems)
-            {
-                s.LinesList.Add(new Line("Pittsburg/ Bay Point"));
-            }
+            StationGroup.StationItems[0].LinesList.Add(new Line("Pittsburg/Bay Point"));
+            StationGroup.StationItems[0].LinesList[0].Destinations[0] = "Pittsburg/Bay Point";
+            StationGroup.StationItems[0].LinesList[0].Destinations[1] = "SF Int'l Airport";
+            
 
-            this.navigationHelper = new NavigationHelper(this);
-            this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
-            this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+            StationGroup.StationItems[0].LinesList.Add(new Line("Richmond"));
+            StationGroup.StationItems[0].LinesList[1].Destinations[0] = "Richmond";
+            StationGroup.StationItems[0].LinesList[1].Destinations[1] = "Daly City";
+
+            StationGroup.StationItems[0].LinesList.Add(new Line("Dublin/Pleasaton"));
+            StationGroup.StationItems[0].LinesList[2].Destinations[0] = "Dublin/Pleasaton";
+            StationGroup.StationItems[0].LinesList[2].Destinations[1] = "Daly City";
+
+            StationGroup.StationItems[1].LinesList.Add(new Line("Richmond"));
+            StationGroup.StationItems[1].LinesList[0].Destinations[0] = "Richmond";
+            StationGroup.StationItems[1].LinesList[0].Destinations[1] = "Fremont";
+
+            StationGroup.StationItems[2].LinesList.Add(new Line("Richmond"));
+            StationGroup.StationItems[2].LinesList[0].Destinations[0] = "Pittsburg/Bay Point";
+            StationGroup.StationItems[2].LinesList[0].Destinations[1] = "SF Int'l Airport";
+
+            StationGroup.StationItems[2].LinesList.Add(new Line("Dublin/Pleasaton"));
+            StationGroup.StationItems[2].LinesList[1].Destinations[0] = "Fremont";
+            StationGroup.StationItems[2].LinesList[1].Destinations[1] = "Daly City";
+
+
         }
 
-        /// <summary>
-        /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
-        /// </summary>
         public NavigationHelper NavigationHelper
         {
             get { return this.navigationHelper; }
         }
 
-        /// <summary>
-        /// Gets the view model for this <see cref="Page"/>.
-        /// This can be changed to a strongly typed view model.
-        /// </summary>
         public ObservableDictionary DefaultViewModel
         {
             get { return this.defaultViewModel; }
@@ -85,10 +99,12 @@ namespace nexBart
         /// session.  The state will be null the first time a page is visited.</param>
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var stations = StationGroup.GetStations();
-            this.DefaultViewModel["Favorites"] = stations;
-            
+            FavoritesModel.LoadFavorites();
+            scheduleData = new ScheduleGroup();
+            //scheduleData.Name = "Selecefwf";
+            this.DefaultViewModel["Favorites"] = StationGroup.GetStations();
+            this.DefaultViewModel["Schedules"] = scheduleData;
+            //StationC
         }
 
         /// <summary>
@@ -118,18 +134,11 @@ namespace nexBart
             //}
         }
 
-        /// <summary>
-        /// Shows the details of an item clicked on in the <see cref="ItemPage"/>
-        /// </summary>
-        /// <param name="sender">The source of the click event.</param>
-        /// <param name="e">Defaults about the click event.</param>
-        private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
+        private void StationSelected(object sender, SelectionChangedEventArgs e)
         {
-            var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
-            if (!Frame.Navigate(typeof(ItemPage), itemId))
-            {
-                throw new Exception(this.resourceLoader.GetString("NavigationFailedExceptionMessage"));
-            }
+            StationData selected = (StationData)(((ComboBox)sender).SelectedItem);
+
+            HubPageModel.StationSelected(selected, ref scheduleData);
         }
 
         #region NavigationHelper registration

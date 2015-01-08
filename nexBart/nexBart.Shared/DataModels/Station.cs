@@ -9,7 +9,14 @@ namespace nexBart.DataModel
         public string Name { get; set; }
         public List<Line> LinesList { get; set; }
 
-        public int numLines;
+        private string abbrv;
+
+        private Dictionary<string, string> abbreviations = new Dictionary<string, string>()
+        {
+            {"12th St. Oakland City Center", "12th" }
+        };
+
+        public Station() { }
 
         public Station(string _name)
         {

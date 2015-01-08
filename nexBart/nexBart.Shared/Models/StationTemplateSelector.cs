@@ -9,10 +9,10 @@ namespace nexBart.Models
 {
     class StationTemplateSelector : DataTemplateSelector
     {
-        DataTemplate oneLineTemplate { get; set; }
-        DataTemplate twoLineTemplate { get; set; }
-        DataTemplate threeLineTemplate { get; set; }
-        DataTemplate fourLineTemplate { get; set; }
+        public DataTemplate oneLineTemplate { get; set; }
+        public DataTemplate twoLineTemplate { get; set; }
+        public DataTemplate threeLineTemplate { get; set; }
+        public DataTemplate fourLineTemplate { get; set; }
 
         protected override DataTemplate SelectTemplateCore(object item, DependencyObject container)
         {

@@ -1,6 +1,4 @@
 ﻿using nexBart.Common;
-using nexBart.Data;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -68,9 +66,7 @@ namespace nexBart
         /// session.  The state will be null the first time a page is visited.</param>
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            // TODO: Create an appropriate data model for your problem domain to replace the sample data
-            var item = await SampleDataSource.GetItemAsync((string)e.NavigationParameter);
-            this.DefaultViewModel["Item"] = item;
+
         }
 
         /// <summary>
