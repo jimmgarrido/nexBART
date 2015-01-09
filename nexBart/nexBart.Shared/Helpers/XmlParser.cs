@@ -20,8 +20,12 @@ namespace nexBart.Helpers
 
         public static async Task<ObservableCollection<Line>> Departures(XDocument _doc)
         {
-            lines.Clear();
+            List<string> usedDests = new List<string>();
             List<string> usedColors = new List<string>();
+
+            usedColors.Clear();
+            usedDests.Clear();
+            lines.Clear();
 
             XElement rootElement = _doc.Element("root").Element("station");
 
@@ -51,10 +55,17 @@ namespace nexBart.Helpers
                     if(!usedColors.Contains(color))
                     {
                         lines.Add(new Line(dest, color));
+                        usedDests.Add(dest);
                         usedColors.Add(color);
                         SetDestination(est);
                     } else
                     {
+                        if (!usedDests.Contains(dest))
+                        {
+                            lines.Add(new Line(dest, color));
+                            usedDests.Add(dest);
+                            //usedColors.Add(color);
+                        }
                         SetDestination(est);
                     }
                 } 
@@ -66,17 +77,17 @@ namespace nexBart.Helpers
         {
             IEnumerable<Line> line = lines.Where(l => l.colorName.Equals(color));
 
-            if (line.Count() > 0)
+            for (int k = 0; k < line.Count(); k++)
             {
-                if(e.Element("direction").Value.Equals("South"))
+                if (e.Element("direction").Value.Equals("South"))
                 {
                     line.ElementAt(0).Destinations[1] = dest;
-                    SetTimes(0, ref line);
+                    SetTimes(1, ref line);
                 }
                 else
                 {
                     line.ElementAt(0).Destinations[0] = dest;
-                    SetTimes(1, ref line);
+                    SetTimes(0, ref line);
                 }
             }
         }

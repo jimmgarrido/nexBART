@@ -33,7 +33,7 @@
             
             <Style x:Key="RectangleStyle" TargetType="Rectangle">
                 <Setter Property="Height" Value="40"/>
-                <Setter Property="Width" Value="3"/>
+                <Setter Property="Width" Value="4"/>
                 <Setter Property="Margin" Value="0 0 0 0"/>
                 <Setter Property="HorizontalAlignment" Value="Left"/>
                 <Setter Property="VerticalAlignment" Value="Top"/>
@@ -451,28 +451,28 @@
                                         <TextBlock Text="{Binding selectedStation[0].LinesList[1].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                                     </StackPanel>
 
-                                    <Rectangle Fill="{Binding selectedStation[0].LinesList[2].RouteColor[0]}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
+                                    <Rectangle Fill="{Binding selectedStation[0].LinesList[2].RouteColor}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
 
                                     <StackPanel Grid.Row="2" Grid.Column="1">
                                         <TextBlock Text="{Binding selectedStation[0].LinesList[2].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="5, 15, 25 mins" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{Binding selectedStation[0].LinesList[2].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="2" Grid.Column="2">
                                         <TextBlock Text="{Binding selectedStation[0].LinesList[2].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                                        <TextBlock Text="8, 23, 38 mins" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                                        <TextBlock Text="{Binding selectedStation[0].LinesList[2].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                                     </StackPanel>
 
-                                    <Rectangle Fill="{Binding selectedStation[0].LinesList[3].RouteColor[0]}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
+                                    <Rectangle Fill="{Binding selectedStation[0].LinesList[3].RouteColor}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
 
                                     <StackPanel Grid.Row="3" Grid.Column="1">
                                         <TextBlock Text="{Binding selectedStation[0].LinesList[3].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="5, 15, 25 mins" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{Binding selectedStation[0].LinesList[3].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="3" Grid.Column="2">
                                         <TextBlock Text="{Binding selectedStation[0].LinesList[3].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                                        <TextBlock Text="8, 23, 38 mins" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                                        <TextBlock Text="{Binding selectedStation[0].LinesList[3].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                                     </StackPanel>
                                 </Grid>
                             </Grid>

@@ -34,17 +34,10 @@ namespace nexBart.DataModel
         {
             Destinations = new string[2];
             Times = new string[2];
-            //RouteColor = new ObservableCollection<Brush>();
-            //Destinations[0] = _dest;
+
             RGBColor color = colors[_color];
-            //RouteColor.Clear();
             RouteColor = new SolidColorBrush(Color.FromArgb(color.colorBytes[0], color.colorBytes[1], color.colorBytes[2], color.colorBytes[3]));
             colorName = _color;
-        }
-
-        public void SetColor(string color )
-        {
-
         }
     }
 
