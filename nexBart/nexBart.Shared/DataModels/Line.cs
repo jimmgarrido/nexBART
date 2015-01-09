@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
@@ -11,6 +12,7 @@ namespace nexBart.DataModel
         public string[] Destinations { get; set; }
         public string[] Times { get; set; }
         public Brush RouteColor { get; set; }
+        public string colorName;
 
         private Dictionary<string, RGBColor> colors = new Dictionary<string, RGBColor>()
         {
@@ -25,15 +27,19 @@ namespace nexBart.DataModel
         {
             Destinations = new string[2];
             Times = new string[2];
+            //RouteColor = new ObservableCollection<Brush>();
         }
 
-        public Line(string _dest)
+        public Line(string _dest, string _color)
         {
             Destinations = new string[2];
             Times = new string[2];
-
-            RGBColor color = colors["GREEN"];
+            //RouteColor = new ObservableCollection<Brush>();
+            //Destinations[0] = _dest;
+            RGBColor color = colors[_color];
+            //RouteColor.Clear();
             RouteColor = new SolidColorBrush(Color.FromArgb(color.colorBytes[0], color.colorBytes[1], color.colorBytes[2], color.colorBytes[3]));
+            colorName = _color;
         }
 
         public void SetColor(string color )
