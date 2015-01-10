@@ -12,15 +12,12 @@ namespace nexBart.Models
 {
     public class HubPageModel
     {
-        public static async void StationSelected(StationData selection, ScheduleGroup group)
+        public static async void StationSelected(StationData selection, SchedulesModel model)
         {
             Station tempStation = new Station(selection);
             tempStation.LinesList = await DeparturesHelper.GetDepartures(selection);
-            //tempStation.LinesList[0].RouteColor[0] = new SolidColorBrush(Colors.Azure);
-            //tempStation.Name = "efweefwefw";
 
-            group.SetStation(tempStation);
-      
+            model.SetStation(tempStation);
         }
     }
 }

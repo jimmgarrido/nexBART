@@ -264,7 +264,7 @@
             </DataTemplate>
 
             <x:Int32 x:Key="HubHeaderCharacterSpacing">-22</x:Int32>
-            <x:Double x:Key="HubHeaderFontSize">56</x:Double>
+            <x:Double x:Key="HubHeaderFontSize">62</x:Double>
             <FontFamily x:Key="PhoneFontFamilyNormal">Segoe WP</FontFamily>
             <Thickness x:Key="HubHeaderMarginThickness">15,1,0,00</Thickness>
             <Style x:Key="MainHubStyle" TargetType="Hub">
@@ -336,7 +336,7 @@
             	</Setter>
             </Style>
             <x:Int32 x:Key="HubSectionHeaderCharacterSpacing">-10</x:Int32>
-            <x:Double x:Key="HubSectionHeaderFontSize">21</x:Double>
+            <x:Double x:Key="HubSectionHeaderFontSize">24</x:Double>
             <Thickness x:Key="HubSectionHeaderMarginThickness">-1,5,0,25</Thickness>
             <Thickness x:Key="HubSectionMarginThickness">15,10,0,15</Thickness>
             <Style x:Key="HubSectionStyle" TargetType="HubSection">
@@ -370,6 +370,7 @@
         </ResourceDictionary>
     </Page.Resources>
 
+    
     <Grid x:Name="LayoutRoot">
     	<Grid.Background>
     		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -382,7 +383,7 @@
                         HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}">
                 <DataTemplate>
                     <ListView
-                        ItemsSource="{Binding}"
+                        ItemsSource="{Binding FavoriteStations}"
                         IsItemClickEnabled="True"
                         ItemClick="StopClicked"
                         ContinuumNavigationTransitionInfo.ExitElementContainer="True"
@@ -396,8 +397,8 @@
                 <DataTemplate>
                     <Grid>
                         <StackPanel>
-                            <ComboBox x:Name="StationComboBox" ItemsSource="{Binding stationsList}" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
-                                      BorderBrush="#FF575757" BorderThickness="1" Foreground="Black" PlaceholderText="Select a station" 
+                            <ComboBox x:Name="StationComboBox" ItemsSource="{Binding stationList}" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                                      BorderBrush="#FF575757" BorderThickness="2" Foreground="Black" PlaceholderText="Select a station" 
                                       Background="Transparent" SelectionChanged="StationSelected">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
@@ -413,6 +414,8 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBlock Text="{Binding selectedStation[0].Name}"  Style="{StaticResource StationNameStyle}" Margin="0 0 0 0" Grid.Row="0" />
+                                <ProgressRing Grid.Row="0" HorizontalAlignment="Center" Height="10" VerticalAlignment="Center" Width="300" />
+                                
                                 <Grid Grid.Row="1" Background="Transparent" VerticalAlignment="Top" >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="55"/>
@@ -426,7 +429,7 @@
                                         <ColumnDefinition Width="160"/>
                                         <ColumnDefinition Width="150"/>
                                     </Grid.ColumnDefinitions>
-
+                            
                                     <Rectangle Fill="{Binding selectedStation[0].LinesList[0].RouteColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
 
                                     <StackPanel Grid.Row="0" Grid.Column="1">
@@ -474,9 +477,12 @@
                                         <TextBlock Text="{Binding selectedStation[0].LinesList[3].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
                                         <TextBlock Text="{Binding selectedStation[0].LinesList[3].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                                     </StackPanel>
-                                </Grid>
-                            </Grid>
+                                </Grid>                             
+                            </Grid>      
                         </StackPanel>
+
+                        <Button VerticalAlignment="Bottom" Width="150" HorizontalAlignment="Left" Content="More Details" Foreground="#FF575757"  BorderThickness="2" BorderBrush="#FF575757"/>
+                        <Button Click="AddFavorite" VerticalAlignment="Bottom" Width="150" HorizontalAlignment="Right" Content="Add Favorite" Foreground="#FF575757"  BorderThickness="2" BorderBrush="#FF575757"/>
                     </Grid>
                 </DataTemplate>
             </HubSection>
@@ -508,7 +514,9 @@
                     <Grid>
                         <StackPanel>
                             <TextBlock Text="Advisories" FontSize="21" Margin="0 0 0 10"/>
-                            <Grid>
+                            <TextBlock Text="No reported delays. Enjoy your commute!"  HorizontalAlignment="Left"
+                                       Foreground="#FF575757" FontSize="17" Margin="0 0 0 10"/>
+                            <Grid Margin="0 0 0 50" Visibility="Collapsed">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="90"/>
                                     <ColumnDefinition Width="260"/>
@@ -520,9 +528,12 @@
                                 </StackPanel>
                             
                                 <TextBlock Text="There is a 5-10 minute delay at West Oakland in the SFO and Millbrae directions due to an equipment problem on the track." Grid.Column="1" 
-                                           FontSize="17"  Foreground="#FF575757" TextWrapping="WrapWholeWords" FontFamily="Segoe WP SemiLight" />
+                                           FontSize="17" Foreground="#FF575757" TextWrapping="WrapWholeWords" FontFamily="Segoe WP SemiLight" />
                             </Grid>
-                            <!--<TextBlock Text="No advisories at this time. Enjoy your commute!" FontSize="21" TextWrapping="WrapWholeWords" Foreground="#FF575757"/>-->
+
+                            <TextBlock Text="Elevators" FontSize="21" Margin="0 0 0 10"/>
+                            <TextBlock Text="All elevators are surprisingly working!"  HorizontalAlignment="Left"
+                                       Foreground="#FF575757" FontSize="17" Margin="0 0 0 10"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>

@@ -1,10 +1,9 @@
-﻿using nexBart.DataModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace nexBart.DataModel
+namespace nexBart.DataModels
 {
     public class Station
     {
@@ -13,17 +12,12 @@ namespace nexBart.DataModel
 
         public string abbrv;
 
-        private Dictionary<string, string> abbreviations = new Dictionary<string, string>()
-        {
-            {"12th St. Oakland City Center", "12th" }
-        };
-
         public Station() { }
 
         public Station(StationData _station)
         {
             this.Name = _station.Name;
-            this.abbrv = _station.abbrv;
+            this.abbrv = _station.Abbrv;
             LinesList = new ObservableCollection<Line>();
         }
     }

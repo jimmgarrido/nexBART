@@ -5,7 +5,7 @@ using System.Text;
 using Windows.UI;
 using Windows.UI.Xaml.Media;
 
-namespace nexBart.DataModel
+namespace nexBart.DataModels
 {
     public class Line
     {

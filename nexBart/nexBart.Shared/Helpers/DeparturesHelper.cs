@@ -1,5 +1,4 @@
-﻿using nexBart.DataModel;
-using nexBart.DataModels;
+﻿using nexBart.DataModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -14,7 +13,7 @@ namespace nexBart.Helpers
     {
         public static async Task<ObservableCollection<Line>> GetDepartures(StationData _station)
         {
-            string requestURL = MakeRequestURL(_station.abbrv);
+            string requestURL = MakeRequestURL(_station.Abbrv);
             var client = new HttpClient();
             var response = new HttpResponseMessage();
             XDocument xmlDoc = new XDocument();

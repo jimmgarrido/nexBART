@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using nexBart.Common;
+using Windows.UI.ViewManagement;
+using Windows.UI;
 
 // The Universal Hub Application project template is documented at http://go.microsoft.com/fwlink/?LinkID=391955
 
@@ -56,6 +58,11 @@ namespace nexBart
 #endif
 
             Frame rootFrame = Window.Current.Content as Frame;
+
+#if WINDOWS_PHONE_APP
+            ApplicationView.GetForCurrentView().SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+            Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Color.FromArgb(255, 87, 87, 87);
+#endif
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active

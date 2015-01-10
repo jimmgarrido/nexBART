@@ -20,6 +20,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\Station.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\StationData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\StationGroup.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\DatabaseHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DeparturesHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Requests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\XmlParser.cs" />

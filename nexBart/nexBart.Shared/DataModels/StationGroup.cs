@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
-namespace nexBart.DataModel
+namespace nexBart.DataModels
 {
     public class StationGroup
     {
