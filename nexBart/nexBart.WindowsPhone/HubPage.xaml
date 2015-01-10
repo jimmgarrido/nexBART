@@ -26,7 +26,7 @@
             </Style>
             
             <Style x:Key="TimeStyle" TargetType="TextBlock">
-                <Setter Property="Foreground" Value="#FF37ACE4"/>
+                <Setter Property="Foreground" Value="#0083d3"/>
                 <Setter Property="FontSize" Value="17"/>
                 <Setter Property="VerticalAlignment" Value="Top"/>
             </Style>
@@ -377,7 +377,7 @@
     			<GradientStop Color="#FFEDEDED" Offset="1"/>
     		</LinearGradientBrush>
     	</Grid.Background>
-        <Hub x:Name="MainHub" Header="nexBart" Margin="0 25 0 0" Style="{StaticResource MainHubStyle}" Foreground="#FF37ACE4">
+        <Hub x:Name="MainHub" Header="nexBart" Margin="0 25 0 0" Style="{StaticResource MainHubStyle}" Foreground="#0083d3">
             <HubSection x:Name="FavoritesSection" Header="my stations" DataContext="{Binding Favorites}"
                         HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}">
                 <DataTemplate>
@@ -503,23 +503,28 @@
                 </DataTemplate>
             </HubSection>
             
-            <HubSection x:Name="AlertsSection" Header="alerts"
-                         DataContext="{Binding Groups[0]}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}">
+            <HubSection x:Name="AlertsSection" Header="alerts" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}">
                 <DataTemplate>
-                    <GridView
-                        Margin="0,9.5,0,0"
-                        ItemsSource="{Binding Items}"
-                        AutomationProperties.AutomationId="ItemGridView"
-                        AutomationProperties.Name="Items In Group"
-                        SelectionMode="None"
-                        IsItemClickEnabled="True"
-                        ContinuumNavigationTransitionInfo.ExitElementContainer="True">
-                        <GridView.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <ItemsWrapGrid />
-                            </ItemsPanelTemplate>
-                        </GridView.ItemsPanel>
-                    </GridView>
+                    <Grid>
+                        <StackPanel>
+                            <TextBlock Text="Advisories" FontSize="21" Margin="0 0 0 10"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="90"/>
+                                    <ColumnDefinition Width="260"/>
+                                </Grid.ColumnDefinitions>
+                            
+                                <StackPanel Grid.Column="0">
+                                    <TextBlock Text="08:28 AM" Grid.Column="0"  FontSize="17"  FontFamily="Segoe WP SemiLight"/>
+                                    <TextBlock Text="Delay" Grid.Column="0"  FontSize="17"  FontFamily="Segoe WP SemiLight"/>
+                                </StackPanel>
+                            
+                                <TextBlock Text="There is a 5-10 minute delay at West Oakland in the SFO and Millbrae directions due to an equipment problem on the track." Grid.Column="1" 
+                                           FontSize="17"  Foreground="#FF575757" TextWrapping="WrapWholeWords" FontFamily="Segoe WP SemiLight" />
+                            </Grid>
+                            <!--<TextBlock Text="No advisories at this time. Enjoy your commute!" FontSize="21" TextWrapping="WrapWholeWords" Foreground="#FF575757"/>-->
+                        </StackPanel>
+                    </Grid>
                 </DataTemplate>
             </HubSection>
         </Hub>
