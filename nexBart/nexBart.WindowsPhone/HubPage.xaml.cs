@@ -45,6 +45,12 @@ namespace nexBart
             this.navigationHelper = new NavigationHelper(this);
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
+
+            favoriteModel = new FavoritesModel();
+            scheduleModel = new SchedulesModel();
+
+            this.DefaultViewModel["Favorites"] = favoriteModel;
+            this.DefaultViewModel["Schedules"] = scheduleModel;
         }
 
         public NavigationHelper NavigationHelper
@@ -59,11 +65,7 @@ namespace nexBart
 
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            favoriteModel = new FavoritesModel();
-            scheduleModel = new SchedulesModel();
-
-            this.DefaultViewModel["Favorites"] = favoriteModel;
-            this.DefaultViewModel["Schedules"] = scheduleModel;
+            
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -80,7 +82,7 @@ namespace nexBart
         {
             StationData selected = (StationData)(((ComboBox)sender).SelectedItem);
 
-            HubPageModel.StationSelected(selected, scheduleModel);
+            SchedulesModel.StationSelected(selected, scheduleModel);
         }
 
         #region NavigationHelper registration

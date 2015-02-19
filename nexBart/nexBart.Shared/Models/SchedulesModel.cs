@@ -1,5 +1,6 @@
 ﻿using nexBart.DataModel;
 using nexBart.DataModels;
+using nexBart.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -111,6 +112,16 @@ namespace nexBart.Models
        {
            selectedStation.Clear();
            selectedStation.Add(selection);
+       }
+
+       public static async void StationSelected(StationData selection, SchedulesModel model)
+       {
+           Station tempStation = new Station(selection);
+
+           //Add progress bar here
+
+           tempStation.LinesList = await DeparturesHelper.GetDepartures(selection);
+           model.SetStation(tempStation);           
        }
     }
 }

@@ -10,12 +10,13 @@ namespace nexBart.Models
 {
     public class FavoritesModel
     {
-        public static ObservableCollection<Station> FavoriteStations;
+        public static ObservableCollection<Station> FavoriteStations {get; set;}
 
         public FavoritesModel()
         {
             FavoriteStations = new ObservableCollection<Station>();
-            Task.Run(() => LoadFavorites());
+            //Task.Run(() => LoadFavorites());
+            LoadFavorites();
         }
 
         public static async Task LoadFavorites()

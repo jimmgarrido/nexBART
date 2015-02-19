@@ -12,14 +12,13 @@ namespace nexBart.Helpers
     class XmlParser
     {
         static ObservableCollection<Line> lines = new ObservableCollection<Line>();
-        static XElement destElement;
         static string color, dest;
-        static IEnumerable<XElement> estimateElements;
         static string[] times = new string[5];
         static int counter = 0;
 
         public static async Task<ObservableCollection<Line>> Departures(XDocument _doc)
         {
+
             List<string> usedDests = new List<string>();
             List<string> usedColors = new List<string>();
 
@@ -27,13 +26,11 @@ namespace nexBart.Helpers
             usedDests.Clear();
             lines.Clear();
 
+            XElement destElement;
             XElement rootElement = _doc.Element("root").Element("station");
 
-            IEnumerable<XElement> etdElements =
-                from e in rootElement.Elements("etd")
-                select e;
-
-            
+            IEnumerable<XElement> estimateElements;
+            IEnumerable<XElement> etdElements = rootElement.Elements("etd");
 
             for(int i=0; i<etdElements.Count(); i++)
             {
@@ -62,7 +59,7 @@ namespace nexBart.Helpers
                     {
                         if (!usedDests.Contains(dest))
                         {
-                            lines.Add(new Line(dest, color));
+                            //lines.Add(new Line(dest, color));
                             usedDests.Add(dest);
                             //usedColors.Add(color);
                         }

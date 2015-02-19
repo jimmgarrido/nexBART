@@ -2,6 +2,7 @@
 using nexBart.DataModels;
 using nexBart.Models;
 using SQLite;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -23,8 +24,6 @@ namespace nexBart.Helpers
             {
                 file = await ApplicationData.Current.LocalFolder.GetFileAsync("favorites.sqlite");
                 dbPath = file.Path;
-
-                await GetFavorites();
             }
             catch (FileNotFoundException)
             {
@@ -40,7 +39,6 @@ namespace nexBart.Helpers
 
             SQLiteAsyncConnection favDB = new SQLiteAsyncConnection(dbPath);
             await favDB.CreateTableAsync<StationData>();
-            //await GetFavorites();
         }
 
         public static async Task GetFavorites()
@@ -51,9 +49,12 @@ namespace nexBart.Helpers
             SQLiteAsyncConnection favDB = new SQLiteAsyncConnection(dbPath);
             var results = await favDB.QueryAsync<StationData>("SELECT * FROM Favorites");
 
+            ObservableCollection<Station> tempList = new ObservableCollection<Station>();
             foreach(StationData d in results)
             {
-                FavoritesModel.FavoriteStations.Add(new Station(d));
+                Station temp = new Station(d);
+                temp.LinesList = await DeparturesHelper.GetDepartures(d);
+                FavoritesModel.FavoriteStations.Add(temp);
             }
         }
 
