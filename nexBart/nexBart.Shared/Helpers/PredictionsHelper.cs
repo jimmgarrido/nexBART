@@ -9,11 +9,11 @@ using System.Xml.Linq;
 
 namespace nexBart.Helpers
 {
-    public class DeparturesHelper
+    public class PredictionsHelper
     {
-        public static async Task<ObservableCollection<Line>> GetDepartures(StationData _station)
+        public static async Task<ObservableCollection<Line>> GetPredictions(StationData station)
         {
-            string requestURL = MakeRequestURL(_station.Abbrv);
+            string requestURL = MakeRequestURL(station.Abbrv);
             var client = new HttpClient();
             var response = new HttpResponseMessage();
             XDocument xmlDoc = new XDocument();
@@ -33,15 +33,13 @@ namespace nexBart.Helpers
                 //ErrorHandler.NetworkError("Error getting predictions. Check network connection and try again.");
             }
 
-            return await XmlParser.Departures(xmlDoc);
+            return XmlParser.Predictions(xmlDoc);
         }
 
-        private static string MakeRequestURL(string a)
+        private static string MakeRequestURL(string abbrv)
         {
-            string url = Requests.Urls["departures"];
-            
-            return String.Concat(url, a, "&key=", Requests.key);
-            //return url;
+            string url = Requests.Urls["departures"]; 
+            return String.Concat(url, abbrv, "&key=", Requests.Key);
         }
     }
 }

@@ -1,13 +1,14 @@
 ﻿using nexBart.Common;
-using nexBart.DataModel;
 using nexBart.DataModels;
 using nexBart.Models;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
+
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -30,8 +31,32 @@ namespace nexBart
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public SchedulesModel scheduleModel;
-        public FavoritesModel favoriteModel;
+        //Represent each hub section as a model
+        private static SchedulesModel _scheduleView;
+        private static FavoritesModel _favoritesView;
+
+        public static SchedulesModel ScheduleView
+        {
+            get
+            {
+                return _scheduleView;
+            }
+            private set
+            {
+                _scheduleView = value;
+            }
+        }
+        public static FavoritesModel FavoritesView
+        {
+            get
+            {
+                return _favoritesView;
+            }
+            private set
+            {
+                _favoritesView = value;
+            }
+        }
 
         public HubPage()
         {
@@ -46,11 +71,28 @@ namespace nexBart
             this.navigationHelper.LoadState += this.NavigationHelper_LoadState;
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
 
-            favoriteModel = new FavoritesModel();
-            scheduleModel = new SchedulesModel();
+            //Initialize the views and bind to the hub control
+            FavoritesView = new FavoritesModel();
+            ScheduleView = new SchedulesModel();
 
-            this.DefaultViewModel["Favorites"] = favoriteModel;
-            this.DefaultViewModel["Schedules"] = scheduleModel;
+            this.DefaultViewModel["Favorites"] = FavoritesView;
+            this.DefaultViewModel["Schedules"] = ScheduleView;
+        }
+
+        private void StopClicked(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private async void ScheduleStationSelected(object sender, SelectionChangedEventArgs e)
+        {
+            StationData selected = (StationData)(((ComboBox)sender).SelectedItem);
+            ScheduleView.SetSelectedStation(await SchedulesModel.StationSelected(selected));
+        }
+
+        private async void AddFavorite(object sender, RoutedEventArgs e)
+        {
+            await FavoritesModel.AddFavorite(ScheduleView.SelectedStation[0]);
         }
 
         public NavigationHelper NavigationHelper
@@ -63,27 +105,19 @@ namespace nexBart
             get { return this.defaultViewModel; }
         }
 
+        #region NavigationHelper Methods
+
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            
+
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
         {
-            // TODO: Save the unique state of the page here.
-        }
-
-        private void StopClicked(object sender, ItemClickEventArgs e)
-        {
 
         }
 
-        private void StationSelected(object sender, SelectionChangedEventArgs e)
-        {
-            StationData selected = (StationData)(((ComboBox)sender).SelectedItem);
-
-            SchedulesModel.StationSelected(selected, scheduleModel);
-        }
+        #endregion
 
         #region NavigationHelper registration
 
@@ -111,10 +145,5 @@ namespace nexBart
 
         #endregion
 
-        private async void AddFavorite(object sender, RoutedEventArgs e)
-        {
-            await FavoritesModel.AddFavorite(scheduleModel.selectedStation[0]);
-            this.DefaultViewModel["Schedules"] = scheduleModel;
-        }
     }
 }

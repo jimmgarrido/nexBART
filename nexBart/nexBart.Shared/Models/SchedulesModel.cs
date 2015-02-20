@@ -1,22 +1,46 @@
-﻿using nexBart.DataModel;
-using nexBart.DataModels;
+﻿using nexBart.DataModels;
 using nexBart.Helpers;
+
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace nexBart.Models
 {
     public class SchedulesModel
     {
-        public static List<StationData> stationList { get; set; }
-        public ObservableCollection<Station> selectedStation { get; set; }
+        private List<StationData> _stationList;
+        private ObservableCollection<Station> _selectedStation;
+
+        public List<StationData> StationList
+        {
+            get
+            {
+                return _stationList;
+            }
+            private set
+            {
+                _stationList = value;
+            }
+        }
+        public ObservableCollection<Station> SelectedStation
+        {
+            get
+            {
+                return _selectedStation;
+            }
+            private set
+            {
+                _selectedStation = value;
+            }
+        }
 
        public SchedulesModel()
        {
-           selectedStation = new ObservableCollection<Station>();
-           stationList = new List<StationData>()
+           SelectedStation = new ObservableCollection<Station>();
+           StationList = new List<StationData>()
            {
                { new StationData("16th St. Mission", "16th")},
                { new StationData("19th St. Oakland", "19th")},
@@ -62,66 +86,21 @@ namespace nexBart.Models
                { new StationData("West Dublin", "wdub")},
                { new StationData("West Oakland", "woak")}
            };
-           //stationsList.Add(new StationData("12th St. Oakland City Center", "12th"));
-           //stationsList.Add(new StationData("16th St. Mission", "16th"));
-           //stationsList.Add( new StationData("19th St. Oakland", "19th"));
-           //stationsList.Add( new StationData("24th St. Mission", "24th"));
-           //stationsList.Add( new StationData("Ashby", "ashb"));
-           //stationsList.Add( new StationData("Balboa Park", "balb"));
-           //stationsList.Add( new StationData("Bay Fair", "bayf"));
-           //stationsList.Add( new StationData("Castro Valley", "cast"));
-           //stationsList.Add( new StationData("Civic Center", "civc"));
-           //stationsList.Add( new StationData("Coliseum/Oakland Airport", "cols"));
-           //stationsList.Add( new StationData("Colma", "colm"));
-           //stationsList.Add( new StationData("Concord", "conc"));
-           //stationsList.Add( new StationData("Daly City", "daly"));
-           //stationsList.Add( new StationData("Downtown Berkeley", "dbrk"));
-           //stationsList.Add( new StationData("Dublin/Pleasanton", "dubl"));
-           //stationsList.Add( new StationData("El Cerrito del Norte", "deln"));
-           //stationsList.Add( new StationData("El Cerrito Plaza", "plza"));
-           //stationsList.Add( new StationData("Embarcadero ", "embr"));
-           //stationsList.Add( new StationData("Fremont", "frmt"));
-           //stationsList.Add( new StationData("Fruitvale ", "ftvl"));
-           //stationsList.Add( new StationData("Glen Park", "glen"));
-           //stationsList.Add( new StationData("Hayward", "hayw"));
-           //stationsList.Add( new StationData("Lafayette", "lafy"));
-           //stationsList.Add( new StationData("Lake Merritt", "lake"));
-           //stationsList.Add( new StationData("MacArthur", "mcar"));
-           //stationsList.Add( new StationData("Millbrae", "mlbr"));
-           //stationsList.Add( new StationData("Montgomery St.", "mont"));
-           //stationsList.Add( new StationData("North Berkeley", "nbrk"));
-           //stationsList.Add( new StationData("North Concord/Martinez", "ncon"));
-           //stationsList.Add( new StationData("Orinda", "orin"));
-           //stationsList.Add( new StationData("Pittsburg/Bay Point", "pitt"));
-           //stationsList.Add( new StationData("Pleasant Hill", "phil"));
-           //stationsList.Add( new StationData("Powell St.", "powl"));
-           //stationsList.Add( new StationData("Richmond", "rich"));
-           //stationsList.Add( new StationData("Rockridge", "rock"));
-           //stationsList.Add( new StationData("San Bruno", "sbrn"));
-           //stationsList.Add( new StationData("San Francisco Int'l Airport", "sfia"));
-           //stationsList.Add( new StationData("San Leandro", "sanl"));
-           //stationsList.Add( new StationData("South Hayward", "shay"));
-           //stationsList.Add( new StationData("South San Francisco", "ssan"));
-           //stationsList.Add( new StationData("Union City", "ucty"));
-           //stationsList.Add( new StationData("Walnut Creek", "wcrk"));
-           //stationsList.Add( new StationData("West Dublin", "wdub"));
-           //stationsList.Add( new StationData("West Oakland", "woak"));
        }
 
-       public void SetStation(Station selection)
+       public void SetSelectedStation(Station selection)
        {
-           selectedStation.Clear();
-           selectedStation.Add(selection);
+           SelectedStation.Clear();
+           SelectedStation.Add(selection);
        }
 
-       public static async void StationSelected(StationData selection, SchedulesModel model)
+       public static async Task<Station> StationSelected(StationData selection)
        {
            Station tempStation = new Station(selection);
 
-           //Add progress bar here
+           tempStation.AddLineList(await PredictionsHelper.GetPredictions(selection));
 
-           tempStation.LinesList = await DeparturesHelper.GetDepartures(selection);
-           model.SetStation(tempStation);           
+           return tempStation;
        }
     }
 }

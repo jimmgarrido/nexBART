@@ -1,5 +1,4 @@
-﻿using nexBart.DataModel;
-using nexBart.DataModels;
+﻿using nexBart.DataModels;
 using nexBart.Models;
 using SQLite;
 
@@ -53,8 +52,8 @@ namespace nexBart.Helpers
             foreach(StationData d in results)
             {
                 Station temp = new Station(d);
-                temp.LinesList = await DeparturesHelper.GetDepartures(d);
-                FavoritesModel.FavoriteStations.Add(temp);
+                //temp.LinesList = await DeparturesHelper.GetDepartures(d);
+                FavoritesModel.FavoriteStations.Add(new Station(d));
             }
         }
 
@@ -64,7 +63,7 @@ namespace nexBart.Helpers
             await conn.InsertAsync(new StationData
             {
                 Name = s.Name,
-                Abbrv = s.abbrv
+                Abbrv = s.Abbrv
             });
         }
     }

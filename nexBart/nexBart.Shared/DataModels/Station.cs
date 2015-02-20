@@ -7,18 +7,39 @@ namespace nexBart.DataModels
 {
     public class Station
     {
-        public string Name { get; set; }
-        public ObservableCollection<Line> LinesList { get; set; }
+        private ObservableCollection<Line> _lines;
 
-        public string abbrv;
+        public string Name { get; set; }
+        public string Abbrv { get; set; }
+        public ObservableCollection<Line> Lines 
+        { 
+            get 
+            { 
+                return _lines; 
+            } 
+            private set 
+            { 
+                _lines = value; 
+            } 
+        }
 
         public Station() { }
 
-        public Station(StationData _station)
+        public Station(StationData data)
         {
-            this.Name = _station.Name;
-            this.abbrv = _station.Abbrv;
-            LinesList = new ObservableCollection<Line>();
+            Name = data.Name;
+            Abbrv = data.Abbrv;
+            Lines = new ObservableCollection<Line>();
+        }
+
+        public void AddLineList(ObservableCollection<Line> lines)
+        {
+            Lines = lines;
+        }
+
+        public StationData GetData()
+        {
+            return new StationData(Name, Abbrv);
         }
     }
 }

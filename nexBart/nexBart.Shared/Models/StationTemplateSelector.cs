@@ -15,11 +15,11 @@ namespace nexBart.Models
         {
             Station stationItem = item as Station;
 
-            if (stationItem.LinesList.Count == 1) return oneLineTemplate;
-            else if (stationItem.LinesList.Count == 2) return twoLineTemplate;
-            else if (stationItem.LinesList.Count == 3) return threeLineTemplate;
-            else if (stationItem.LinesList.Count == 4) return fourLineTemplate;
-            else return base.SelectTemplateCore(item, container);
+            if (stationItem.Lines.Count == 1) return oneLineTemplate;
+            else if (stationItem.Lines.Count == 2) return twoLineTemplate;
+            else if (stationItem.Lines.Count == 3) return threeLineTemplate;
+            else if (stationItem.Lines.Count == 4) return fourLineTemplate;
+            else return oneLineTemplate;
         }
     }
 }

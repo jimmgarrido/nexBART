@@ -15,17 +15,15 @@
     <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)DataModels\ScheduleGroups.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\Line.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\LineColors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\Station.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\StationData.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DataModels\StationGroup.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DatabaseHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Helpers\DeparturesHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\PredictionsHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Requests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\XmlParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\FavoritesModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\HubPageModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\SchedulesModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\StationTemplateSelector.cs" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\LightGray.png" />

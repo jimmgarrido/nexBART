@@ -9,6 +9,10 @@ using System.Xml.Linq;
 
 namespace nexBart.Helpers
 {
+    /*
+     * Where all the magic happens
+    */
+
     class XmlParser
     {
         static ObservableCollection<Line> lines = new ObservableCollection<Line>();
@@ -16,9 +20,8 @@ namespace nexBart.Helpers
         static string[] times = new string[5];
         static int counter = 0;
 
-        public static async Task<ObservableCollection<Line>> Departures(XDocument _doc)
+        public static ObservableCollection<Line> Predictions(XDocument _doc)
         {
-
             List<string> usedDests = new List<string>();
             List<string> usedColors = new List<string>();
 
@@ -32,7 +35,7 @@ namespace nexBart.Helpers
             IEnumerable<XElement> estimateElements;
             IEnumerable<XElement> etdElements = rootElement.Elements("etd");
 
-            for(int i=0; i<etdElements.Count(); i++)
+            for (int i = 0; i < etdElements.Count(); i++)
             {
                 destElement = etdElements.ElementAt(i);
 
@@ -43,19 +46,20 @@ namespace nexBart.Helpers
                 foreach (XElement est in estimateElements)
                 {
                     color = est.Element("color").Value;
-                    
-                    if(est.Element("minutes").Value.Equals("Leaving"))
+
+                    if (est.Element("minutes").Value.Equals("Leaving"))
                         times[counter] = "Now";
                     else times[counter] = est.Element("minutes").Value;
                     counter++;
 
-                    if(!usedColors.Contains(color))
+                    if (!usedColors.Contains(color))
                     {
                         lines.Add(new Line(dest, color));
                         usedDests.Add(dest);
                         usedColors.Add(color);
                         SetDestination(est);
-                    } else
+                    }
+                    else
                     {
                         if (!usedDests.Contains(dest))
                         {
@@ -65,7 +69,7 @@ namespace nexBart.Helpers
                         }
                         SetDestination(est);
                     }
-                } 
+                }
             }
             return lines;
         }
@@ -79,17 +83,17 @@ namespace nexBart.Helpers
                 if (e.Element("direction").Value.Equals("South"))
                 {
                     line.ElementAt(0).Destinations[1] = dest;
-                    SetTimes(1, ref line);
+                    SetTimes(1, line);
                 }
                 else
                 {
                     line.ElementAt(0).Destinations[0] = dest;
-                    SetTimes(0, ref line);
+                    SetTimes(0, line);
                 }
             }
         }
 
-        private static void SetTimes(int id, ref IEnumerable<Line> _line)
+        private static void SetTimes(int id, IEnumerable<Line> _line)
         {
             string allTimes = "";
 

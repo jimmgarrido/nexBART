@@ -28,6 +28,11 @@ namespace nexBart.Models
         public static async Task RefreshFavorites()
         {
             await DatabaseHelper.GetFavorites();
+
+            foreach(Station s in FavoriteStations)
+            {
+                s.AddLineList(await PredictionsHelper.GetPredictions(new StationData(s.Name, s.Abbrv))); 
+            }
         }
 
         public static async Task AddFavorite(Station favorite)
