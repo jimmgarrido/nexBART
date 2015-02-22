@@ -32,9 +32,12 @@ namespace nexBart.DataModels
             Lines = new ObservableCollection<Line>();
         }
 
-        public void AddLineList(ObservableCollection<Line> lines)
+        public void AddLineList(List<Line> lines)
         {
-            Lines = lines;
+            foreach(Line l in lines)
+            {
+                Lines.Add(l);
+            }
         }
 
         public StationData GetData()

@@ -59,6 +59,7 @@ namespace nexBart.DataModels
             Destinations = new string[2];
             Times = new string[2];
 
+            Destinations[0] = dest;
             RGBColor rgbColor = LineColors.Colors[color];
             LineColor = new SolidColorBrush(Color.FromArgb(rgbColor.colorBytes[0], rgbColor.colorBytes[1], rgbColor.colorBytes[2], rgbColor.colorBytes[3]));
             colorName = color;

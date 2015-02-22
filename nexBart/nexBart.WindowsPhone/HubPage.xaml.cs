@@ -74,6 +74,8 @@ namespace nexBart
             //Initialize the views and bind to the hub control
             FavoritesView = new FavoritesModel();
             ScheduleView = new SchedulesModel();
+            
+            FavoritesView.CheckFavorites();
 
             this.DefaultViewModel["Favorites"] = FavoritesView;
             this.DefaultViewModel["Schedules"] = ScheduleView;
@@ -87,12 +89,16 @@ namespace nexBart
         private async void ScheduleStationSelected(object sender, SelectionChangedEventArgs e)
         {
             StationData selected = (StationData)(((ComboBox)sender).SelectedItem);
-            ScheduleView.SetSelectedStation(await SchedulesModel.StationSelected(selected));
+
+            await ScheduleView.StationSelected(selected);
+            //ScheduleView.SetStation(new Stationselected);
+            //ScheduleView.SetSelectedStation(await SchedulesModel.StationSelected(selected));
         }
 
         private async void AddFavorite(object sender, RoutedEventArgs e)
         {
-            await FavoritesModel.AddFavorite(ScheduleView.SelectedStation[0]);
+            FavoritesView.FavoriteStations.Clear();
+            await FavoritesView.AddFavorite(ScheduleView.SelectedStation[0]);
         }
 
         public NavigationHelper NavigationHelper
@@ -107,9 +113,9 @@ namespace nexBart
 
         #region NavigationHelper Methods
 
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-
+            
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)

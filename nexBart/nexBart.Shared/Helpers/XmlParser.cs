@@ -15,13 +15,15 @@ namespace nexBart.Helpers
 
     class XmlParser
     {
-        static ObservableCollection<Line> lines = new ObservableCollection<Line>();
+        static List<Line> lines = new List<Line>();
         static string color, dest;
         static string[] times = new string[5];
         static int counter = 0;
 
-        public static ObservableCollection<Line> Predictions(XDocument _doc)
+        public static async Task<List<Line>> Predictions(XDocument _doc)
         {
+            
+
             List<string> usedDests = new List<string>();
             List<string> usedColors = new List<string>();
 

@@ -11,10 +11,10 @@ namespace nexBart.Models
 {
     public class SchedulesModel
     {
-        private List<StationData> _stationList;
+        private static List<StationData> _stationList;
         private ObservableCollection<Station> _selectedStation;
 
-        public List<StationData> StationList
+        public static List<StationData> StationList
         {
             get
             {
@@ -88,19 +88,14 @@ namespace nexBart.Models
            };
        }
 
-       public void SetSelectedStation(Station selection)
-       {
-           SelectedStation.Clear();
-           SelectedStation.Add(selection);
-       }
-
-       public static async Task<Station> StationSelected(StationData selection)
+       public async Task StationSelected(StationData selection)
        {
            Station tempStation = new Station(selection);
 
            tempStation.AddLineList(await PredictionsHelper.GetPredictions(selection));
 
-           return tempStation;
+           SelectedStation.Clear();
+           SelectedStation.Add(tempStation);
        }
     }
 }

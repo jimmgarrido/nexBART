@@ -10,34 +10,40 @@ namespace nexBart.Models
 {
     public class FavoritesModel
     {
-        public static ObservableCollection<Station> FavoriteStations {get; set;}
+        public ObservableCollection<Station> FavoriteStations {get; set;}
 
         public FavoritesModel()
         {
             FavoriteStations = new ObservableCollection<Station>();
-            //Task.Run(() => LoadFavorites());
-            LoadFavorites();
         }
 
-        public static async Task LoadFavorites()
+        public async Task RefreshFavorites()
         {
-            await DatabaseHelper.CheckDB();
-            await DatabaseHelper.GetFavorites();
-        }
+            List<Station> favorites = await DatabaseHelper.GetFavorites();
+            List<Line> lines = new List<Line>();
 
-        public static async Task RefreshFavorites()
-        {
-            await DatabaseHelper.GetFavorites();
-
-            foreach(Station s in FavoriteStations)
+            for (int i = 0; i < favorites.Count; i++ )
             {
-                s.AddLineList(await PredictionsHelper.GetPredictions(new StationData(s.Name, s.Abbrv))); 
+                lines = await PredictionsHelper.GetPredictions(new StationData(favorites[i].Name, favorites[i].Abbrv));
+                favorites[i].AddLineList(lines);
+                //FavoriteStations.Add(s);
+            }
+
+            foreach(Station x in favorites)
+            {
+                FavoriteStations.Add(x);
             }
         }
 
-        public static async Task AddFavorite(Station favorite)
+        public async Task AddFavorite(Station favorite)
         {
             await DatabaseHelper.AddFavorite(favorite);
+            await RefreshFavorites();
+        }
+
+        public async Task CheckFavorites()
+        {
+            await DatabaseHelper.CheckDB();
             await RefreshFavorites();
         }
     }

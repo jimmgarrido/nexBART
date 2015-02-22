@@ -11,7 +11,7 @@ namespace nexBart.Helpers
 {
     public class PredictionsHelper
     {
-        public static async Task<ObservableCollection<Line>> GetPredictions(StationData station)
+        public static async Task<List<Line>> GetPredictions(StationData station)
         {
             string requestURL = MakeRequestURL(station.Abbrv);
             var client = new HttpClient();
@@ -33,7 +33,8 @@ namespace nexBart.Helpers
                 //ErrorHandler.NetworkError("Error getting predictions. Check network connection and try again.");
             }
 
-            return XmlParser.Predictions(xmlDoc);
+            List<Line> lines = await XmlParser.Predictions(xmlDoc);
+            return lines;
         }
 
         private static string MakeRequestURL(string abbrv)

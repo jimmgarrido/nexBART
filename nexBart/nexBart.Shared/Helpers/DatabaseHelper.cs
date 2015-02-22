@@ -40,21 +40,22 @@ namespace nexBart.Helpers
             await favDB.CreateTableAsync<StationData>();
         }
 
-        public static async Task GetFavorites()
+        public static async Task<List<Station>> GetFavorites()
         {
-            //ObservableCollection<Station>
-            if (FavoritesModel.FavoriteStations != null) FavoritesModel.FavoriteStations.Clear();
+            List<Station> favorites = new List<Station>();
 
             SQLiteAsyncConnection favDB = new SQLiteAsyncConnection(dbPath);
             var results = await favDB.QueryAsync<StationData>("SELECT * FROM Favorites");
 
-            ObservableCollection<Station> tempList = new ObservableCollection<Station>();
+            List<Station> tempList = new List<Station>();
             foreach(StationData d in results)
             {
                 Station temp = new Station(d);
                 //temp.LinesList = await DeparturesHelper.GetDepartures(d);
-                FavoritesModel.FavoriteStations.Add(new Station(d));
+                favorites.Add(new Station(d));
             }
+
+            return favorites;
         }
 
         public static async Task AddFavorite(Station s)

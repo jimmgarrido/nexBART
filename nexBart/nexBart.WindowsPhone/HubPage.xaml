@@ -437,9 +437,9 @@
                                     <!-- Row 1-->
                                     <Rectangle Fill="{Binding SelectedStation[0].Lines[0].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
 
-                                    <StackPanel Grid.Row="0" Grid.Column="1">
-                                        <TextBlock Text="{Binding SelectedStation[0].Lines[0].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="{Binding SelectedStation[0].Lines[0].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                                    <StackPanel Grid.Row="0" Grid.Column="1" DataContext="{Binding SelectedStation[0]}">
+                                        <TextBlock Text="{Binding Lines[0].Destinations[0], Mode=OneWay}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                                        <TextBlock Text="{Binding Lines[0].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                                     </StackPanel>
 
                                     <StackPanel Grid.Row="0" Grid.Column="2">
