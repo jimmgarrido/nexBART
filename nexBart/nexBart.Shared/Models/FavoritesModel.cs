@@ -38,13 +38,11 @@ namespace nexBart.Models
         public async Task AddFavorite(Station favorite)
         {
             await DatabaseHelper.AddFavorite(favorite);
-            await RefreshFavorites();
         }
 
         public async Task CheckFavorites()
         {
             await DatabaseHelper.CheckDB();
-            await RefreshFavorites();
         }
     }
 }

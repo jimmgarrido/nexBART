@@ -18,15 +18,23 @@ namespace nexBart.Helpers
         static string dbPath;
         public static async Task CheckDB()
         {
+            bool dbExsists;
             StorageFile file = null;
+
             try
             {
                 file = await ApplicationData.Current.LocalFolder.GetFileAsync("favorites.sqlite");
                 dbPath = file.Path;
+                dbExsists = true;
             }
             catch (FileNotFoundException)
             {
-                MakeDB(file);
+                dbExsists = false;
+            }
+
+            if(!dbExsists)
+            {
+                await MakeDB(file);
             }
         }
 
