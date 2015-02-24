@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using System.Linq;
 
 namespace nexBart.Models
 {
@@ -37,12 +38,20 @@ namespace nexBart.Models
 
         public async Task AddFavorite(Station favorite)
         {
+            FavoriteStations.Clear();
             await DatabaseHelper.AddFavorite(favorite);
         }
 
         public async Task CheckFavorites()
         {
             await DatabaseHelper.CheckDB();
+        }
+
+        public bool IsFavorite(Station selection)
+        {
+            int index = FavoriteStations.IndexOf(selection);
+
+            return FavoriteStations.Any(s => s.Name == selection.Name);
         }
     }
 }

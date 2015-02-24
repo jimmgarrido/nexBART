@@ -36,10 +36,12 @@ namespace nexBart.Models
                 _selectedStation = value;
             }
         }
+        public string ButtonText { get; set; }
 
        public SchedulesModel()
        {
            SelectedStation = new ObservableCollection<Station>();
+           ButtonText = "Test Text";
            StationList = new List<StationData>()
            {
                { new StationData("16th St. Mission", "16th")},

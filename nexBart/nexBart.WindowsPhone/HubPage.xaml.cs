@@ -58,6 +58,7 @@ namespace nexBart
             }
         }
 
+        private Button favBtn, detailBtn;
         public HubPage()
         {
             this.InitializeComponent();
@@ -88,13 +89,29 @@ namespace nexBart
         {
             StationData selected = (StationData)(((ComboBox)sender).SelectedItem);
             await ScheduleView.StationSelected(selected);
+
+            favBtn.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            detailBtn.Visibility = Windows.UI.Xaml.Visibility.Visible;
+
+            if(FavoritesView.IsFavorite(ScheduleView.SelectedStation[0]))
+            {
+                favBtn.Content = "Remove Favorite";
+            }
+            else
+            {
+                favBtn.Content = "Add Favorite";
+            }
         }
 
-        private async void AddFavorite(object sender, RoutedEventArgs e)
+        private async void FavButtonClicked(object sender, RoutedEventArgs e)
         {
-            FavoritesView.FavoriteStations.Clear();
             await FavoritesView.AddFavorite(ScheduleView.SelectedStation[0]);
             await FavoritesView.RefreshFavorites();
+        }
+
+        private void MoreDetails(object sender, RoutedEventArgs e)
+        {
+
         }
 
         public NavigationHelper NavigationHelper
@@ -111,8 +128,19 @@ namespace nexBart
 
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
+#if WINDOWS_PHONE_APP
+            var systemTray = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
+            systemTray.ProgressIndicator.Text = "Getting Times";
+            systemTray.ProgressIndicator.ProgressValue = null;
+#endif
+
             await FavoritesView.CheckFavorites();
             await FavoritesView.RefreshFavorites();
+
+#if WINDOWS_PHONE_APP
+            systemTray.ProgressIndicator.ProgressValue = 0;
+            systemTray.ProgressIndicator.Text = "";
+#endif
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -147,6 +175,16 @@ namespace nexBart
         }
 
         #endregion
+
+        private void FavButtonLoaded(object sender, RoutedEventArgs e)
+        {
+            favBtn = sender as Button;
+        }
+
+        private void DetailButtonLoaded(object sender, RoutedEventArgs e)
+        {
+            detailBtn = sender as Button;
+        }
 
     }
 }
