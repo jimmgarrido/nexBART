@@ -12,7 +12,9 @@ namespace nexBart.DataModels
             {"RED", new RGBColor(255, 255, 0, 0) },
             {"BLUE", new RGBColor(255, 0, 153, 204) },
             {"YELLOW", new RGBColor(255, 255, 255, 51) },
-            {"ORANGE", new RGBColor(255, 255, 153, 51) }
+            {"ORANGE", new RGBColor(255, 255, 153, 51) },
+            {"WHITE", new RGBColor(255, 255, 255, 255) },
+            {"BLACK", new RGBColor(255, 0, 0, 0)}
         };
     }
 

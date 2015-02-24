@@ -16,6 +16,8 @@
                 <Setter Property="Foreground" Value="#FF575757"/>
                 <Setter Property="BorderBrush" Value="#FF575757"/>
                 <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="FontSize" Value="17"/>
+                <Setter Property="Margin" Value="0 0 0 -5"/>
             </Style>
             
             <!--DataTemplates for the station list-->
@@ -397,8 +399,11 @@
                             ItemClick="StopClicked"
                             ContinuumNavigationTransitionInfo.ExitElementContainer="True"
                             ItemTemplateSelector="{StaticResource stationTemplateSelector}"
-                            Visibility="Visible">
+                            Visibility="Visible"
+                            VerticalAlignment="Top"
+                            Height="420">
                         </ListView>
+                        <Button Content="Refresh Times" Width="330" Style="{StaticResource ButtonStyle}" />
                     </Grid>
                 </DataTemplate>
             </HubSection>
@@ -408,7 +413,18 @@
                 <DataTemplate>
                     <Grid>
                         <StackPanel>
-                            <ComboBox x:Name="StationComboBox" ItemsSource="{Binding StationList}" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
+                            <Button HorizontalAlignment="Stretch" Content="Select a station" Width="330" Style="{StaticResource ButtonStyle}" >
+                                <Button.Flyout>
+                                    <ListPickerFlyout x:Name="StopsFlyout" Title="SELECT STATION" Placement="Right" ItemsSource="{Binding StationList}" ItemsPicked="ScheduleStationSelected">
+                                        <ListPickerFlyout.ItemTemplate>
+                                            <DataTemplate>
+                                                <ContentControl Width="480" Content="{Binding Name}"/>
+                                            </DataTemplate>
+                                        </ListPickerFlyout.ItemTemplate>
+                                    </ListPickerFlyout>
+                                </Button.Flyout>
+                            </Button>
+                            <!--<ComboBox x:Name="StationComboBox" ItemsSource="{Binding StationList}" HorizontalAlignment="Stretch" VerticalAlignment="Top" 
                                       BorderBrush="#FF575757" BorderThickness="2" Foreground="Black" PlaceholderText="Select a station" 
                                       Background="Transparent" SelectionChanged="ScheduleStationSelected">
                                 <ComboBox.ItemTemplate>
@@ -416,7 +432,7 @@
                                         <ContentControl Width="480" Content="{Binding Name}"/>
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
-                            </ComboBox>
+                            </ComboBox>-->
 
                             <Grid Background="Transparent" Margin="5 0 0 25" VerticalAlignment="Top" DataContext="{Binding SelectedStation[0]}">
                                 <Grid.RowDefinitions>

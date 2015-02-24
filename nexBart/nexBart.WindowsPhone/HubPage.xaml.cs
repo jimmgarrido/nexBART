@@ -85,9 +85,9 @@ namespace nexBart
 
         }
 
-        private async void ScheduleStationSelected(object sender, SelectionChangedEventArgs e)
+        private async void ScheduleStationSelected(ListPickerFlyout sender, ItemsPickedEventArgs args)
         {
-            StationData selected = (StationData)(((ComboBox)sender).SelectedItem);
+            StationData selected = sender.SelectedItem as StationData;
             await ScheduleView.StationSelected(selected);
 
             favBtn.Visibility = Windows.UI.Xaml.Visibility.Visible;
@@ -128,19 +128,12 @@ namespace nexBart
 
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-#if WINDOWS_PHONE_APP
-            var systemTray = Windows.UI.ViewManagement.StatusBar.GetForCurrentView();
-            systemTray.ProgressIndicator.Text = "Getting Times";
-            systemTray.ProgressIndicator.ProgressValue = null;
-#endif
+
 
             await FavoritesView.CheckFavorites();
             await FavoritesView.RefreshFavorites();
 
-#if WINDOWS_PHONE_APP
-            systemTray.ProgressIndicator.ProgressValue = 0;
-            systemTray.ProgressIndicator.Text = "";
-#endif
+
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -184,6 +177,11 @@ namespace nexBart
         private void DetailButtonLoaded(object sender, RoutedEventArgs e)
         {
             detailBtn = sender as Button;
+        }
+
+        private void StopsFlyout_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
+        {
+
         }
 
     }
