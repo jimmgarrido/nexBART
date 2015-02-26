@@ -49,7 +49,7 @@
             </Style>
             
             <DataTemplate x:Key="OneLine">
-                <Grid Background="Transparent" Margin="5 0 0 25" VerticalAlignment="Top">
+                <Grid Background="Transparent" Margin="5 0 0 10" VerticalAlignment="Top">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="auto"/>
@@ -83,7 +83,7 @@
             </DataTemplate>
             
             <DataTemplate x:Key="TwoLines">
-                <Grid Background="Transparent" Margin="5 0 0 25" VerticalAlignment="Top">
+                <Grid Background="Transparent" Margin="5 0 0 10" VerticalAlignment="Top">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="auto"/>
@@ -130,7 +130,7 @@
             </DataTemplate>
             
             <DataTemplate x:Key="ThreeLines">
-                <Grid Background="Transparent" Margin="5 0 0 25" VerticalAlignment="Top">
+                <Grid Background="Transparent" Margin="5 0 0 10" VerticalAlignment="Top">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="auto"/>
@@ -190,7 +190,7 @@
             </DataTemplate>
             
             <DataTemplate x:Key="FourLines">
-                <Grid Background="Transparent" Margin="5 0 0 25" VerticalAlignment="Top">
+                <Grid Background="Transparent" Margin="5 0 0 10" VerticalAlignment="Top">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="auto"/>
@@ -401,9 +401,9 @@
                             ItemTemplateSelector="{StaticResource stationTemplateSelector}"
                             Visibility="Visible"
                             VerticalAlignment="Top"
-                            Height="420">
+                            Height="415">
                         </ListView>
-                        <Button Content="Refresh Times" Width="330" Style="{StaticResource ButtonStyle}" />
+                        <Button Content="Refresh Times" Width="330" Style="{StaticResource ButtonStyle}" Click="RefreshTimes" />
                     </Grid>
                 </DataTemplate>
             </HubSection>

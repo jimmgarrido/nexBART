@@ -1,6 +1,7 @@
 ﻿using nexBart.Common;
 using nexBart.DataModels;
 using nexBart.Models;
+using nexBart.Views;
 
 using System;
 using System.Collections.Generic;
@@ -82,7 +83,7 @@ namespace nexBart
 
         private void StopClicked(object sender, ItemClickEventArgs e)
         {
-
+            Frame.Navigate(typeof(StationDetailPage), e.ClickedItem);
         }
 
         private async void ScheduleStationSelected(ListPickerFlyout sender, ItemsPickedEventArgs args)
@@ -105,7 +106,14 @@ namespace nexBart
 
         private async void FavButtonClicked(object sender, RoutedEventArgs e)
         {
+            FavoritesView.FavoriteStations.Clear();
             await FavoritesView.AddFavorite(ScheduleView.SelectedStation[0]);
+            await FavoritesView.RefreshFavorites();
+        }
+
+        private async void RefreshTimes(object sender, RoutedEventArgs e)
+        {
+            FavoritesView.FavoriteStations.Clear();
             await FavoritesView.RefreshFavorites();
         }
 
@@ -128,12 +136,8 @@ namespace nexBart
 
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-
-
             await FavoritesView.CheckFavorites();
             await FavoritesView.RefreshFavorites();
-
-
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)

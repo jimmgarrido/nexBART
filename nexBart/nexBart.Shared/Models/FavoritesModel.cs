@@ -38,7 +38,6 @@ namespace nexBart.Models
 
         public async Task AddFavorite(Station favorite)
         {
-            FavoriteStations.Clear();
             await DatabaseHelper.AddFavorite(favorite);
         }
 
