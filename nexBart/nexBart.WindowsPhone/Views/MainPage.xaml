@@ -544,10 +544,10 @@
                 <DataTemplate>
                     <Grid>
                         <StackPanel>
-                            <TextBlock Text="Advisories" FontSize="21" Margin="0 0 0 10"/>
+                            <!--<TextBlock Text="Advisories" FontSize="21" Margin="0 0 0 10"/>
                             <TextBlock Text="No reported delays. Enjoy your commute!"  HorizontalAlignment="Left"
-                                       Foreground="#FF575757" FontSize="17" Margin="0 0 0 10"/>
-                            <Grid Margin="0 0 0 50" Visibility="Collapsed">
+                                       Foreground="#FF575757" FontSize="17" Margin="0 0 0 10"/>-->
+                            <Grid Margin="0 0 0 50" Visibility="Visible">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="90"/>
                                     <ColumnDefinition Width="260"/>

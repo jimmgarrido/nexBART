@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PredictionsHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Requests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\XmlParser.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlertsModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FavoritesModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SchedulesModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StationDetailModel.cs" />
