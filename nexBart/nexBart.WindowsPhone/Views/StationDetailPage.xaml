@@ -15,9 +15,13 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <StackPanel Margin="19,25,0,0">
-            <TextBlock x:Name="StopHeader" Margin="0,0,0,15" Foreground="#0083d3" Style="{ThemeResource HeaderTextBlockStyle}" 
-                       CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" FontSize="36" Text="24th St. Mission"/>
-        </StackPanel>
+        <Grid Margin="20,35,0,0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="StopHeader" Grid.Row="0" Foreground="#0083d3" Style="{ThemeResource HeaderTextBlockStyle}" 
+                       CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" FontSize="36"/>
+            
+        </Grid>
     </Grid>
 </Page>

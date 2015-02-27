@@ -23,9 +23,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\PredictionsHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Requests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\XmlParser.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\FavoritesModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\SchedulesModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\StationTemplateSelector.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FavoritesModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SchedulesModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StationDetailModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StationTemplateSelector.cs" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\LightGray.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\MediumGray.png" />
     <Content Include="$(MSBuildThisFileDirectory)Assets\DarkGray.png" />

@@ -119,7 +119,7 @@ namespace nexBart
 
         private void MoreDetails(object sender, RoutedEventArgs e)
         {
-
+            Frame.Navigate(typeof(StationDetailPage), ScheduleView.SelectedStation[0]);
         }
 
         public NavigationHelper NavigationHelper
@@ -182,11 +182,5 @@ namespace nexBart
         {
             detailBtn = sender as Button;
         }
-
-        private void StopsFlyout_ItemsPicked(ListPickerFlyout sender, ItemsPickedEventArgs args)
-        {
-
-        }
-
     }
 }

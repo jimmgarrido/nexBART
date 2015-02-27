@@ -49,7 +49,7 @@
             </Style>
             
             <DataTemplate x:Key="OneLine">
-                <Grid Background="Transparent" Margin="5 0 0 10" VerticalAlignment="Top">
+                <Grid Background="Transparent" Margin="5 0 0 5" VerticalAlignment="Top">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="auto"/>
@@ -69,12 +69,12 @@
 
                         <Rectangle Fill="{Binding LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="0" Grid.Column="1">
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
                             <TextBlock Text="{Binding Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="0" Grid.Column="2">
+                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
                             <TextBlock Text="{Binding Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
@@ -83,7 +83,7 @@
             </DataTemplate>
             
             <DataTemplate x:Key="TwoLines">
-                <Grid Background="Transparent" Margin="5 0 0 10" VerticalAlignment="Top">
+                <Grid Background="Transparent" Margin="5 0 0 5" VerticalAlignment="Top">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="auto"/>
@@ -104,24 +104,24 @@
 
                         <Rectangle Fill="{Binding Lines[0].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="0" Grid.Column="1">
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[0].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
                             <TextBlock Text="{Binding Lines[0].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="0" Grid.Column="2">
+                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[0].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
                             <TextBlock Text="{Binding Lines[0].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
                         
                         <Rectangle Fill="{Binding Lines[1].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="1" Grid.Column="1">
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[1].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
                             <TextBlock Text="{Binding Lines[1].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1" Grid.Column="2">
+                        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[1].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
                             <TextBlock Text="{Binding Lines[1].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
@@ -130,7 +130,7 @@
             </DataTemplate>
             
             <DataTemplate x:Key="ThreeLines">
-                <Grid Background="Transparent" Margin="5 0 0 10" VerticalAlignment="Top">
+                <Grid Background="Transparent" Margin="5 0 0 5" VerticalAlignment="Top">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="auto"/>
@@ -152,36 +152,36 @@
 
                         <Rectangle Fill="{Binding Lines[0].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="0" Grid.Column="1">
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[0].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
                             <TextBlock Text="{Binding Lines[0].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="0" Grid.Column="2">
+                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[0].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
                             <TextBlock Text="{Binding Lines[0].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
                         
                         <Rectangle Fill="{Binding Lines[1].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="1" Grid.Column="1">
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[1].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
                             <TextBlock Text="{Binding Lines[1].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1" Grid.Column="2">
+                        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[1].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
                             <TextBlock Text="{Binding Lines[1].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
                         
                         <Rectangle Fill="{Binding Lines[2].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="2" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="2" Grid.Column="1">
+                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[2].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
                             <TextBlock Text="{Binding Lines[2].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="2" Grid.Column="2">
+                        <StackPanel Grid.Row="2" Grid.Column="2" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[2].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
                             <TextBlock Text="{Binding Lines[2].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
@@ -190,7 +190,7 @@
             </DataTemplate>
             
             <DataTemplate x:Key="FourLines">
-                <Grid Background="Transparent" Margin="5 0 0 10" VerticalAlignment="Top">
+                <Grid Background="Transparent" Margin="5 0 0 5" VerticalAlignment="Top">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="50"/>
                         <RowDefinition Height="auto"/>
@@ -213,48 +213,48 @@
 
                         <Rectangle Fill="{Binding Lines[0].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="0" Grid.Column="1">
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[0].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
                             <TextBlock Text="{Binding Lines[0].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="0" Grid.Column="2">
+                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[0].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
                             <TextBlock Text="{Binding Lines[0].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
                         
                         <Rectangle Fill="{Binding Lines[1].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="1" Grid.Column="1">
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[1].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
                             <TextBlock Text="{Binding Lines[1].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1" Grid.Column="2">
+                        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[1].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
                             <TextBlock Text="{Binding Lines[1].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
                         
                         <Rectangle Fill="{Binding Lines[2].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="2" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="2" Grid.Column="1">
+                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[2].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
                             <TextBlock Text="{Binding Lines[2].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="2" Grid.Column="2">
+                        <StackPanel Grid.Row="2" Grid.Column="2" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[2].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
                             <TextBlock Text="{Binding Lines[2].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
                         
                         <Rectangle Fill="{Binding Lines[3].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="3" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="3" Grid.Column="1">
+                        <StackPanel Grid.Row="3" Grid.Column="1" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[3].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
                             <TextBlock Text="{Binding Lines[3].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="3" Grid.Column="2">
+                        <StackPanel Grid.Row="3" Grid.Column="2" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[3].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
                             <TextBlock Text="{Binding Lines[3].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
