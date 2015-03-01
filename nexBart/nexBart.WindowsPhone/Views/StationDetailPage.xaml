@@ -19,7 +19,7 @@
             <TextBlock x:Name="StopHeader" Grid.Row="0" Foreground="#0083d3" Style="{ThemeResource HeaderTextBlockStyle}" 
                        CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" FontSize="36" Text="24th St Mission"/>
 
-            <ListView Margin="0 10 0 0 ">
+            <ListView Margin="0 10 0 0" VerticalAlignment="Top" Height="450">
                 <ListViewItem>
                     <Grid Margin="0 0 0 15">
                         <Grid.ColumnDefinitions>
