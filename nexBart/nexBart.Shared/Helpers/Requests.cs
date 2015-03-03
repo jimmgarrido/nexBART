@@ -6,18 +6,31 @@ namespace nexBart.Helpers
 {
     public class Requests
     {
-        private static string _key = "Q9VI-UXQY-I9GQ-DT35";
+        private static readonly string key = "Q9VI-UXQY-I9GQ-DT35";
 
-        public static string Key
+        private static Dictionary<string, string> URLs = new Dictionary<string, string>()
         {
-            get
-            {
-                return _key;
-            }
-        }
-        public static Dictionary<string, string> Urls = new Dictionary<string, string>()
-        {
-            {"departures", "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=" }
+            {"departures", "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=" },
+            {"advisories", "http://api.bart.gov/api/bsa.aspx?cmd=bsa"},
+            {"elevators", "http://api.bart.gov/api/bsa.aspx?cmd=elev"}
         };
+
+        public static string MakePredictionsURL(string station)
+        {
+            string url = URLs["departures"];
+            return String.Concat(url, station, "&key=", key);
+        }
+
+        public static string MakeAdvsURL()
+        {
+            string url = URLs["advisories"];
+            return String.Concat(url + "&key=", key);
+        }
+
+        public static string MakeElevURL()
+        {
+            string url = URLs["elevators"];
+            return String.Concat(url + "&key=", key);
+        }
     }
 }

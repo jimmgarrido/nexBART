@@ -7,7 +7,7 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace nexBart.Models
+namespace nexBart.ViewModels
 {
     public class SchedulesModel
     {
@@ -44,6 +44,7 @@ namespace nexBart.Models
            ButtonText = "Test Text";
            StationList = new List<StationData>()
            {
+               { new StationData("12th St. Oakland", "12th")},
                { new StationData("16th St. Mission", "16th")},
                { new StationData("19th St. Oakland", "19th")},
                { new StationData("24th St. Mission", "24th")},
@@ -94,7 +95,7 @@ namespace nexBart.Models
        {
            Station tempStation = new Station(selection);
 
-           tempStation.AddLineList(await PredictionsHelper.GetPredictions(selection));
+           tempStation.AddLineList(await WebHelper.GetPredictions(selection));
 
            SelectedStation.Clear();
            SelectedStation.Add(tempStation);

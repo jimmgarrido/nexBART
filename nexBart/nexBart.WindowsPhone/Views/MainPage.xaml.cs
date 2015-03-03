@@ -1,15 +1,13 @@
 ﻿using nexBart.Common;
 using nexBart.DataModels;
-using nexBart.Models;
+using nexBart.ViewModels;
 using nexBart.Views;
-
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-
 using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -58,6 +56,7 @@ namespace nexBart
                 _favoritesView = value;
             }
         }
+        public static AlertsModel AlertsView { get; set; }
 
         private Button favBtn, detailBtn;
         public HubPage()
@@ -76,9 +75,12 @@ namespace nexBart
             //Initialize the views and bind to the hub control
             FavoritesView = new FavoritesModel();
             ScheduleView = new SchedulesModel();
+            AlertsView = new AlertsModel();
 
             this.DefaultViewModel["Favorites"] = FavoritesView;
             this.DefaultViewModel["Schedules"] = ScheduleView;
+            //this.DefaultViewModel["Alerts"] = AlertsView;
+            alertsGroup.Source = from alert in AlertsModel.Alerts group alert by alert.Type into grp orderby grp.Key select grp;
         }
 
         private void StopClicked(object sender, ItemClickEventArgs e)
@@ -109,6 +111,7 @@ namespace nexBart
             FavoritesView.FavoriteStations.Clear();
             await FavoritesView.AddFavorite(ScheduleView.SelectedStation[0]);
             await FavoritesView.RefreshFavorites();
+            favBtn.Content = "Remove Favorite";
         }
 
         private async void RefreshTimes(object sender, RoutedEventArgs e)

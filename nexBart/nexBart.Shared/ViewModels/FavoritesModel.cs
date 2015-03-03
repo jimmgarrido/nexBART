@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
 
-namespace nexBart.Models
+namespace nexBart.ViewModels
 {
     public class FavoritesModel
     {
@@ -25,7 +25,7 @@ namespace nexBart.Models
 
             for (int i = 0; i < favorites.Count; i++ )
             {
-                lines = await PredictionsHelper.GetPredictions(new StationData(favorites[i].Name, favorites[i].Abbrv));
+                lines = await WebHelper.GetPredictions(new StationData(favorites[i].Name, favorites[i].Abbrv));
                 favorites[i].AddLineList(lines);
                 //FavoriteStations.Add(s);
             }

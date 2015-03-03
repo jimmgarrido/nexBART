@@ -9,11 +9,11 @@ using System.Xml.Linq;
 
 namespace nexBart.Helpers
 {
-    public class PredictionsHelper
+    public class WebHelper
     {
         public static async Task<List<Line>> GetPredictions(StationData station)
         {
-            string requestURL = MakeRequestURL(station.Abbrv);
+            string predictionsURL = Requests.MakePredictionsURL(station.Abbrv);
             var client = new HttpClient();
             var response = new HttpResponseMessage();
             XDocument xmlDoc = new XDocument();
@@ -23,7 +23,7 @@ namespace nexBart.Helpers
             client.DefaultRequestHeaders.IfModifiedSince = System.DateTime.Now;
             try
             {
-                response = await client.GetAsync(new Uri(requestURL));
+                response = await client.GetAsync(new Uri(predictionsURL));
                 response.EnsureSuccessStatusCode();
                 reader = await response.Content.ReadAsStringAsync();
                 xmlDoc = XDocument.Parse(reader);
@@ -37,10 +37,10 @@ namespace nexBart.Helpers
             return lines;
         }
 
-        private static string MakeRequestURL(string abbrv)
+        public static async Task GetAlerts()
         {
-            string url = Requests.Urls["departures"]; 
-            return String.Concat(url, abbrv, "&key=", Requests.Key);
+            string advisoryURL = Requests.MakeAdvsURL();
+            string elevURL = Requests.MakeElevURL();
         }
     }
 }
