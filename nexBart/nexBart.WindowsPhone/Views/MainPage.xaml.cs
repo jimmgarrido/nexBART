@@ -90,8 +90,8 @@ namespace nexBart
         {
             await FavoritesView.CheckFavorites();
             await FavoritesView.RefreshFavorites();
-            await AlertsView.RefreshAlerts();
-            alertsGroup.Source = AlertsView.GetGroup();
+            alertsGroup.Source = await AlertsView.RefreshAlerts();
+            //alertsGroup.Source = AlertsView.GetGroup();
         }
 
         private void StopClicked(object sender, ItemClickEventArgs e)
@@ -128,7 +128,10 @@ namespace nexBart
         private async void RefreshTimes(object sender, RoutedEventArgs e)
         {
             FavoritesView.FavoriteStations.Clear();
+            AlertsView.Alerts.Clear();
+
             await FavoritesView.RefreshFavorites();
+            alertsGroup.Source = await AlertsView.RefreshAlerts();
         }
 
         private void MoreDetails(object sender, RoutedEventArgs e)

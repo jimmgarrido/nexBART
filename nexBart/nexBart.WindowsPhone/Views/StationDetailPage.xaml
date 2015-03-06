@@ -7,6 +7,127 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <ResourceDictionary>
+            <Style x:Key="ButtonStyle" TargetType="Button">
+                <Setter Property="VerticalAlignment" Value="Bottom"/>
+                <Setter Property="Width" Value="165" />
+                <Setter Property="Foreground" Value="#FF575757"/>
+                <Setter Property="BorderBrush" Value="#FF575757"/>
+                <Setter Property="BorderThickness" Value="2"/>
+                <Setter Property="FontSize" Value="17"/>
+                <Setter Property="Margin" Value="0 0 0 -5"/>
+            </Style>
+            
+            <Style x:Key="LablelStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#575757" />
+                <Setter Property="FontSize" Value="22"/>
+            </Style> 
+
+            <Style x:Key="TimesStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#0083d3"/>
+                <Setter Property="FontSize" Value="19"/>
+                <Setter Property="FontFamily" Value="Segoe WP SemiLight"/>
+                
+            </Style>
+            
+            <DataTemplate x:Name="HubSectionTemplate">
+                <Grid Margin="0 0 0 15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Rectangle Fill="{Binding LineColor}" Grid.Column="0"/>
+                    <StackPanel Grid.Column="1" Margin="10 0 0 0">
+                        
+                        <TextBlock Text="{Binding Destinations[0]}" FontSize="22" Foreground="#575757" />
+                        <Grid Margin="0 0 0 10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="24"/>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="20"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="75"/>
+                                <ColumnDefinition Width="75"/>
+                                <ColumnDefinition Width="75"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="4 mins" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="0" />
+                            <TextBlock Text="15 mins" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="1" />
+                            <TextBlock Text="44 mins" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="2" />
+
+                            <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="0" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+
+                            <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                        </Grid>
+
+                        <TextBlock Text="{Binding Destinations[1]}" FontSize="22" Foreground="#575757" />
+
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="20"/>
+                                <RowDefinition Height="18"/>
+                                <RowDefinition Height="18"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="70"/>
+                                <ColumnDefinition Width="70"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock Text="2 mins" Grid.Row="0" Grid.Column="0" Foreground="#0083d3" FontSize="17" />
+                            <TextBlock Text="9 mins" Grid.Row="0" Grid.Column="1" Foreground="#0083d3" FontSize="17" />
+                            <TextBlock Text="21 mins" Grid.Row="0" Grid.Column="2" Foreground="#0083d3" FontSize="17" />
+
+                            <TextBlock Text="4 cars" Grid.Row="1" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+
+                            <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                            <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+
+                        </Grid>
+                    </StackPanel>
+                </Grid>
+            </DataTemplate>
+
+            <Style x:Name="HubSectionStyle" TargetType="HubSection">
+                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                <Setter Property="VerticalContentAlignment" Value="Stretch"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="HubSection">
+                            <Grid Background="{TemplateBinding Background}" Margin="0 10 0 0">
+
+                                <Grid.RenderTransform>
+                                    <CompositeTransform x:Name="WrappingTransform"/>
+                                </Grid.RenderTransform>
+                                <ContentPresenter x:Name="ContentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" 
+                                                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="0 0 0 0" 
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>   
+    </Page.Resources>
+    
+    <Page.BottomAppBar>
+        <CommandBar Background="#0083d3" ClosedDisplayMode="Minimal">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="refresh"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
+    
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -15,216 +136,160 @@
             </LinearGradientBrush>
         </Grid.Background>
 
-        <StackPanel Margin="20,35,0,0">
+        <StackPanel Margin="15 30 0 0">
             <TextBlock x:Name="StopHeader" Grid.Row="0" Foreground="#0083d3" Style="{ThemeResource HeaderTextBlockStyle}" 
-                       CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" FontSize="36" Text="24th St Mission"/>
+                       CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" FontSize="38"/>
+            
+            <TextBlock Text="Departures" Margin="0 5 0 0" Style="{StaticResource LablelStyle}"/>
+            
+            <Hub x:Name="DepartHub" Height="220">
+                
+                <!--<HubSection Header="Test" Foreground="#575757">
+                    <DataTemplate>
+                        <Grid Margin="0 0 0 15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-            <ListView Margin="0 10 0 0" VerticalAlignment="Top" Height="450">
-                <ListViewItem>
-                    <Grid Margin="0 0 0 15">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                            <Rectangle Fill="{Binding LineColor}" Grid.Column="0"/>
+                            <StackPanel Grid.Column="1" Margin="10 0 0 0">
 
-                        <Rectangle Fill="#ff0000" Grid.Column="0"/>
-                        <StackPanel Grid.Column="1" Margin="10 0 0 0">
+                                <TextBlock Text="{Binding Destinations[0]}" FontSize="22" Foreground="#575757" />
 
-                            <TextBlock Text="Daly City" FontSize="20" Foreground="#575757" />
-                            
-                            <Grid Margin="0 0 0 10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="18"/>
-                                    <RowDefinition Height="18"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                </Grid.ColumnDefinitions>
+                                <Grid Margin="0 0 0 10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="24"/>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="75"/>
+                                        <ColumnDefinition Width="75"/>
+                                        <ColumnDefinition Width="75"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="2 mins" Grid.Row="0" Grid.Column="0" Foreground="#0083d3" FontSize="17" />
-                                <TextBlock Text="15 mins" Grid.Row="0" Grid.Column="1" Foreground="#0083d3" FontSize="17" />
-                                <TextBlock Text="44 mins" Grid.Row="0" Grid.Column="2" Foreground="#0083d3" FontSize="17" />
+                                    <TextBlock Text="4 mins" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="0" />
+                                    <TextBlock Text="15 mins" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="1" />
+                                    <TextBlock Text="44 mins" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="2" />
 
-                                <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="0" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
 
-                                <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                            </Grid>
+                                    <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                </Grid>
 
-                            <TextBlock Text="Dublin/Pleasanton" FontSize="20" Foreground="#575757" />
+                                <TextBlock Text="{Binding Destinations[1]}" FontSize="22" Foreground="#575757" />
 
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="18"/>
-                                    <RowDefinition Height="18"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                </Grid.ColumnDefinitions>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="18"/>
+                                        <RowDefinition Height="18"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition Width="70"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="2 mins" Grid.Row="0" Grid.Column="0" Foreground="#0083d3" FontSize="17" />
-                                <TextBlock Text="9 mins" Grid.Row="0" Grid.Column="1" Foreground="#0083d3" FontSize="17" />
-                                <TextBlock Text="21 mins" Grid.Row="0" Grid.Column="2" Foreground="#0083d3" FontSize="17" />
+                                    <TextBlock Text="2 mins" Grid.Row="0" Grid.Column="0" Foreground="#0083d3" FontSize="17" />
+                                    <TextBlock Text="9 mins" Grid.Row="0" Grid.Column="1" Foreground="#0083d3" FontSize="17" />
+                                    <TextBlock Text="21 mins" Grid.Row="0" Grid.Column="2" Foreground="#0083d3" FontSize="17" />
 
-                                <TextBlock Text="4 cars" Grid.Row="1" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="4 cars" Grid.Row="1" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
 
-                                <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
 
-                            </Grid>
-                        </StackPanel>
-                    </Grid>
-                </ListViewItem>
-                <ListViewItem>
-                    <Grid Margin="0 0 0 15">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </HubSection>
+                <HubSection Header="Test" Foreground="#575757"/>
+                <HubSection Header="Test" Foreground="#575757"/>-->
+            </Hub>
 
-                        <Rectangle Fill="#ffff33" Grid.Column="0"/>
-                        <StackPanel Grid.Column="1" Margin="10 0 0 0">
+            <!--<ListView x:Name="stationList" Margin="0 10 0 0" VerticalAlignment="Top" Height="270">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0 0 0 15">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="Daly City" FontSize="20" Foreground="#575757" />
+                            <Rectangle Fill="{Binding LineColor}" Grid.Column="0"/>
+                            <StackPanel Grid.Column="1" Margin="10 0 0 0">
 
-                            <Grid Margin="0 0 0 10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="18"/>
-                                    <RowDefinition Height="18"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Destinations[0]}" FontSize="22" Foreground="#575757" />
 
-                                <TextBlock Text="2 mins" Grid.Row="0" Grid.Column="0" Foreground="#0083d3" FontSize="17" />
-                                <TextBlock Text="15 mins" Grid.Row="0" Grid.Column="1" Foreground="#0083d3" FontSize="17" />
-                                <TextBlock Text="44 mins" Grid.Row="0" Grid.Column="2" Foreground="#0083d3" FontSize="17" />
+                                <Grid Margin="0 0 0 10">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="24"/>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="20"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="75"/>
+                                        <ColumnDefinition Width="75"/>
+                                        <ColumnDefinition Width="75"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="4 mins" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="0" />
+                                    <TextBlock Text="15 mins" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="1" />
+                                    <TextBlock Text="44 mins" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="2" />
 
-                                <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                            </Grid>
+                                    <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="0" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
 
-                            <TextBlock Text="Dublin/Pleasanton" FontSize="20" Foreground="#575757" />
+                                    <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Foreground="#575757" FontSize="17" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                </Grid>
 
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="18"/>
-                                    <RowDefinition Height="18"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="{Binding Destinations[1]}" FontSize="22" Foreground="#575757" />
 
-                                <TextBlock Text="2 mins" Grid.Row="0" Grid.Column="0" Foreground="#0083d3" FontSize="17" />
-                                <TextBlock Text="9 mins" Grid.Row="0" Grid.Column="1" Foreground="#0083d3" FontSize="17" />
-                                <TextBlock Text="21 mins" Grid.Row="0" Grid.Column="2" Foreground="#0083d3" FontSize="17" />
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="20"/>
+                                        <RowDefinition Height="18"/>
+                                        <RowDefinition Height="18"/>
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition Width="70"/>
+                                        <ColumnDefinition Width="70"/>
+                                    </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="4 cars" Grid.Row="1" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="2 mins" Grid.Row="0" Grid.Column="0" Foreground="#0083d3" FontSize="17" />
+                                    <TextBlock Text="9 mins" Grid.Row="0" Grid.Column="1" Foreground="#0083d3" FontSize="17" />
+                                    <TextBlock Text="21 mins" Grid.Row="0" Grid.Column="2" Foreground="#0083d3" FontSize="17" />
 
-                                <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="4 cars" Grid.Row="1" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
 
-                            </Grid>
-                        </StackPanel>
+                                    <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
+                                    <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
 
-                    </Grid>
-                </ListViewItem>
-
-                <ListViewItem>
-                    <Grid Margin="0 0 0 15">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
-                        <Rectangle Fill="#339933" Grid.Column="0"/>
-                        <StackPanel Grid.Column="1" Margin="10 0 0 0">
-
-                            <TextBlock Text="Daly City" FontSize="20" Foreground="#575757" />
-
-                            <Grid Margin="0 0 0 10">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="18"/>
-                                    <RowDefinition Height="18"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Text="2 mins" Grid.Row="0" Grid.Column="0" Foreground="#0083d3" FontSize="17" />
-                                <TextBlock Text="15 mins" Grid.Row="0" Grid.Column="1" Foreground="#0083d3" FontSize="17" />
-                                <TextBlock Text="44 mins" Grid.Row="0" Grid.Column="2" Foreground="#0083d3" FontSize="17" />
-
-                                <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-
-                                <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                            </Grid>
-
-                            <TextBlock Text="Dublin/Pleasanton" FontSize="20" Foreground="#575757" />
-
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="18"/>
-                                    <RowDefinition Height="18"/>
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                    <ColumnDefinition Width="70"/>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Text="2 mins" Grid.Row="0" Grid.Column="0" Foreground="#0083d3" FontSize="17" />
-                                <TextBlock Text="9 mins" Grid.Row="0" Grid.Column="1" Foreground="#0083d3" FontSize="17" />
-                                <TextBlock Text="21 mins" Grid.Row="0" Grid.Column="2" Foreground="#0083d3" FontSize="17" />
-
-                                <TextBlock Text="4 cars" Grid.Row="1" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-
-                                <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-                                <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Foreground="#575757" FontSize="14" FontFamily="Segoe WP SemiLight" TextWrapping="WrapWholeWords"/>
-
-                            </Grid>
-                        </StackPanel>
-
-                    </Grid>
-                </ListViewItem>
-            </ListView>
+                                </Grid>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>-->
+            
+            <TextBlock Text="Station Info" Margin="0 10 0 0" Style="{StaticResource LablelStyle}"/>
         </StackPanel>
     </Grid>
 </Page>

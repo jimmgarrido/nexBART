@@ -25,15 +25,6 @@ namespace nexBart.Views
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
-        }
-
         public StationDetailModel DetailModel;
 
         public StationDetailPage()
@@ -50,6 +41,21 @@ namespace nexBart.Views
             DetailModel = new StationDetailModel(e.NavigationParameter as Station);
 
             StopHeader.Text = DetailModel.Selection[0].Name;
+
+            //stationList.ItemsSource = DetailModel.Selection[0].Lines;
+            DataTemplate sectionTemplate = new DataTemplate();
+
+            int i = 0;
+            foreach(Line l in DetailModel.Selection[0].Lines)
+            {
+                DepartHub.Sections.Add(new HubSection
+                {
+                    ContentTemplate = HubSectionTemplate,
+                    DataContext = l,
+                    Style = HubSectionStyle
+                });
+                i++;
+            }
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
@@ -82,5 +88,14 @@ namespace nexBart.Views
         }
 
         #endregion
+
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
+        public ObservableDictionary DefaultViewModel
+        {
+            get { return this.defaultViewModel; }
+        }
     }
 }

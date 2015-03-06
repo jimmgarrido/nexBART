@@ -11,14 +11,14 @@ namespace nexBart.ViewModels
 {
     public class AlertsModel
     {
-        public static ObservableCollection<Alert> Alerts { get; set; }
+        public ObservableCollection<Alert> Alerts { get; set; }
 
         public AlertsModel()
         {
             Alerts = new ObservableCollection<Alert>();
         }
 
-        public async Task RefreshAlerts()
+        public async Task<IOrderedEnumerable<IGrouping<string, Alert>>> RefreshAlerts()
         {
             List<Alert> alerts = await WebHelper.GetAlerts();
 
@@ -26,6 +26,8 @@ namespace nexBart.ViewModels
             {
                 Alerts.Add(a);
             }
+
+            return from alert in Alerts group alert by alert.Type into grp orderby grp.Key select grp;
         }
 
         public IOrderedEnumerable<IGrouping<string, Alert>> GetGroup()

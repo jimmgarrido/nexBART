@@ -89,7 +89,9 @@ namespace nexBart.Helpers
 
                 if (desc != "No delays reported.")
                 {
+
                     advType = e.Element("type").Value;
+                    advType = ToUpperFirstLetter(advType);
 
                     //Format time from given value to friendly AM/PM
                     time = e.Element("posted").Value;
@@ -98,11 +100,11 @@ namespace nexBart.Helpers
                     fullTime = DateTime.Parse(time);
                     time = fullTime.ToString("hh:mm tt");
 
-                    alerts.Add(new Alert(time, "Advisories", advType, desc));
+                    alerts.Add(new Alert("Advisories", advType, desc, time));
                 }
                 else
                 {
-                    alerts.Add(new Alert("", "Advisories", "", desc));
+                    alerts.Add(new Alert("Advisories", "", desc, ""));
                 }
             }
 
@@ -114,6 +116,8 @@ namespace nexBart.Helpers
 
                 if (desc != "Attention passengers: All elevators are in service. Thank You.")
                 {
+                    desc = desc.Substring(0, desc.Length - 12);
+
                     //Format time from given value to friendly AM/PM
                     time = e.Element("posted").Value;
                     time = time.Substring(0, time.Length - 4);
@@ -121,11 +125,11 @@ namespace nexBart.Helpers
                     fullTime = DateTime.Parse(time);
                     time = fullTime.ToString("hh:mm tt");
 
-                    alerts.Add(new Alert(time, "Elevators", "", desc));
+                    alerts.Add(new Alert("Elevators", "", desc, time));
                 }
                 else
                 {
-                    alerts.Add(new Alert("", "Elevators", "", desc));
+                    alerts.Add(new Alert("Elevators", "", desc, ""));
                 }
             }
 
@@ -161,6 +165,18 @@ namespace nexBart.Helpers
                 else allTimes = String.Concat(allTimes, ", ", times[j]);
             }
             _line.ElementAt(0).Times[id] = allTimes + " mins";
+        }
+
+        private static string ToUpperFirstLetter(string source)
+        {
+            if (string.IsNullOrEmpty(source))
+                return string.Empty;
+
+            source = source.ToLower();
+            char[] letters = source.ToCharArray();
+            letters[0] = char.ToUpper(letters[0]);
+
+            return new string(letters);
         }
     }
 }

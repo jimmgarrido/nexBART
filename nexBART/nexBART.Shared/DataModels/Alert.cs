@@ -12,7 +12,7 @@ namespace nexBart.DataModels
         public string Description { get; set; }
         public string AdvType { get; set; }
 
-        public Alert(string time, string type, string advType, string des) 
+        public Alert(string type, string advType, string des, string time) 
         {
             Time = time;
             Type = type;
