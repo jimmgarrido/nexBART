@@ -22,8 +22,6 @@ namespace nexBart.Helpers
 
         public static async Task<List<Line>> Predictions(XDocument _doc)
         {
-            
-
             List<string> usedDests = new List<string>();
             List<string> usedColors = new List<string>();
 
@@ -74,6 +72,64 @@ namespace nexBart.Helpers
                 }
             }
             return lines;
+        }
+
+        public static async Task<List<Alert>> Alerts(XDocument advDoc, XDocument elevDoc)
+        {
+            List<Alert> alerts = new List<Alert>();
+            string advType, time, desc;
+            DateTime fullTime;
+            IEnumerable<XElement> bsaElements;
+
+            //Get advisories
+            bsaElements = advDoc.Element("root").Elements("bsa");
+            foreach(XElement e in bsaElements)
+            {
+                desc = e.Element("description").Value;
+
+                if (desc != "No delays reported.")
+                {
+                    advType = e.Element("type").Value;
+
+                    //Format time from given value to friendly AM/PM
+                    time = e.Element("posted").Value;
+                    time = time.Substring(0, time.Length - 4);
+
+                    fullTime = DateTime.Parse(time);
+                    time = fullTime.ToString("hh:mm tt");
+
+                    alerts.Add(new Alert(time, "Advisories", advType, desc));
+                }
+                else
+                {
+                    alerts.Add(new Alert("", "Advisories", "", desc));
+                }
+            }
+
+            //Get elevator information
+            bsaElements = elevDoc.Element("root").Elements("bsa");
+            foreach (XElement e in bsaElements)
+            {
+                desc = e.Element("description").Value;
+
+                if (desc != "Attention passengers: All elevators are in service. Thank You.")
+                {
+                    //Format time from given value to friendly AM/PM
+                    time = e.Element("posted").Value;
+                    time = time.Substring(0, time.Length - 4);
+
+                    fullTime = DateTime.Parse(time);
+                    time = fullTime.ToString("hh:mm tt");
+
+                    alerts.Add(new Alert(time, "Elevators", "", desc));
+                }
+                else
+                {
+                    alerts.Add(new Alert("", "Elevators", "", desc));
+                }
+            }
+
+            return alerts;
         }
 
         private static void SetDestination(XElement e)

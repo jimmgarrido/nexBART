@@ -3,13 +3,18 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "nexBart", "nexBart", "{FE1B00FF-A561-45DA-A486-C93945545C7A}"
-EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "nexBart.Shared", "nexBart\nexBart.Shared\nexBart.Shared.shproj", "{813B46CD-3217-4260-B256-BE2A69B8BA9D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nexBart.Windows", "nexBart\nexBart.Windows\nexBart.Windows.csproj", "{B6D2420D-766A-4175-901B-3E4086A72755}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nexBart.WindowsPhone", "nexBart\nexBart.WindowsPhone\nexBart.WindowsPhone.csproj", "{850FEDB8-7326-451A-AB19-2704CD166B2D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9A027CA1-2318-4FF3-B889-F40D7390DAE6}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
@@ -48,9 +53,9 @@ Global
 		{B6D2420D-766A-4175-901B-3E4086A72755}.Release|x86.ActiveCfg = Release|x86
 		{B6D2420D-766A-4175-901B-3E4086A72755}.Release|x86.Build.0 = Release|x86
 		{B6D2420D-766A-4175-901B-3E4086A72755}.Release|x86.Deploy.0 = Release|x86
-		{850FEDB8-7326-451A-AB19-2704CD166B2D}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{850FEDB8-7326-451A-AB19-2704CD166B2D}.Debug|Any CPU.Build.0 = Debug|x86
-		{850FEDB8-7326-451A-AB19-2704CD166B2D}.Debug|Any CPU.Deploy.0 = Debug|x86
+		{850FEDB8-7326-451A-AB19-2704CD166B2D}.Debug|Any CPU.ActiveCfg = Debug|ARM
+		{850FEDB8-7326-451A-AB19-2704CD166B2D}.Debug|Any CPU.Build.0 = Debug|ARM
+		{850FEDB8-7326-451A-AB19-2704CD166B2D}.Debug|Any CPU.Deploy.0 = Debug|ARM
 		{850FEDB8-7326-451A-AB19-2704CD166B2D}.Debug|ARM.ActiveCfg = Debug|ARM
 		{850FEDB8-7326-451A-AB19-2704CD166B2D}.Debug|ARM.Build.0 = Debug|ARM
 		{850FEDB8-7326-451A-AB19-2704CD166B2D}.Debug|ARM.Deploy.0 = Debug|ARM
@@ -71,10 +76,5 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{813B46CD-3217-4260-B256-BE2A69B8BA9D} = {FE1B00FF-A561-45DA-A486-C93945545C7A}
-		{B6D2420D-766A-4175-901B-3E4086A72755} = {FE1B00FF-A561-45DA-A486-C93945545C7A}
-		{850FEDB8-7326-451A-AB19-2704CD166B2D} = {FE1B00FF-A561-45DA-A486-C93945545C7A}
 	EndGlobalSection
 EndGlobal

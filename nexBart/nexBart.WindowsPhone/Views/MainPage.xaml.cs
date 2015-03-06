@@ -79,8 +79,19 @@ namespace nexBart
 
             this.DefaultViewModel["Favorites"] = FavoritesView;
             this.DefaultViewModel["Schedules"] = ScheduleView;
-            //this.DefaultViewModel["Alerts"] = AlertsView;
-            alertsGroup.Source = from alert in AlertsModel.Alerts group alert by alert.Type into grp orderby grp.Key select grp;
+            this.DefaultViewModel["Alerts"] = AlertsView;
+
+            //alertsGroup.Source = AlertsView.GetGroup();
+
+            FinishedInit();
+        }
+
+        private async void FinishedInit()
+        {
+            await FavoritesView.CheckFavorites();
+            await FavoritesView.RefreshFavorites();
+            await AlertsView.RefreshAlerts();
+            alertsGroup.Source = AlertsView.GetGroup();
         }
 
         private void StopClicked(object sender, ItemClickEventArgs e)
@@ -137,10 +148,9 @@ namespace nexBart
 
         #region NavigationHelper Methods
 
-        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            await FavoritesView.CheckFavorites();
-            await FavoritesView.RefreshFavorites();
+
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)

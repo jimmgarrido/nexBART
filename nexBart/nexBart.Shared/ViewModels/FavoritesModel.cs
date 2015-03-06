@@ -23,11 +23,10 @@ namespace nexBart.ViewModels
             List<Station> favorites = await DatabaseHelper.GetFavorites();
             List<Line> lines = new List<Line>();
 
-            for (int i = 0; i < favorites.Count; i++ )
+            foreach(Station s in favorites)
             {
-                lines = await WebHelper.GetPredictions(new StationData(favorites[i].Name, favorites[i].Abbrv));
-                favorites[i].AddLineList(lines);
-                //FavoriteStations.Add(s);
+                lines = await WebHelper.GetPredictions(new StationData(s.Name, s.Abbrv));
+                s.AddLineList(lines);
             }
 
             foreach(Station x in favorites)

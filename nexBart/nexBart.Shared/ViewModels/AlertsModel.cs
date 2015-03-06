@@ -1,9 +1,11 @@
 ﻿using nexBart.DataModels;
+using nexBart.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace nexBart.ViewModels
 {
@@ -14,14 +16,21 @@ namespace nexBart.ViewModels
         public AlertsModel()
         {
             Alerts = new ObservableCollection<Alert>();
-
-            Alerts.Add(new Alert("10:44 PM", "Advisory", 
-                "BART is running round-the-clock service during the labor day weekend bay bridge closure. More info at www.bart.gov or (510) 465-2278."));
         }
 
-        public void GetGroup()
+        public async Task RefreshAlerts()
         {
-            var sorted = from alert in Alerts group alert by alert.Type into grp orderby grp.Key select grp;
+            List<Alert> alerts = await WebHelper.GetAlerts();
+
+            foreach(Alert a in alerts)
+            {
+                Alerts.Add(a);
+            }
+        }
+
+        public IOrderedEnumerable<IGrouping<string, Alert>> GetGroup()
+        {
+            return from alert in Alerts group alert by alert.Type into grp orderby grp.Key select grp;
         }
     }
 }

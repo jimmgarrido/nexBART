@@ -33,14 +33,40 @@ namespace nexBart.Helpers
                 //ErrorHandler.NetworkError("Error getting predictions. Check network connection and try again.");
             }
 
-            List<Line> lines = await XmlParser.Predictions(xmlDoc);
-            return lines;
+            return await XmlParser.Predictions(xmlDoc);
         }
 
-        public static async Task GetAlerts()
+        public static async Task<List<Alert>> GetAlerts()
         {
             string advisoryURL = Requests.MakeAdvsURL();
             string elevURL = Requests.MakeElevURL();
+
+            var client = new HttpClient();
+            var response = new HttpResponseMessage();
+            XDocument advisoryXml = new XDocument();
+            XDocument elevatorXml = new XDocument();
+            string reader;
+
+            //Make sure to pull from network not cache everytime
+            client.DefaultRequestHeaders.IfModifiedSince = System.DateTime.Now;
+            try
+            {
+                response = await client.GetAsync(new Uri(advisoryURL));
+                response.EnsureSuccessStatusCode();
+                reader = await response.Content.ReadAsStringAsync();
+                advisoryXml = XDocument.Parse(reader);
+
+                response = await client.GetAsync(new Uri(elevURL));
+                response.EnsureSuccessStatusCode();
+                reader = await response.Content.ReadAsStringAsync();
+                elevatorXml = XDocument.Parse(reader);
+            } 
+            catch(Exception)
+            {
+
+            }
+
+            return await XmlParser.Alerts(advisoryXml, elevatorXml);
         }
     }
 }
