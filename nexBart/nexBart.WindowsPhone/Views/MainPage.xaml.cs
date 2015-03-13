@@ -101,7 +101,7 @@ namespace nexBart
 
         private async void ScheduleStationSelected(ListPickerFlyout sender, ItemsPickedEventArgs args)
         {
-            StationData selected = sender.SelectedItem as StationData;
+            Station selected = sender.SelectedItem as Station;
             await ScheduleView.StationSelected(selected);
 
             favBtn.Visibility = Windows.UI.Xaml.Visibility.Visible;

@@ -1,16 +1,19 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 
 namespace nexBart.DataModels
 {
+    [Table("Favorites")]
     public class Station
     {
-        private ObservableCollection<Line> _lines;
-
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
         public string Name { get; set; }
         public string Abbrv { get; set; }
+        [Ignore]
         public ObservableCollection<Line> Lines 
         { 
             get 
@@ -23,13 +26,14 @@ namespace nexBart.DataModels
             } 
         }
 
+        private ObservableCollection<Line> _lines;
+
         public Station() { }
 
-        public Station(StationData data)
+        public Station(string _name, string _abbrv)
         {
-            Name = data.Name;
-            Abbrv = data.Abbrv;
-            Lines = new ObservableCollection<Line>();
+            Name = _name;
+            Abbrv = _abbrv;
         }
 
         public void AddLineList(List<Line> lines)
@@ -38,11 +42,6 @@ namespace nexBart.DataModels
             {
                 Lines.Add(l);
             }
-        }
-
-        public StationData GetData()
-        {
-            return new StationData(Name, Abbrv);
         }
     }
 }

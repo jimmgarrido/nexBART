@@ -11,7 +11,7 @@ namespace nexBart.Helpers
 {
     public class WebHelper
     {
-        public static async Task<List<Line>> GetPredictions(StationData station)
+        public static async Task<List<Line>> GetPredictions(Station station)
         {
             string predictionsURL = Requests.MakePredictionsURL(station.Abbrv);
             var client = new HttpClient();

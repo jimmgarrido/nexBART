@@ -11,10 +11,10 @@ namespace nexBart.ViewModels
 {
     public class SchedulesModel
     {
-        private static List<StationData> _stationList;
+        private List<Station> _stationList;
         private ObservableCollection<Station> _selectedStation;
 
-        public static List<StationData> StationList
+        public List<Station> StationList
         {
             get
             {
@@ -36,69 +36,65 @@ namespace nexBart.ViewModels
                 _selectedStation = value;
             }
         }
-        public string ButtonText { get; set; }
 
        public SchedulesModel()
        {
            SelectedStation = new ObservableCollection<Station>();
-           ButtonText = "Test Text";
-           StationList = new List<StationData>()
+           StationList = new List<Station>()
            {
-               { new StationData("12th St. Oakland", "12th")},
-               { new StationData("16th St. Mission", "16th")},
-               { new StationData("19th St. Oakland", "19th")},
-               { new StationData("24th St. Mission", "24th")},
-               { new StationData("Ashby", "ashb")},
-               { new StationData("Balboa Park", "balb")},
-               { new StationData("Bay Fair", "bayf")},
-               { new StationData("Castro Valley", "cast")},
-               { new StationData("Civic Center", "civc")},
-               { new StationData("Coliseum/Oakland Airport", "cols")},
-               { new StationData("Colma", "colm")},
-               { new StationData("Concord", "conc")},
-               { new StationData("Daly City", "daly")},
-               { new StationData("Downtown Berkeley", "dbrk")},
-               { new StationData("Dublin/Pleasanton", "dubl")},
-               { new StationData("El Cerrito del Norte", "deln")},
-               { new StationData("El Cerrito Plaza", "plza")},
-               { new StationData("Embarcadero ", "embr")},
-               { new StationData("Fremont", "frmt")},
-               { new StationData("Fruitvale ", "ftvl")},
-               { new StationData("Glen Park", "glen")},
-               { new StationData("Hayward", "hayw")},
-               { new StationData("Lafayette", "lafy")},
-               { new StationData("Lake Merritt", "lake")},
-               { new StationData("MacArthur", "mcar")},
-               { new StationData("Millbrae", "mlbr")},
-               { new StationData("Montgomery St.", "mont")},
-               { new StationData("North Berkeley", "nbrk")},
-               { new StationData("North Concord/Martinez", "ncon")},
-               { new StationData("Orinda", "orin")},
-               { new StationData("Pittsburg/Bay Point", "pitt")},
-               { new StationData("Pleasant Hill", "phil")},
-               { new StationData("Powell St.", "powl")},
-               { new StationData("Richmond", "rich")},
-               { new StationData("Rockridge", "rock")},
-               { new StationData("San Bruno", "sbrn")},
-               { new StationData("San Francisco Int'l Airport", "sfia")},
-               { new StationData("San Leandro", "sanl")},
-               { new StationData("South Hayward", "shay")},
-               { new StationData("South San Francisco", "ssan")},
-               { new StationData("Union City", "ucty")},
-               { new StationData("Walnut Creek", "wcrk")},
-               { new StationData("West Dublin", "wdub")},
-               { new StationData("West Oakland", "woak")}
+               { new Station("12th St. Oakland", "12th")},
+               { new Station("16th St. Mission", "16th")},
+               { new Station("19th St. Oakland", "19th")},
+               { new Station("24th St. Mission", "24th")},
+               { new Station("Ashby", "ashb")},
+               { new Station("Balboa Park", "balb")},
+               { new Station("Bay Fair", "bayf")},
+               { new Station("Castro Valley", "cast")},
+               { new Station("Civic Center", "civc")},
+               { new Station("Coliseum/Oakland Airport", "cols")},
+               { new Station("Colma", "colm")},
+               { new Station("Concord", "conc")},
+               { new Station("Daly City", "daly")},
+               { new Station("Downtown Berkeley", "dbrk")},
+               { new Station("Dublin/Pleasanton", "dubl")},
+               { new Station("El Cerrito del Norte", "deln")},
+               { new Station("El Cerrito Plaza", "plza")},
+               { new Station("Embarcadero ", "embr")},
+               { new Station("Fremont", "frmt")},
+               { new Station("Fruitvale ", "ftvl")},
+               { new Station("Glen Park", "glen")},
+               { new Station("Hayward", "hayw")},
+               { new Station("Lafayette", "lafy")},
+               { new Station("Lake Merritt", "lake")},
+               { new Station("MacArthur", "mcar")},
+               { new Station("Millbrae", "mlbr")},
+               { new Station("Montgomery St.", "mont")},
+               { new Station("North Berkeley", "nbrk")},
+               { new Station("North Concord/Martinez", "ncon")},
+               { new Station("Orinda", "orin")},
+               { new Station("Pittsburg/Bay Point", "pitt")},
+               { new Station("Pleasant Hill", "phil")},
+               { new Station("Powell St.", "powl")},
+               { new Station("Richmond", "rich")},
+               { new Station("Rockridge", "rock")},
+               { new Station("San Bruno", "sbrn")},
+               { new Station("San Francisco Int'l Airport", "sfia")},
+               { new Station("San Leandro", "sanl")},
+               { new Station("South Hayward", "shay")},
+               { new Station("South San Francisco", "ssan")},
+               { new Station("Union City", "ucty")},
+               { new Station("Walnut Creek", "wcrk")},
+               { new Station("West Dublin", "wdub")},
+               { new Station("West Oakland", "woak")}
            };
        }
 
-       public async Task StationSelected(StationData selection)
+       public async Task StationSelected(Station selection)
        {
-           Station tempStation = new Station(selection);
-
-           tempStation.AddLineList(await WebHelper.GetPredictions(selection));
+           selection.AddLineList(await WebHelper.GetPredictions(selection));
 
            SelectedStation.Clear();
-           SelectedStation.Add(tempStation);
+           SelectedStation.Add(selection);
        }
     }
 }

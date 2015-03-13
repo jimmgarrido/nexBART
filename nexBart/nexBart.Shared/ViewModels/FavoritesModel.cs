@@ -25,7 +25,7 @@ namespace nexBart.ViewModels
 
             foreach(Station s in favorites)
             {
-                lines = await WebHelper.GetPredictions(new StationData(s.Name, s.Abbrv));
+                lines = await WebHelper.GetPredictions(s);
                 s.AddLineList(lines);
             }
 

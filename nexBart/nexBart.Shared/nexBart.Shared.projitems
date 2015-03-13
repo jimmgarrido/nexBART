@@ -19,7 +19,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\Line.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\LineColors.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\Station.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)DataModels\StationData.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\DatabaseHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\WebHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Requests.cs" />

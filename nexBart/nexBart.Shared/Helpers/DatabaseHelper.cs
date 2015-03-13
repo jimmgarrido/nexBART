@@ -45,23 +45,15 @@ namespace nexBart.Helpers
             dbPath = file.Path;
 
             SQLiteAsyncConnection favDB = new SQLiteAsyncConnection(dbPath);
-            await favDB.CreateTableAsync<StationData>();
+            await favDB.CreateTableAsync<Station>();
         }
 
         public static async Task<List<Station>> GetFavorites()
         {
-            List<Station> favorites = new List<Station>();
+            //List<Station> favorites = new List<Station>();
 
             SQLiteAsyncConnection favDB = new SQLiteAsyncConnection(dbPath);
-            var results = await favDB.QueryAsync<StationData>("SELECT * FROM Favorites");
-
-            List<Station> tempList = new List<Station>();
-            foreach(StationData d in results)
-            {
-                Station temp = new Station(d);
-                //temp.LinesList = await DeparturesHelper.GetDepartures(d);
-                favorites.Add(new Station(d));
-            }
+            List<Station> favorites = await favDB.QueryAsync<Station>("SELECT * FROM Favorites");
 
             return favorites;
         }
@@ -69,11 +61,12 @@ namespace nexBart.Helpers
         public static async Task AddFavorite(Station s)
         {
             SQLiteAsyncConnection conn = new SQLiteAsyncConnection(dbPath);
-            await conn.InsertAsync(new StationData
-            {
-                Name = s.Name,
-                Abbrv = s.Abbrv
-            });
+            //await conn.InsertAsync(new StationData
+            //{
+            //    Name = s.Name,
+            //    Abbrv = s.Abbrv
+            //});
+            await conn.InsertAsync(s);
         }
     }
 }
