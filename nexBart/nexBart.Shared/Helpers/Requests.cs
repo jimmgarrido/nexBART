@@ -12,7 +12,9 @@ namespace nexBart.Helpers
         {
             {"departures", "http://api.bart.gov/api/etd.aspx?cmd=etd&orig=" },
             {"advisories", "http://api.bart.gov/api/bsa.aspx?cmd=bsa"},
-            {"elevators", "http://api.bart.gov/api/bsa.aspx?cmd=elev"}
+            {"elevators", "http://api.bart.gov/api/bsa.aspx?cmd=elev"},
+            {"station-info", "http://api.bart.gov/api/stn.aspx?cmd=stninfo&orig="},
+            {"station-access", "http://api.bart.gov/api/stn.aspx?cmd=stnaccess&orig="}
         };
 
         public static string MakePredictionsURL(string station)

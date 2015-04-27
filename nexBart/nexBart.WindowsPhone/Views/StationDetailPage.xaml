@@ -22,13 +22,18 @@
             <Style x:Key="LablelStyle" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#575757" />
                 <Setter Property="FontSize" Value="22"/>
-            </Style> 
+            </Style>
+
+            <Style x:Key="TextStyle" TargetType="TextBlock">
+                <Setter Property="Foreground" Value="#575757"/>
+                <!--<Setter Property="Foreground" Value="#0083d3" />-->
+                <Setter Property="FontSize" Value="19"/>
+            </Style>
 
             <Style x:Key="TimesStyle" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#0083d3"/>
                 <Setter Property="FontSize" Value="19"/>
                 <Setter Property="FontFamily" Value="Segoe WP SemiLight"/>
-                
             </Style>
             
             <DataTemplate x:Name="HubSectionTemplate">
@@ -290,6 +295,24 @@
             </ListView>-->
             
             <TextBlock Text="Station Info" Margin="0 10 0 0" Style="{StaticResource LablelStyle}"/>
+            <Grid Margin="0 10 0 0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                    <RowDefinition Height="35"/>
+                </Grid.RowDefinitions>
+                
+                <TextBlock Text="Address" Style="{StaticResource TextStyle}" Grid.Column="0" Grid.Row="0"/>
+                <TextBlock Text="Bikes" Style="{StaticResource TextStyle}" Grid.Column="0" Grid.Row="1"/>
+                <TextBlock Text="Parking" Style="{StaticResource TextStyle}" Grid.Column="0" Grid.Row="2"/>
+                <TextBlock Text="Lockers" Style="{StaticResource TextStyle}" Grid.Column="0" Grid.Row="3"/>
+                <TextBlock Text="2800 Mission Street San Francisco, CA" Style="{StaticResource TextStyle}" Grid.Column="1" TextWrapping="WrapWholeWords"/>
+            </Grid>
         </StackPanel>
     </Grid>
 </Page>

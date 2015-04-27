@@ -32,6 +32,7 @@ namespace nexBart.DataModels
 
         public Station(string _name, string _abbrv)
         {
+            Lines = new ObservableCollection<Line>();
             Name = _name;
             Abbrv = _abbrv;
         }
