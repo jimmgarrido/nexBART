@@ -9,13 +9,21 @@ namespace nexBart.Models
 {
     public class StationDetailModel
     {
-        public ObservableCollection<Station> Selection = new ObservableCollection<Station>();
+        //public ObservableCollection<Station> Selection = new ObservableCollection<Station>();
+        public Station Selection;
 
         public StationDetailModel() { }
 
         public StationDetailModel(Station station)
         {
-            Selection.Add(station);
+            Selection = station;
+            //Selection.Add(station);
+
+            foreach(Line l in Selection.Lines)
+            {
+                l.MakeTimesArray(0);
+                l.MakeTimesArray(1);
+            }
         }
     }
 }

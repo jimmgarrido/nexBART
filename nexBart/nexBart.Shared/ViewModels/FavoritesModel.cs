@@ -40,6 +40,11 @@ namespace nexBart.ViewModels
             await DatabaseHelper.AddFavorite(favorite);
         }
 
+        public async Task RemoveFavorite(Station favorite)
+        {
+            await DatabaseHelper.RemoveFavorite(favorite);
+        }
+
         public async Task CheckFavorites()
         {
             await DatabaseHelper.CheckDB();
@@ -47,9 +52,15 @@ namespace nexBart.ViewModels
 
         public bool IsFavorite(Station selection)
         {
-            int index = FavoriteStations.IndexOf(selection);
+            Station temp;
 
-            return FavoriteStations.Any(s => s.Name == selection.Name);
+            if ((FavoriteStations.Any(s => s.Name == selection.Name)))
+            {
+                temp = FavoriteStations.ToList().Find(st => st.Name == selection.Name);
+                selection.Id = temp.Id;
+                return true;
+            }
+            else return false;
         }
     }
 }

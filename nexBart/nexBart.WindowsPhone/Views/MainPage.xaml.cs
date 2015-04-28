@@ -25,7 +25,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace nexBart
 {
-    public sealed partial class HubPage : Page
+    public sealed partial class MainPage : Page
     {
         private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
@@ -58,8 +58,8 @@ namespace nexBart
         }
         public static AlertsModel AlertsView { get; set; }
 
-        private Button favBtn, detailBtn;
-        public HubPage()
+        private Button refreshBtn, detailBtn;
+        public MainPage()
         {
             this.InitializeComponent();
 
@@ -96,7 +96,9 @@ namespace nexBart
 
         private void StopClicked(object sender, ItemClickEventArgs e)
         {
-            Frame.Navigate(typeof(StationDetailPage), e.ClickedItem);
+            Station item = (Station) e.ClickedItem;
+            FavoritesView.IsFavorite(item);
+            Frame.Navigate(typeof(StationDetailPage), item);
         }
 
         private async void ScheduleStationSelected(ListPickerFlyout sender, ItemsPickedEventArgs args)
@@ -104,26 +106,37 @@ namespace nexBart
             Station selected = sender.SelectedItem as Station;
             await ScheduleView.StationSelected(selected);
 
-            favBtn.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            refreshBtn.Visibility = Windows.UI.Xaml.Visibility.Visible;
             detailBtn.Visibility = Windows.UI.Xaml.Visibility.Visible;
-
-            if(FavoritesView.IsFavorite(ScheduleView.SelectedStation[0]))
-            {
-                favBtn.Content = "Remove Favorite";
-            }
-            else
-            {
-                favBtn.Content = "Add Favorite";
-            }
         }
 
-        private async void FavButtonClicked(object sender, RoutedEventArgs e)
-        {
-            FavoritesView.FavoriteStations.Clear();
-            await FavoritesView.AddFavorite(ScheduleView.SelectedStation[0]);
-            await FavoritesView.RefreshFavorites();
-            favBtn.Content = "Remove Favorite";
-        }
+        //private void FavButtonClicked(object sender, RoutedEventArgs e)
+        //{
+        //    if(((Button)sender).Content.Equals("Add Favorite"))
+        //    {
+        //        AddFavorite();
+        //    }
+        //    else if(((Button)sender).Content.Equals("Remove Favorite"))
+        //    {
+        //        RemoveFavorite();
+        //    }
+        //}
+
+        //private async void AddFavorite()
+        //{
+        //    FavoritesView.FavoriteStations.Clear();
+        //    await FavoritesView.AddFavorite(ScheduleView.SelectedStation[0]);
+        //    await FavoritesView.RefreshFavorites();
+        //    favBtn.Content = "Remove Favorite";
+        //}
+
+        //private async void RemoveFavorite()
+        //{
+        //    FavoritesView.FavoriteStations.Clear();
+        //    await FavoritesView.RemoveFavorite(ScheduleView.SelectedStation[0]);
+        //    await FavoritesView.RefreshFavorites();
+        //    favBtn.Content = "Add Favorite";
+        //}
 
         private async void RefreshTimes(object sender, RoutedEventArgs e)
         {
@@ -136,6 +149,7 @@ namespace nexBart
 
         private void MoreDetails(object sender, RoutedEventArgs e)
         {
+            FavoritesView.IsFavorite(ScheduleView.SelectedStation[0]);
             Frame.Navigate(typeof(StationDetailPage), ScheduleView.SelectedStation[0]);
         }
 
@@ -189,9 +203,9 @@ namespace nexBart
 
         #endregion
 
-        private void FavButtonLoaded(object sender, RoutedEventArgs e)
+        private void RefreshButtonLoaded(object sender, RoutedEventArgs e)
         {
-            favBtn = sender as Button;
+            refreshBtn = sender as Button;
         }
 
         private void DetailButtonLoaded(object sender, RoutedEventArgs e)

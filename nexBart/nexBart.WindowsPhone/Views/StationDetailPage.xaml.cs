@@ -25,7 +25,7 @@ namespace nexBart.Views
         private NavigationHelper navigationHelper;
         private ObservableDictionary defaultViewModel = new ObservableDictionary();
 
-        public StationDetailModel DetailModel;
+        private StationDetailModel DetailModel;
 
         public StationDetailPage()
         {
@@ -38,15 +38,29 @@ namespace nexBart.Views
 
         private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
-            DetailModel = new StationDetailModel(e.NavigationParameter as Station);
+            Station item = (Station) e.NavigationParameter;
+            DetailModel = new StationDetailModel(item);
 
-            StopHeader.Text = DetailModel.Selection[0].Name;
+            //StopHeader.Text = DetailModel.Selection[0].Name;
+            StopHeader.Text = DetailModel.Selection.Name;
 
             //stationList.ItemsSource = DetailModel.Selection[0].Lines;
             DataTemplate sectionTemplate = new DataTemplate();
 
-            int i = 0;
-            foreach(Line l in DetailModel.Selection[0].Lines)
+            if (item.Id == 0)
+            {
+                FavoriteBtn.Label = "favorite";
+                FavoriteBtn.Icon = new SymbolIcon(Symbol.Add);
+                FavoriteBtn.Click += AddFavorite;
+            }
+            else
+            {
+                FavoriteBtn.Label = "unfavorite";
+                FavoriteBtn.Icon = new SymbolIcon(Symbol.Remove);
+                FavoriteBtn.Click += RemoveFavorite; 
+            }
+
+            foreach (Line l in DetailModel.Selection.Lines)
             {
                 DepartHub.Sections.Add(new HubSection
                 {
@@ -54,8 +68,40 @@ namespace nexBart.Views
                     DataContext = l,
                     Style = HubSectionStyle
                 });
-                i++;
             }
+        }
+
+        private async void AddFavorite(object sender, RoutedEventArgs e)
+        {
+            MainPage.FavoritesView.FavoriteStations.Clear();
+            await MainPage.FavoritesView.AddFavorite(DetailModel.Selection);
+            await MainPage.FavoritesView.RefreshFavorites();
+            FavoriteBtn.Label = "unfavorite";
+            FavoriteBtn.Icon = new SymbolIcon(Symbol.Remove);
+            FavoriteBtn.Click -= AddFavorite;
+            FavoriteBtn.Click += RemoveFavorite;
+        }
+
+        private async void RemoveFavorite(object sender, RoutedEventArgs e)
+        {
+            MainPage.FavoritesView.FavoriteStations.Clear();
+            await MainPage.FavoritesView.RemoveFavorite(DetailModel.Selection);
+            await MainPage.FavoritesView.RefreshFavorites();
+            FavoriteBtn.Label = "favorite";
+            FavoriteBtn.Icon = new SymbolIcon(Symbol.Add);
+            FavoriteBtn.Click -= RemoveFavorite;
+            FavoriteBtn.Click += AddFavorite;
+        }
+
+        private async void RefreshTimes(object sender, RoutedEventArgs e)
+        {
+            MainPage.FavoritesView.FavoriteStations.Clear();
+            await MainPage.FavoritesView.RemoveFavorite(DetailModel.Selection);
+            await MainPage.FavoritesView.RefreshFavorites();
+            FavoriteBtn.Label = "favorite";
+            FavoriteBtn.Icon = new SymbolIcon(Symbol.Add);
+            FavoriteBtn.Click -= RemoveFavorite;
+            FavoriteBtn.Click += AddFavorite;
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)

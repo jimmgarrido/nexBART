@@ -164,7 +164,7 @@ namespace nexBart.Helpers
                 if(j == 0) allTimes = times[0];
                 else allTimes = String.Concat(allTimes, ", ", times[j]);
             }
-            _line.ElementAt(0).Times[id] = allTimes + " mins";
+            _line.ElementAt(0).Times[id] = allTimes;
         }
 
         private static string ToUpperFirstLetter(string source)

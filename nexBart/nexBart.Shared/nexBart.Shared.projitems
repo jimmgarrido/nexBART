@@ -28,12 +28,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SchedulesModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StationDetailModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StationTemplateSelector.cs" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\LightGray.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\MediumGray.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Assets\DarkGray.png" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StringFormat.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\NavigationHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\RelayCommand.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\SuspensionManager.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\ObservableDictionary.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Assets\refresh.png" />
   </ItemGroup>
 </Project>

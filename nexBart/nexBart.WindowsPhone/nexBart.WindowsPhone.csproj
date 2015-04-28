@@ -95,6 +95,7 @@
     <Compile Include="Views\StationDetailPage.xaml.cs">
       <DependentUpon>StationDetailPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\StringFormat.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

@@ -2,7 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
-namespace nexBart.Models
+namespace nexBart.ViewModels
 {
     class StationTemplateSelector : DataTemplateSelector
     {

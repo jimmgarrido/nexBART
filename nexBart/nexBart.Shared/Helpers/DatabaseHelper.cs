@@ -68,5 +68,11 @@ namespace nexBart.Helpers
             //});
             await conn.InsertAsync(s);
         }
+
+        public static async Task RemoveFavorite(Station s)
+        {
+            SQLiteAsyncConnection conn = new SQLiteAsyncConnection(dbPath);
+            await conn.DeleteAsync(s);
+        }
     }
 }

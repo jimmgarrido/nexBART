@@ -14,21 +14,12 @@ namespace nexBart.DataModels
         public string Name { get; set; }
         public string Abbrv { get; set; }
         [Ignore]
-        public ObservableCollection<Line> Lines 
-        { 
-            get 
-            { 
-                return _lines; 
-            } 
-            private set 
-            { 
-                _lines = value; 
-            } 
+        public ObservableCollection<Line> Lines { get; set; }
+
+        public Station() 
+        {
+            Lines = new ObservableCollection<Line>();
         }
-
-        private ObservableCollection<Line> _lines;
-
-        public Station() { }
 
         public Station(string _name, string _abbrv)
         {

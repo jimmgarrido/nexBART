@@ -9,32 +9,15 @@ namespace nexBart.DataModels
 {
     public class Line
     {
-        private string[] _destinations;
-        private string[] _times;
+        //private string[] _destinations;
+        //private string[] _times;
         private Brush _lineColor;
 
-        public string[] Destinations 
-        {
-            get
-            {
-                return _destinations;
-            }
-            private set
-            {
-                _destinations = value;
-            }
-        }
-        public string[] Times
-        {
-            get
-            {
-                return _times;
-            }
-            private set
-            {
-                _times = value;
-            }
-        }
+        public string[] Destinations { get; set; }
+        public string[] Times { get; set; }
+        public string[] DirOneTimes { get; set; }
+        public string[] DirTwoTimes { get; set; }
+
         public Brush LineColor
         {
             get
@@ -67,6 +50,27 @@ namespace nexBart.DataModels
                 rgbColor = LineColors.Colors["BLACK"];
             LineColor = new SolidColorBrush(Color.FromArgb(rgbColor.colorBytes[0], rgbColor.colorBytes[1], rgbColor.colorBytes[2], rgbColor.colorBytes[3]));
             colorName = color;
+        }
+
+        public void MakeTimesArray(int index)
+        {
+            string[] sep = {", "};
+
+            if(index == 0)
+            {
+                if (Times[index] != null)
+                {
+                    //Times[index] = 
+                    DirOneTimes = Times[index].Split(sep, StringSplitOptions.None);
+                }
+            }
+            else
+            {
+                if (Times[index] != null)
+                {
+                    DirTwoTimes = Times[index].Split(sep, StringSplitOptions.None);
+                }
+            }
         }
     }
 }
