@@ -17,6 +17,7 @@ namespace nexBart.DataModels
         public string[] Times { get; set; }
         public string[] DirOneTimes { get; set; }
         public string[] DirTwoTimes { get; set; }
+        public Train[] Trains { get; set; }
 
         public Brush LineColor
         {
@@ -35,6 +36,7 @@ namespace nexBart.DataModels
         {
             Destinations = new string[2];
             Times = new string[2];
+            Trains = new Train[3];
         }
 
         public Line(string dest, string color)

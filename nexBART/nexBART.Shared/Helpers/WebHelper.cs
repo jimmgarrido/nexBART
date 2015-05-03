@@ -13,7 +13,7 @@ namespace nexBart.Helpers
     {
         public static async Task<List<Line>> GetPredictions(Station station)
         {
-            string predictionsURL = Requests.MakePredictionsURL(station.Abbrv);
+            string predictionsUrl = Requests.MakePredictionsURL(station.Abbrv);
             var client = new HttpClient();
             var response = new HttpResponseMessage();
             XDocument xmlDoc = new XDocument();
@@ -23,7 +23,7 @@ namespace nexBart.Helpers
             client.DefaultRequestHeaders.IfModifiedSince = System.DateTime.Now;
             try
             {
-                response = await client.GetAsync(new Uri(predictionsURL));
+                response = await client.GetAsync(new Uri(predictionsUrl));
                 response.EnsureSuccessStatusCode();
                 reader = await response.Content.ReadAsStringAsync();
                 xmlDoc = XDocument.Parse(reader);
@@ -67,6 +67,11 @@ namespace nexBart.Helpers
             }
 
             return await XmlParser.Alerts(advisoryXml, elevatorXml);
+        }
+
+        public static async Task<Train[]> GetTrainDetails()
+        {
+            return new Train[1];
         }
     }
 }

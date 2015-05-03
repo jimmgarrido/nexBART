@@ -17,12 +17,17 @@ namespace nexBart.Models
         public StationDetailModel(Station station)
         {
             Selection = station;
-            //Selection.Add(station);
+            LoadData();
+        }
 
+        public async void LoadData()
+        {
             foreach(Line l in Selection.Lines)
             {
                 l.MakeTimesArray(0);
-                l.MakeTimesArray(1);
+                l.MakeTimesArray(1); 
+
+                //l.Trains = await 
             }
         }
     }

@@ -42,7 +42,7 @@ namespace nexBart.Helpers
                 dest = destElement.Element("destination").Value;
                 estimateElements = destElement.Elements("estimate");
                 counter = 0;
-
+                times = new string[5];            
                 foreach (XElement est in estimateElements)
                 {
                     color = est.Element("color").Value;
@@ -134,6 +134,11 @@ namespace nexBart.Helpers
             }
 
             return alerts;
+        }
+
+        public static async Task<Train[]> TrainDetails(XDocument doc)
+        {
+            return new Train[1];
         }
 
         private static void SetDestination(XElement e)

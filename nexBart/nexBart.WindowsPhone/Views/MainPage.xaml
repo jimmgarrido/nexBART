@@ -444,11 +444,6 @@
                                 <ProgressRing Grid.Row="0" HorizontalAlignment="Center" Height="10" VerticalAlignment="Center" Width="300" />
                                 
                                 <Grid Grid.Row="1" Background="Transparent" VerticalAlignment="Top" >
-                                    <Grid.Transitions>
-                                        <TransitionCollection>
-                                            <AddDeleteThemeTransition/>
-                                        </TransitionCollection>
-                                    </Grid.Transitions>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="55"/>
                                         <RowDefinition Height="55"/>

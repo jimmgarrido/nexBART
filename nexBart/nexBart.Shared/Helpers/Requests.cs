@@ -34,5 +34,10 @@ namespace nexBart.Helpers
             string url = URLs["elevators"];
             return String.Concat(url + "&key=", key);
         }
+
+        //public static string MakeDetails(string station)
+        //{
+        //    string url = URLs[""]
+        //}
     }
 }
