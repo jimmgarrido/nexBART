@@ -16,21 +16,22 @@ namespace nexBart.Helpers
     class XmlParser
     {
         static List<Line> lines = new List<Line>();
-        static string color, dest;
-        static string[] times = new string[5];
+        static List<string> usedDests = new List<string>();
+        static List<string> usedColors = new List<string>();
+
+        static string color, destName;
+        static string[] times;
         static int counter = 0;
 
-        public static async Task<List<Line>> Predictions(XDocument _doc)
+        public static async Task<List<Line>> Predictions(XDocument doc)
         {
-            List<string> usedDests = new List<string>();
-            List<string> usedColors = new List<string>();
-
             usedColors.Clear();
             usedDests.Clear();
             lines.Clear();
 
+            XElement rootElement = doc.Element("root").Element("station");
             XElement destElement;
-            XElement rootElement = _doc.Element("root").Element("station");
+            XElement estimate;
 
             IEnumerable<XElement> estimateElements;
             IEnumerable<XElement> etdElements = rootElement.Elements("etd");
@@ -38,36 +39,36 @@ namespace nexBart.Helpers
             for (int i = 0; i < etdElements.Count(); i++)
             {
                 destElement = etdElements.ElementAt(i);
+                destName = destElement.Element("destination").Value;
 
-                dest = destElement.Element("destination").Value;
                 estimateElements = destElement.Elements("estimate");
-                counter = 0;
-                times = new string[5];            
-                foreach (XElement est in estimateElements)
+                times = new string[3];  
+          
+                for(int j=0; j<3; j++)
                 {
-                    color = est.Element("color").Value;
+                    estimate = estimateElements.ElementAt(j);
+                    color = estimate.Element("color").Value;
 
-                    if (est.Element("minutes").Value.Equals("Leaving"))
+                    if (estimate.Element("minutes").Value.Equals("Leaving"))
                         times[counter] = "Now";
-                    else times[counter] = est.Element("minutes").Value;
-                    counter++;
+                    else times[counter] = estimate.Element("minutes").Value;
 
                     if (!usedColors.Contains(color))
                     {
-                        lines.Add(new Line(dest, color));
-                        usedDests.Add(dest);
+                        lines.Add(new Line(destName, color));
+                        usedDests.Add(destName);
                         usedColors.Add(color);
-                        SetDestination(est);
+                        SetDestination(estimate);
                     }
                     else
                     {
-                        if (!usedDests.Contains(dest))
+                        if (!usedDests.Contains(destName))
                         {
                             //lines.Add(new Line(dest, color));
-                            usedDests.Add(dest);
+                            usedDests.Add(destName);
                             //usedColors.Add(color);
                         }
-                        SetDestination(est);
+                        SetDestination(estimate);
                     }
                 }
             }
@@ -149,12 +150,12 @@ namespace nexBart.Helpers
             {
                 if (e.Element("direction").Value.Equals("South"))
                 {
-                    line.ElementAt(0).Destinations[1] = dest;
+                    line.ElementAt(0).Destinations[1] = destName;
                     SetTimes(1, line);
                 }
                 else
                 {
-                    line.ElementAt(0).Destinations[0] = dest;
+                    line.ElementAt(0).Destinations[0] = destName;
                     SetTimes(0, line);
                 }
             }

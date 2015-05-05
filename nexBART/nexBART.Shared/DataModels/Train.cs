@@ -4,6 +4,7 @@
     {
         public string NumCars { get; set; }
         public string BikeStatus {get; set;}
+        public string Time { get; set; }
 
         public Train(string cars, string bikes)
         {

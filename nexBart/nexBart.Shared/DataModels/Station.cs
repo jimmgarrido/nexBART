@@ -13,6 +13,7 @@ namespace nexBart.DataModels
         public int Id { get; set; }
         public string Name { get; set; }
         public string Abbrv { get; set; }
+
         [Ignore]
         public ObservableCollection<Line> Lines { get; set; }
 

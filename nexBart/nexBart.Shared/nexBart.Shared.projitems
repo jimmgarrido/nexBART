@@ -16,6 +16,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\Alert.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)DataModels\Destination.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\Train.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\Line.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\LineColors.cs" />
