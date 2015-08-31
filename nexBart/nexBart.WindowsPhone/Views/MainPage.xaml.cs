@@ -27,45 +27,28 @@ namespace nexBart
 {
     public sealed partial class MainPage : Page
     {
+        #region Navigation and ViewModel Properties
         private readonly NavigationHelper navigationHelper;
-        private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
+        public NavigationHelper NavigationHelper
+        {
+            get { return this.navigationHelper; }
+        }
+        public ObservableDictionary DefaultViewModel { get; set; }
+        #endregion
 
         //Represent each hub section as a model
-        private static SchedulesModel _scheduleView;
-        private static FavoritesModel _favoritesView;
-
-        public static SchedulesModel ScheduleView
-        {
-            get
-            {
-                return _scheduleView;
-            }
-            private set
-            {
-                _scheduleView = value;
-            }
-        }
-        public static FavoritesModel FavoritesView
-        {
-            get
-            {
-                return _favoritesView;
-            }
-            private set
-            {
-                _favoritesView = value;
-            }
-        }
-        public static AlertsModel AlertsView { get; set; }
-
         private Button refreshBtn, detailBtn;
+
+        public SchedulesModel ScheduleView { get; set; }
+        public FavoritesModel FavoritesView { get; set; }
+        public AlertsModel AlertsView { get; set; }
+
         public MainPage()
         {
             this.InitializeComponent();
 
             // Hub is only supported in Portrait orientation
             DisplayInformation.AutoRotationPreferences = DisplayOrientations.Portrait;
-
             this.NavigationCacheMode = NavigationCacheMode.Required;
 
             this.navigationHelper = new NavigationHelper(this);
@@ -77,18 +60,37 @@ namespace nexBart
             ScheduleView = new SchedulesModel();
             AlertsView = new AlertsModel();
 
-            this.DefaultViewModel["Favorites"] = FavoritesView;
-            this.DefaultViewModel["Schedules"] = ScheduleView;
-            this.DefaultViewModel["Alerts"] = AlertsView;
+            //this.DefaultViewModel["Favorites"] = FavoritesView;
+            //this.DefaultViewModel["Schedules"] = ScheduleView;
+            //this.DefaultViewModel["Alerts"] = AlertsView;
 
-            //alertsGroup.Source = AlertsView.GetGroup();
-
-            FinishedInit();
+            FavoritesSection.DataContext = FavoritesView;
+            SchedulesSection.DataContext = ScheduleView;
+            AlertsSection.DataContext = AlertsView;
         }
 
-        private async void FinishedInit()
+
+        /**
+        ** Lifecycle methods
+        **/
+        protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
-            await FavoritesView.CheckFavorites();
+            this.navigationHelper.OnNavigatedTo(e);
+            await LoadData();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            this.navigationHelper.OnNavigatedFrom(e);
+        }
+
+
+        /**
+        ** Event Handlers
+        **/
+        private async Task LoadData()
+        {
+            await FavoritesView.CheckFavoritesDB();
             await FavoritesView.RefreshFavorites();
             alertsGroup.Source = await AlertsView.RefreshAlerts();
             //alertsGroup.Source = AlertsView.GetGroup();
@@ -101,13 +103,13 @@ namespace nexBart
             Frame.Navigate(typeof(StationDetailPage), item);
         }
 
-        private async void ScheduleStationSelected(ListPickerFlyout sender, ItemsPickedEventArgs args)
+        private async void ScheduleStationSelected(object sender, SelectionChangedEventArgs args)
         {
-            Station selected = sender.SelectedItem as Station;
+            Station selected = ((ComboBox)sender).SelectedItem as Station;
             await ScheduleView.StationSelected(selected);
 
-            refreshBtn.Visibility = Windows.UI.Xaml.Visibility.Visible;
-            detailBtn.Visibility = Windows.UI.Xaml.Visibility.Visible;
+            refreshBtn.Visibility = Visibility.Visible;
+            detailBtn.Visibility = Visibility.Visible;
         }
 
         //private void FavButtonClicked(object sender, RoutedEventArgs e)
@@ -152,57 +154,7 @@ namespace nexBart
             FavoritesView.IsFavorite(ScheduleView.SelectedStation[0]);
             Frame.Navigate(typeof(StationDetailPage), ScheduleView.SelectedStation[0]);
         }
-
-        public NavigationHelper NavigationHelper
-        {
-            get { return this.navigationHelper; }
-        }
-
-        public ObservableDictionary DefaultViewModel
-        {
-            get { return this.defaultViewModel; }
-        }
-
-        #region NavigationHelper Methods
-
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
-        {
-
-        }
-
-        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
-        {
-
-        }
-
-        #endregion
-
-        #region NavigationHelper registration
-
-        /// <summary>
-        /// The methods provided in this section are simply used to allow
-        /// NavigationHelper to respond to the page's navigation methods.
-        /// <para>
-        /// Page specific logic should be placed in event handlers for the
-        /// <see cref="NavigationHelper.LoadState"/>
-        /// and <see cref="NavigationHelper.SaveState"/>.
-        /// The navigation parameter is available in the LoadState method
-        /// in addition to page state preserved during an earlier session.
-        /// </para>
-        /// </summary>
-        /// <param name="e">Event data that describes how this page was reached.</param>
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            this.navigationHelper.OnNavigatedTo(e);
-        }
-
-        protected override void OnNavigatedFrom(NavigationEventArgs e)
-        {
-            this.navigationHelper.OnNavigatedFrom(e);
-        }
-
-        #endregion
-
+    
         private void RefreshButtonLoaded(object sender, RoutedEventArgs e)
         {
             refreshBtn = sender as Button;
@@ -212,5 +164,17 @@ namespace nexBart
         {
             detailBtn = sender as Button;
         }
+
+        #region NavigationHelper Methods
+        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        {
+
+        }
+
+        private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
+        {
+
+        }
+        #endregion
     }
 }

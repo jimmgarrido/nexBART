@@ -15,64 +15,127 @@ namespace nexBart.Helpers
 
     class XmlParser
     {
-        static List<Line> lines = new List<Line>();
-        static List<string> usedDests = new List<string>();
-        static List<string> usedColors = new List<string>();
+        //static List<Line> lines = new List<Line>();
+        //static List<string> usedDests = new List<string>();
+        //static List<string> usedColors = new List<string>();
 
-        static string color, destName;
-        static string[] times;
-        static int counter = 0;
+        //static string color, destName;
+        //static string[] times;
+        //static int counter = 0;
 
-        public static async Task<List<Line>> Predictions(XDocument doc)
+        public static List<Line> ParsePredictions(XDocument doc)
         {
-            usedColors.Clear();
-            usedDests.Clear();
-            lines.Clear();
+            var stationLines = new List<Line>();
 
-            XElement rootElement = doc.Element("root").Element("station");
-            XElement destElement;
-            XElement estimate;
+            var destination = "";
+            var etdElements = doc.Element("root").Element("station").Elements("etd");
 
-            IEnumerable<XElement> estimateElements;
-            IEnumerable<XElement> etdElements = rootElement.Elements("etd");
-
-            for (int i = 0; i < etdElements.Count(); i++)
+            for (int i=0;i<etdElements.Count(); i++)
             {
-                destElement = etdElements.ElementAt(i);
-                destName = destElement.Element("destination").Value;
+                var etd = etdElements.ElementAt(i);
 
-                estimateElements = destElement.Elements("estimate");
-                times = new string[3];  
-          
-                for(int j=0; j<3; j++)
+                destination = etd.Element("destination").Value;
+                var estimateElements = etd.Elements("estimate");
+
+                for(int j=0; j<estimateElements.Count(); j++)
                 {
-                    estimate = estimateElements.ElementAt(j);
-                    color = estimate.Element("color").Value;
+                    var estimate = estimateElements.ElementAt(j);
 
-                    if (estimate.Element("minutes").Value.Equals("Leaving"))
-                        times[counter] = "Now";
-                    else times[counter] = estimate.Element("minutes").Value;
+                    var lineColor = estimate.Element("color").Value;
+                    var estMins = estimate.Element("minutes").Value;
+                    var length = estimate.Element("length").Value;
+                    var bikeFlag = estimate.Element("bikeflag").Value;
 
-                    if (!usedColors.Contains(color))
+                    var newTrain = new Train(estMins, length, bikeFlag);
+                    /**If color does not exist in stationLines:
+                    ** - Add new line
+                    ** - Add new destination to new line depending on the train's directions
+                    ** - Add new train to line
+                    **/
+                    if (!stationLines.Exists(l => l.colorName == lineColor))
                     {
-                        lines.Add(new Line(destName, color));
-                        usedDests.Add(destName);
-                        usedColors.Add(color);
-                        SetDestination(estimate);
+                        var newLine = new Line(lineColor);
+
+                        if (estimate.Element("direction").Value == "South")
+                        {
+                            newLine.Destinations[1] = new Destination(destination);
+                            newLine.Destinations[1].Times = estMins;
+                            newLine.Destinations[1].Trains.Add(newTrain);
+                        }
+                        else
+                        {
+                            newLine.Destinations[0] = new Destination(destination);
+                            newLine.Destinations[0].Times = estMins;
+                            newLine.Destinations[0].Trains.Add(newTrain);
+                        }
+
+                        stationLines.Add(newLine);
                     }
                     else
                     {
-                        if (!usedDests.Contains(destName))
+                        var line = stationLines.Find(l => l.colorName == lineColor);
+
+                        if (estimate.Element("direction").Value == "South")
                         {
-                            //lines.Add(new Line(dest, color));
-                            usedDests.Add(destName);
-                            //usedColors.Add(color);
+                            if(line.Destinations[1] == null) line.Destinations[1] = new Destination(destination);
+                            if (line.Destinations[1].Trains.Count < 3)
+                            {
+                                line.Destinations[1].Times += estMins;
+                                line.Destinations[1].Trains.Add(newTrain);
+                            }
                         }
-                        SetDestination(estimate);
+                        else
+                        {
+                            if (line.Destinations[0] == null) line.Destinations[0] = new Destination(destination);
+                            if (line.Destinations[0].Trains.Count < 3)
+                            {
+                                line.Destinations[0].Times += estMins;
+                                line.Destinations[0].Trains.Add(newTrain);
+                            }
+                        }
                     }
                 }
             }
-            return lines;
+
+            return stationLines;
+
+            //for (int i = 0; i < etdElements.Count(); i++)
+            //{
+            //    destElement = etdElements.ElementAt(i);
+            //    destName = destElement.Element("destination").Value;
+
+            //    estimateElements = destElement.Elements("estimate");
+            //    times = new string[3];  
+
+            //    for(int j=0; j<3; j++)
+            //    {
+            //        estimate = estimateElements.ElementAt(j);
+            //        color = estimate.Element("color").Value;
+
+            //        if (estimate.Element("minutes").Value.Equals("Leaving"))
+            //            times[counter] = "Now";
+            //        else times[counter] = estimate.Element("minutes").Value;
+
+            //        if (!usedColors.Contains(color))
+            //        {
+            //            lines.Add(new Line(destName, color));
+            //            usedDests.Add(destName);
+            //            usedColors.Add(color);
+            //            SetDestination(estimate);
+            //        }
+            //        else
+            //        {
+            //            if (!usedDests.Contains(destName))
+            //            {
+            //                //lines.Add(new Line(dest, color));
+            //                usedDests.Add(destName);
+            //                //usedColors.Add(color);
+            //            }
+            //            SetDestination(estimate);
+            //        }
+            //    }
+            //}
+            //return lines;
         }
 
         public static async Task<List<Alert>> Alerts(XDocument advDoc, XDocument elevDoc)
@@ -137,41 +200,37 @@ namespace nexBart.Helpers
             return alerts;
         }
 
-        public static async Task<Train[]> TrainDetails(XDocument doc)
-        {
-            return new Train[1];
-        }
 
-        private static void SetDestination(XElement e)
-        {
-            IEnumerable<Line> line = lines.Where(l => l.colorName.Equals(color));
+        //private static void SetDestination(XElement e)
+        //{
+        //    IEnumerable<Line> line = lines.Where(l => l.colorName.Equals(color));
 
-            for (int k = 0; k < line.Count(); k++)
-            {
-                if (e.Element("direction").Value.Equals("South"))
-                {
-                    line.ElementAt(0).Destinations[1] = destName;
-                    SetTimes(1, line);
-                }
-                else
-                {
-                    line.ElementAt(0).Destinations[0] = destName;
-                    SetTimes(0, line);
-                }
-            }
-        }
+        //    for (int k = 0; k < line.Count(); k++)
+        //    {
+        //        if (e.Element("direction").Value.Equals("South"))
+        //        {
+        //            //line.ElementAt(0).Destinations[1] = destName;
+        //            SetTimes(1, line);
+        //        }
+        //        else
+        //        {
+        //            //line.ElementAt(0).Destinations[0] = destName;
+        //            SetTimes(0, line);
+        //        }
+        //    }
+        //}
 
-        private static void SetTimes(int id, IEnumerable<Line> _line)
-        {
-            string allTimes = "";
+        //private static void SetTimes(int id, IEnumerable<Line> _line)
+        //{
+        //    string allTimes = "";
 
-            for(int j=0; j<counter; j++)
-            {
-                if(j == 0) allTimes = times[0];
-                else allTimes = String.Concat(allTimes, ", ", times[j]);
-            }
-            _line.ElementAt(0).Times[id] = allTimes;
-        }
+        //    for(int j=0; j<counter; j++)
+        //    {
+        //        if(j == 0) allTimes = times[0];
+        //        else allTimes = String.Concat(allTimes, ", ", times[j]);
+        //    }
+        //    //_line.ElementAt(0).Times[id] = allTimes;
+        //}
 
         private static string ToUpperFirstLetter(string source)
         {

@@ -24,8 +24,8 @@ namespace nexBart.Models
         {
             foreach(Line l in Selection.Lines)
             {
-                l.MakeTimesArray(0);
-                l.MakeTimesArray(1); 
+                //l.MakeTimesArray(0);
+                //l.MakeTimesArray(1); 
 
                 //l.Trains = await 
             }

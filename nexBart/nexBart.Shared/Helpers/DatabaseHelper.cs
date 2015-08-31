@@ -50,8 +50,6 @@ namespace nexBart.Helpers
 
         public static async Task<List<Station>> GetFavorites()
         {
-            //List<Station> favorites = new List<Station>();
-
             SQLiteAsyncConnection favDB = new SQLiteAsyncConnection(dbPath);
             List<Station> favorites = await favDB.QueryAsync<Station>("SELECT * FROM Favorites");
 

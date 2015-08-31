@@ -21,11 +21,10 @@ namespace nexBart.ViewModels
         public async Task RefreshFavorites()
         {
             List<Station> favorites = await DatabaseHelper.GetFavorites();
-            List<Line> lines = new List<Line>();
 
             foreach(Station s in favorites)
             {
-                lines = await WebHelper.GetPredictions(s);
+                var lines = await WebHelper.GetPredictions(s);
                 s.AddLineList(lines);
             }
 
@@ -45,7 +44,7 @@ namespace nexBart.ViewModels
             await DatabaseHelper.RemoveFavorite(favorite);
         }
 
-        public async Task CheckFavorites()
+        public async Task CheckFavoritesDB()
         {
             await DatabaseHelper.CheckDB();
         }

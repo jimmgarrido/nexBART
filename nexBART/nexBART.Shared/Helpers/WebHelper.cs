@@ -16,8 +16,7 @@ namespace nexBart.Helpers
             string predictionsUrl = Requests.MakePredictionsURL(station.Abbrv);
             var client = new HttpClient();
             var response = new HttpResponseMessage();
-            XDocument xmlDoc = new XDocument();
-            string reader;
+            var xmlDoc = new XDocument();
 
             //Make sure to pull from network not cache everytime
             client.DefaultRequestHeaders.IfModifiedSince = System.DateTime.Now;
@@ -25,7 +24,7 @@ namespace nexBart.Helpers
             {
                 response = await client.GetAsync(new Uri(predictionsUrl));
                 response.EnsureSuccessStatusCode();
-                reader = await response.Content.ReadAsStringAsync();
+                var reader = await response.Content.ReadAsStringAsync();
                 xmlDoc = XDocument.Parse(reader);
             }
             catch(Exception)
@@ -33,7 +32,7 @@ namespace nexBart.Helpers
                 //ErrorHandler.NetworkError("Error getting predictions. Check network connection and try again.");
             }
 
-            return await XmlParser.Predictions(xmlDoc);
+            return XmlParser.ParsePredictions(xmlDoc);
         }
 
         public static async Task<List<Alert>> GetAlerts()

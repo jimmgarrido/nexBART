@@ -3,13 +3,16 @@
     public class Train
     {
         public string NumCars { get; set; }
-        public string BikeStatus {get; set;}
+        public string Bikes {get; set;}
         public string Time { get; set; }
 
-        public Train(string cars, string bikes)
+        public Train(string mins, string length, string bikeFlag)
         {
-            NumCars = cars;
-            BikeStatus = bikes;
+            Time = mins;
+            NumCars = length;
+
+            if (bikeFlag == "1") Bikes = "yes";
+            else Bikes = "no";
         }
     }
 }

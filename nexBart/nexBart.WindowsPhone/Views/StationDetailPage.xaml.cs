@@ -73,35 +73,35 @@ namespace nexBart.Views
 
         private async void AddFavorite(object sender, RoutedEventArgs e)
         {
-            MainPage.FavoritesView.FavoriteStations.Clear();
-            await MainPage.FavoritesView.AddFavorite(DetailModel.Selection);
-            await MainPage.FavoritesView.RefreshFavorites();
-            FavoriteBtn.Label = "unfavorite";
-            FavoriteBtn.Icon = new SymbolIcon(Symbol.Remove);
-            FavoriteBtn.Click -= AddFavorite;
-            FavoriteBtn.Click += RemoveFavorite;
+            //MainPage.FavoritesView.FavoriteStations.Clear();
+            //await MainPage.FavoritesView.AddFavorite(DetailModel.Selection);
+            //await MainPage.FavoritesView.RefreshFavorites();
+            //FavoriteBtn.Label = "unfavorite";
+            //FavoriteBtn.Icon = new SymbolIcon(Symbol.Remove);
+            //FavoriteBtn.Click -= AddFavorite;
+            //FavoriteBtn.Click += RemoveFavorite;
         }
 
         private async void RemoveFavorite(object sender, RoutedEventArgs e)
         {
-            MainPage.FavoritesView.FavoriteStations.Clear();
-            await MainPage.FavoritesView.RemoveFavorite(DetailModel.Selection);
-            await MainPage.FavoritesView.RefreshFavorites();
-            FavoriteBtn.Label = "favorite";
-            FavoriteBtn.Icon = new SymbolIcon(Symbol.Add);
-            FavoriteBtn.Click -= RemoveFavorite;
-            FavoriteBtn.Click += AddFavorite;
+            //MainPage.FavoritesView.FavoriteStations.Clear();
+            //await MainPage.FavoritesView.RemoveFavorite(DetailModel.Selection);
+            //await MainPage.FavoritesView.RefreshFavorites();
+            //FavoriteBtn.Label = "favorite";
+            //FavoriteBtn.Icon = new SymbolIcon(Symbol.Add);
+            //FavoriteBtn.Click -= RemoveFavorite;
+            //FavoriteBtn.Click += AddFavorite;
         }
 
         private async void RefreshTimes(object sender, RoutedEventArgs e)
         {
-            MainPage.FavoritesView.FavoriteStations.Clear();
-            await MainPage.FavoritesView.RemoveFavorite(DetailModel.Selection);
-            await MainPage.FavoritesView.RefreshFavorites();
-            FavoriteBtn.Label = "favorite";
-            FavoriteBtn.Icon = new SymbolIcon(Symbol.Add);
-            FavoriteBtn.Click -= RemoveFavorite;
-            FavoriteBtn.Click += AddFavorite;
+            //MainPage.FavoritesView.FavoriteStations.Clear();
+            //await MainPage.FavoritesView.RemoveFavorite(DetailModel.Selection);
+            //await MainPage.FavoritesView.RefreshFavorites();
+            //FavoriteBtn.Label = "favorite";
+            //FavoriteBtn.Icon = new SymbolIcon(Symbol.Add);
+            //FavoriteBtn.Click -= RemoveFavorite;
+            //FavoriteBtn.Click += AddFavorite;
         }
 
         private void NavigationHelper_SaveState(object sender, SaveStateEventArgs e)
