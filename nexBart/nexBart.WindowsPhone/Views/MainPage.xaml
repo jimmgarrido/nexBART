@@ -59,6 +59,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="{Binding Name}"  Style="{StaticResource StationNameStyle}" Margin="0 0 0 0" Grid.Row="0"/>
+                    
                     <Grid Grid.Row="1" Background="Transparent" VerticalAlignment="Top" DataContext="{Binding Lines[0]}">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="55"/>
@@ -93,7 +94,7 @@
                     </Grid.RowDefinitions>
 
                     <TextBlock Text="{Binding Name}"  Style="{StaticResource StationNameStyle}" Margin="0 0 0 0" Grid.Row="0" />
-                    <Grid Grid.Row="1" Background="Transparent" VerticalAlignment="Top" >
+                    <Grid Grid.Row="1" Background="Transparent" VerticalAlignment="Top">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="55"/>
                             <RowDefinition Height="55"/>
@@ -109,14 +110,16 @@
 
                         <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[0].Destinations[0].Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Lines[0].Destinations[0.Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Lines[0].Destinations[0].Times}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                            <!--<TextBlock Text="{Binding Lines[0].Destinations[0.Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>-->
                         </StackPanel>
 
                         <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 -5 0 0">
                             <TextBlock Text="{Binding Lines[0].Destinations[1].Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                            <TextBlock Text="{Binding Lines[0].Destinations[1].Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding Lines[0].Destinations[1].Times}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                            <!--<TextBlock Text="{Binding Lines[0].Destinations[1].Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>-->
                         </StackPanel>
-                        
+
                         <Rectangle Fill="{Binding Lines[1].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
 
                         <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 -5 0 0">
@@ -422,7 +425,7 @@
             <HubSection x:Name="SchedulesSection" Header="schedules"
                         DataContext="{Binding Schedules}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}">
                 <DataTemplate>
-                    <Grid Background="Yellow" Margin="5 0 0 25" VerticalAlignment="Top">
+                    <Grid Margin="5 0 0 25" VerticalAlignment="Top">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="auto"/>
@@ -437,10 +440,9 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
 
-                        <TextBlock Text="{Binding Name}"  Style="{StaticResource StationNameStyle}" Margin="0 0 0 0" Grid.Row="0" />
-                                <ProgressRing Grid.Row="0" HorizontalAlignment="Center" Height="10" VerticalAlignment="Center" Width="300" />
-
-                        <Grid Grid.Row="1" Background="Transparent" VerticalAlignment="Top" DataContext="{Binding SelectedStation[0]}" >
+                        <TextBlock Text="{Binding Name}"  Style="{StaticResource StationNameStyle}" Margin="0 0 0 0" Grid.Row="0" />                           
+                        
+                        <!--<Grid Grid.Row="1" Background="Transparent" VerticalAlignment="Top" DataContext="{Binding SelectedStation[0]}" >
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="55"/>
                                         <RowDefinition Height="55"/>
@@ -454,7 +456,7 @@
                                         <ColumnDefinition Width="150"/>
                                     </Grid.ColumnDefinitions>
                             
-                                    <!-- Row 1-->
+                                    --><!-- Row 1--><!--
                                     <Rectangle Fill="{Binding Lines[0].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
 
                                     <StackPanel Grid.Row="0" Grid.Column="1">
@@ -467,7 +469,7 @@
                                         <TextBlock Text="{Binding Lines[0].Times[1], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                                     </StackPanel>
 
-                                    <!-- Row 2-->
+                                    --><!-- Row 2--><!--
                                     <Rectangle Fill="{Binding Lines[1].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
 
                                     <StackPanel Grid.Row="1" Grid.Column="1">
@@ -480,7 +482,7 @@
                                         <TextBlock Text="{Binding Lines[1].Times[1], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                                     </StackPanel>
 
-                                    <!-- Row 3-->
+                                    --><!-- Row 3--><!--
                                     <Rectangle Fill="{Binding Lines[2].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="2" Grid.Column="0" />
 
                                     <StackPanel Grid.Row="2" Grid.Column="1">
@@ -493,7 +495,7 @@
                                         <TextBlock Text="{Binding Lines[2].Times[1], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                                     </StackPanel>
 
-                                    <!-- Row 4-->
+                                    --><!-- Row 4--><!--
                                     <Rectangle Fill="{Binding Lines[3].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="3" Grid.Column="0" />
 
                                     <StackPanel Grid.Row="3" Grid.Column="1">
@@ -505,12 +507,12 @@
                                         <TextBlock Text="{Binding Lines[3].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
                                         <TextBlock Text="{Binding Lines[3].Times[1], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                                     </StackPanel>
-                                </Grid>                                  
+                                </Grid>-->                                  
 
-                        <Button Click="MoreDetails" Grid.Row="2" Content="More Details" Style="{StaticResource ButtonStyle}" 
+                        <!--<Button Click="MoreDetails" Grid.Row="2" Content="More Details" Style="{StaticResource ButtonStyle}" 
                                 HorizontalAlignment="Left" VerticalAlignment="Bottom" Loaded="DetailButtonLoaded" Visibility="Collapsed"/>
                         <Button Click="RefreshTimes" Grid.Row="2" Content="Refresh Times" HorizontalAlignment="Right" 
-                                Style="{StaticResource ButtonStyle}" Loaded="RefreshButtonLoaded" Visibility="Collapsed"/>
+                                Style="{StaticResource ButtonStyle}" Loaded="RefreshButtonLoaded" Visibility="Collapsed"/>-->
                     </Grid>
                 </DataTemplate>
             </HubSection>

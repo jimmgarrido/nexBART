@@ -58,7 +58,7 @@
                     <Rectangle Fill="{Binding LineColor}" Grid.Column="0"/>
                     <StackPanel Grid.Column="1" Margin="10 0 0 0">
                         
-                        <TextBlock Text="{Binding Destinations[0]}" FontSize="22" Foreground="#575757" />
+                        <TextBlock Text="{Binding Destinations[0].Name}" FontSize="22" Foreground="#575757" />
                         <Grid Margin="0 0 0 20">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="24"/>
@@ -71,20 +71,24 @@
                                 <ColumnDefinition Width="80"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="{Binding DirOneTimes[0], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="0" />
+                            <!--<TextBlock Text="{Binding DirOneTimes[0], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="0" />
                             <TextBlock Text="{Binding DirOneTimes[1], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="1" />
-                            <TextBlock Text="{Binding DirOneTimes[2], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="2" />
+                            <TextBlock Text="{Binding DirOneTimes[2], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="2" />-->
+                            <TextBlock Text="{Binding Destinations[0].Trains[0].Time}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="0" />
+                            <TextBlock Text="{Binding Destinations[0].Trains[1].Time}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="1" />
+                            <TextBlock Text="{Binding Destinations[0].Trains[2].Time}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="2" />
 
-                            <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="0" Style="{StaticResource DetailStyle}"/>
-                            <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Style="{StaticResource DetailStyle}"/>
-                            <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Style="{StaticResource DetailStyle}"/>
 
-                            <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Style="{StaticResource DetailStyle}"/>
-                            <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Style="{StaticResource DetailStyle}"/>
-                            <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Style="{StaticResource DetailStyle}"/>
+                            <TextBlock Text="{Binding Destinations[0].Trains[0].NumCars}" Grid.Row="1" Grid.Column="0" Style="{StaticResource DetailStyle}"/>
+                            <TextBlock Text="{Binding Destinations[0].Trains[1].NumCars}" Grid.Row="1" Grid.Column="1" Style="{StaticResource DetailStyle}"/>
+                            <TextBlock Text="{Binding Destinations[0].Trains[2].NumCars}" Grid.Row="1" Grid.Column="2" Style="{StaticResource DetailStyle}"/>
+
+                            <TextBlock Text="{Binding Destinations[0].Trains[0].Bikes}" Grid.Row="2" Grid.Column="0" Style="{StaticResource DetailStyle}"/>
+                            <TextBlock Text="{Binding Destinations[0].Trains[1].Bikes}" Grid.Row="2" Grid.Column="1" Style="{StaticResource DetailStyle}"/>
+                            <TextBlock Text="{Binding Destinations[0].Trains[2].Bikes}" Grid.Row="2" Grid.Column="2" Style="{StaticResource DetailStyle}"/>
                         </Grid>
 
-                        <TextBlock Text="{Binding Destinations[1]}" FontSize="22" Foreground="#575757" />
+                        <TextBlock Text="{Binding Destinations[1].Name}" FontSize="22" Foreground="#575757" />
 
                         <Grid>
                             <Grid.RowDefinitions>
@@ -98,17 +102,18 @@
                                 <ColumnDefinition Width="80"/>
                             </Grid.ColumnDefinitions>
 
-                            <TextBlock Text="{Binding DirTwoTimes[0], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="0" />
-                            <TextBlock Text="{Binding DirTwoTimes[1], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="1" />
-                            <TextBlock Text="{Binding DirTwoTimes[2], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="2" />
+                            <TextBlock Text="{Binding Destinations[1].Trains[0].Time}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="0" />
+                            <TextBlock Text="{Binding Destinations[1].Trains[1].Time}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="1" />
+                            <TextBlock Text="{Binding Destinations[1].Trains[2].Time}" Style="{StaticResource TimesStyle}" Grid.Row="0" Grid.Column="2" />
 
-                            <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="0" Style="{StaticResource DetailStyle}"/>
-                            <TextBlock Text="8 cars" Grid.Row="1" Grid.Column="1" Style="{StaticResource DetailStyle}"/>
-                            <TextBlock Text="9 cars" Grid.Row="1" Grid.Column="2" Style="{StaticResource DetailStyle}"/>
 
-                            <TextBlock Text="bikes" Grid.Row="2" Grid.Column="0" Style="{StaticResource DetailStyle}"/>
-                            <TextBlock Text="no bikes" Grid.Row="2" Grid.Column="1" Style="{StaticResource DetailStyle}"/>
-                            <TextBlock Text="bikes" Grid.Row="2" Grid.Column="2" Style="{StaticResource DetailStyle}"/>
+                            <TextBlock Text="{Binding Destinations[1].Trains[0].NumCars}" Grid.Row="1" Grid.Column="0" Style="{StaticResource DetailStyle}"/>
+                            <TextBlock Text="{Binding Destinations[1].Trains[1].NumCars}" Grid.Row="1" Grid.Column="1" Style="{StaticResource DetailStyle}"/>
+                            <TextBlock Text="{Binding Destinations[1].Trains[2].NumCars}" Grid.Row="1" Grid.Column="2" Style="{StaticResource DetailStyle}"/>
+
+                            <TextBlock Text="{Binding Destinations[1].Trains[0].Bikes}" Grid.Row="2" Grid.Column="0" Style="{StaticResource DetailStyle}"/>
+                            <TextBlock Text="{Binding Destinations[1].Trains[1].Bikes}" Grid.Row="2" Grid.Column="1" Style="{StaticResource DetailStyle}"/>
+                            <TextBlock Text="{Binding Destinations[1].Trains[2].Bikes}" Grid.Row="2" Grid.Column="2" Style="{StaticResource DetailStyle}"/>
                         </Grid>
                     </StackPanel>
                 </Grid>

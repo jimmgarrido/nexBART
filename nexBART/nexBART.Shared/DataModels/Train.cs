@@ -11,8 +11,8 @@
             Time = mins;
             NumCars = length;
 
-            if (bikeFlag == "1") Bikes = "yes";
-            else Bikes = "no";
+            if (bikeFlag == "1") Bikes = "bikes";
+            else Bikes = "no bikes";
         }
     }
 }

@@ -13,16 +13,8 @@ namespace nexBart.Helpers
      * Where all the magic happens
     */
 
-    class XmlParser
+    public class XmlParser
     {
-        //static List<Line> lines = new List<Line>();
-        //static List<string> usedDests = new List<string>();
-        //static List<string> usedColors = new List<string>();
-
-        //static string color, destName;
-        //static string[] times;
-        //static int counter = 0;
-
         public static List<Line> ParsePredictions(XDocument doc)
         {
             var stationLines = new List<Line>();
@@ -80,7 +72,7 @@ namespace nexBart.Helpers
                             if(line.Destinations[1] == null) line.Destinations[1] = new Destination(destination);
                             if (line.Destinations[1].Trains.Count < 3)
                             {
-                                line.Destinations[1].Times += estMins;
+                                line.Destinations[1].Times += ", " + estMins;
                                 line.Destinations[1].Trains.Add(newTrain);
                             }
                         }
@@ -89,7 +81,7 @@ namespace nexBart.Helpers
                             if (line.Destinations[0] == null) line.Destinations[0] = new Destination(destination);
                             if (line.Destinations[0].Trains.Count < 3)
                             {
-                                line.Destinations[0].Times += estMins;
+                                line.Destinations[0].Times += ", " + estMins;
                                 line.Destinations[0].Trains.Add(newTrain);
                             }
                         }
