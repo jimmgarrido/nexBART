@@ -72,7 +72,11 @@ namespace nexBart.Helpers
                             if(line.Destinations[1] == null) line.Destinations[1] = new Destination(destination);
                             if (line.Destinations[1].Trains.Count < 3)
                             {
-                                line.Destinations[1].Times += ", " + estMins;
+                                if (line.Destinations[1].Times == null)
+                                    line.Destinations[1].Times = estMins;
+                                else
+                                    line.Destinations[1].Times += ", " + estMins;
+
                                 line.Destinations[1].Trains.Add(newTrain);
                             }
                         }
@@ -81,7 +85,11 @@ namespace nexBart.Helpers
                             if (line.Destinations[0] == null) line.Destinations[0] = new Destination(destination);
                             if (line.Destinations[0].Trains.Count < 3)
                             {
-                                line.Destinations[0].Times += ", " + estMins;
+                                if (line.Destinations[0].Times == null)
+                                    line.Destinations[0].Times = estMins;
+                                else
+                                    line.Destinations[0].Times += ", " + estMins;
+
                                 line.Destinations[0].Trains.Add(newTrain);
                             }
                         }
@@ -90,44 +98,6 @@ namespace nexBart.Helpers
             }
 
             return stationLines;
-
-            //for (int i = 0; i < etdElements.Count(); i++)
-            //{
-            //    destElement = etdElements.ElementAt(i);
-            //    destName = destElement.Element("destination").Value;
-
-            //    estimateElements = destElement.Elements("estimate");
-            //    times = new string[3];  
-
-            //    for(int j=0; j<3; j++)
-            //    {
-            //        estimate = estimateElements.ElementAt(j);
-            //        color = estimate.Element("color").Value;
-
-            //        if (estimate.Element("minutes").Value.Equals("Leaving"))
-            //            times[counter] = "Now";
-            //        else times[counter] = estimate.Element("minutes").Value;
-
-            //        if (!usedColors.Contains(color))
-            //        {
-            //            lines.Add(new Line(destName, color));
-            //            usedDests.Add(destName);
-            //            usedColors.Add(color);
-            //            SetDestination(estimate);
-            //        }
-            //        else
-            //        {
-            //            if (!usedDests.Contains(destName))
-            //            {
-            //                //lines.Add(new Line(dest, color));
-            //                usedDests.Add(destName);
-            //                //usedColors.Add(color);
-            //            }
-            //            SetDestination(estimate);
-            //        }
-            //    }
-            //}
-            //return lines;
         }
 
         public static async Task<List<Alert>> Alerts(XDocument advDoc, XDocument elevDoc)
@@ -191,38 +161,6 @@ namespace nexBart.Helpers
 
             return alerts;
         }
-
-
-        //private static void SetDestination(XElement e)
-        //{
-        //    IEnumerable<Line> line = lines.Where(l => l.colorName.Equals(color));
-
-        //    for (int k = 0; k < line.Count(); k++)
-        //    {
-        //        if (e.Element("direction").Value.Equals("South"))
-        //        {
-        //            //line.ElementAt(0).Destinations[1] = destName;
-        //            SetTimes(1, line);
-        //        }
-        //        else
-        //        {
-        //            //line.ElementAt(0).Destinations[0] = destName;
-        //            SetTimes(0, line);
-        //        }
-        //    }
-        //}
-
-        //private static void SetTimes(int id, IEnumerable<Line> _line)
-        //{
-        //    string allTimes = "";
-
-        //    for(int j=0; j<counter; j++)
-        //    {
-        //        if(j == 0) allTimes = times[0];
-        //        else allTimes = String.Concat(allTimes, ", ", times[j]);
-        //    }
-        //    //_line.ElementAt(0).Times[id] = allTimes;
-        //}
 
         private static string ToUpperFirstLetter(string source)
         {

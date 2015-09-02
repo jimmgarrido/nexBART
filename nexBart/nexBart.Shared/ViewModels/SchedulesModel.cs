@@ -4,28 +4,19 @@ using nexBart.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace nexBart.ViewModels
 {
-    public class SchedulesModel
+    public class SchedulesModel : INotifyPropertyChanged
     {
-        private List<Station> _stationList;
-        private ObservableCollection<Station> _selectedStation;
+        private Station _selectedStation;
 
-        public List<Station> StationList
-        {
-            get
-            {
-                return _stationList;
-            }
-            private set
-            {
-                _stationList = value;
-            }
-        }
-        public ObservableCollection<Station> SelectedStation
+        public List<Station> StationList { get; set; }
+        
+        public Station SelectedStation
         {
             get
             {
@@ -34,12 +25,12 @@ namespace nexBart.ViewModels
             private set
             {
                 _selectedStation = value;
+                NotifyPropertyChanged("SelectedStation");
             }
         }
 
        public SchedulesModel()
        {
-           SelectedStation = new ObservableCollection<Station>();
            StationList = new List<Station>()
            {
                { new Station("12th St. Oakland", "12th")},
@@ -92,9 +83,19 @@ namespace nexBart.ViewModels
        public async Task StationSelected(Station selection)
        {
            selection.AddLineList(await WebHelper.GetPredictions(selection));
-
-           SelectedStation.Clear();
-           SelectedStation.Add(selection);
+            SelectedStation = selection;
        }
+
+        #region INotify Methods
+        private void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
     }
 }

@@ -21,7 +21,7 @@ namespace nexBart.ViewModels
         {
             if((string)value == "1")
             {
-                return string.Concat(value, "min");
+                return string.Concat(value, " min");
             }
             else if ((string)value == "Now")
             {
@@ -30,6 +30,10 @@ namespace nexBart.ViewModels
             else if(value == null)
             {
                 return "";
+            }
+            else if((string)value == "Leaving")
+            {
+                return value;
             }
             else
             {

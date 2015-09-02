@@ -1,15 +1,15 @@
 ﻿using nexBart.DataModels;
-
+using nexBart.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace nexBart.Models
 {
     public class StationDetailModel
     {
-        //public ObservableCollection<Station> Selection = new ObservableCollection<Station>();
         public Station Selection;
 
         public StationDetailModel() { }
@@ -17,18 +17,11 @@ namespace nexBart.Models
         public StationDetailModel(Station station)
         {
             Selection = station;
-            LoadData();
         }
 
-        public async void LoadData()
+        public async Task FavoriteStation()
         {
-            foreach(Line l in Selection.Lines)
-            {
-                //l.MakeTimesArray(0);
-                //l.MakeTimesArray(1); 
-
-                //l.Trains = await 
-            }
+            await DatabaseHelper.AddFavorite(Selection);
         }
     }
 }

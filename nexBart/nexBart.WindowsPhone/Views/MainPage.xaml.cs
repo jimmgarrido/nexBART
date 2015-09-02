@@ -38,6 +38,7 @@ namespace nexBart
 
         //Represent each hub section as a model
         private Button refreshBtn, detailBtn;
+        private bool loaded = false;
 
         public SchedulesModel ScheduleView { get; set; }
         public FavoritesModel FavoritesView { get; set; }
@@ -76,7 +77,8 @@ namespace nexBart
         protected async override void OnNavigatedTo(NavigationEventArgs e)
         {
             this.navigationHelper.OnNavigatedTo(e);
-            await LoadData();
+
+            if(!loaded) await LoadData();
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
@@ -93,6 +95,8 @@ namespace nexBart
             await FavoritesView.CheckFavoritesDB();
             await FavoritesView.RefreshFavorites();
             alertsGroup.Source = await AlertsView.RefreshAlerts();
+
+            loaded = true;
             //alertsGroup.Source = AlertsView.GetGroup();
         }
 
@@ -151,8 +155,8 @@ namespace nexBart
 
         private void MoreDetails(object sender, RoutedEventArgs e)
         {
-            FavoritesView.IsFavorite(ScheduleView.SelectedStation[0]);
-            Frame.Navigate(typeof(StationDetailPage), ScheduleView.SelectedStation[0]);
+            FavoritesView.IsFavorite(ScheduleView.SelectedStation);
+            Frame.Navigate(typeof(StationDetailPage), ScheduleView.SelectedStation);
         }
     
         private void RefreshButtonLoaded(object sender, RoutedEventArgs e)

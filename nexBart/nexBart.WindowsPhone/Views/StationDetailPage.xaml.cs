@@ -1,21 +1,8 @@
 ﻿using nexBart.Common;
 using nexBart.DataModels;
 using nexBart.Models;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace nexBart.Views
@@ -76,10 +63,10 @@ namespace nexBart.Views
             //MainPage.FavoritesView.FavoriteStations.Clear();
             //await MainPage.FavoritesView.AddFavorite(DetailModel.Selection);
             //await MainPage.FavoritesView.RefreshFavorites();
-            //FavoriteBtn.Label = "unfavorite";
-            //FavoriteBtn.Icon = new SymbolIcon(Symbol.Remove);
-            //FavoriteBtn.Click -= AddFavorite;
-            //FavoriteBtn.Click += RemoveFavorite;
+            FavoriteBtn.Label = "unfavorite";
+            FavoriteBtn.Icon = new SymbolIcon(Symbol.Remove);
+            FavoriteBtn.Click -= AddFavorite;
+            FavoriteBtn.Click += RemoveFavorite;
         }
 
         private async void RemoveFavorite(object sender, RoutedEventArgs e)
@@ -87,10 +74,10 @@ namespace nexBart.Views
             //MainPage.FavoritesView.FavoriteStations.Clear();
             //await MainPage.FavoritesView.RemoveFavorite(DetailModel.Selection);
             //await MainPage.FavoritesView.RefreshFavorites();
-            //FavoriteBtn.Label = "favorite";
-            //FavoriteBtn.Icon = new SymbolIcon(Symbol.Add);
-            //FavoriteBtn.Click -= RemoveFavorite;
-            //FavoriteBtn.Click += AddFavorite;
+            FavoriteBtn.Label = "favorite";
+            FavoriteBtn.Icon = new SymbolIcon(Symbol.Add);
+            FavoriteBtn.Click -= RemoveFavorite;
+            FavoriteBtn.Click += AddFavorite;
         }
 
         private async void RefreshTimes(object sender, RoutedEventArgs e)

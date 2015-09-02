@@ -60,7 +60,7 @@
 
                     <TextBlock Text="{Binding Name}"  Style="{StaticResource StationNameStyle}" Margin="0 0 0 0" Grid.Row="0"/>
                     
-                    <Grid Grid.Row="1" Background="Transparent" VerticalAlignment="Top" DataContext="{Binding Lines[0]}">
+                    <Grid Grid.Row="1" Background="Transparent" VerticalAlignment="Top">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="55"/>
                         </Grid.RowDefinitions>
@@ -71,16 +71,16 @@
                             <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
 
-                        <Rectangle Fill="{Binding LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
+                        <Rectangle Fill="{Binding Lines[0].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Times[0], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 -5 0 0" DataContext="{Binding Lines[0].Destinations[0]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                            <TextBlock Text="{Binding Times[1], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 -5 0 0" DataContext="{Binding Lines[0].Destinations[1]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -107,29 +107,27 @@
                         </Grid.ColumnDefinitions>
 
                         <Rectangle Fill="{Binding Lines[0].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
-
-                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[0].Destinations[0].Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Lines[0].Destinations[0].Times}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
-                            <!--<TextBlock Text="{Binding Lines[0].Destinations[0.Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>-->
+                        
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 -5 0 0" DataContext="{Binding Lines[0].Destinations[0]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[0].Destinations[1].Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                            <TextBlock Text="{Binding Lines[0].Destinations[1].Times}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
-                            <!--<TextBlock Text="{Binding Lines[0].Destinations[1].Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>-->
+                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 -5 0 0" DataContext="{Binding Lines[0].Destinations[1]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
 
                         <Rectangle Fill="{Binding Lines[1].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
-
-                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[1].Destinations[0].Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Lines[1].Destinations[0].Times}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                        
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 -5 0 0" DataContext="{Binding Lines[1].Destinations[0]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[1].Destinations[1].Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                            <TextBlock Text="{Binding Lines[1].Destinations[1].Times}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0 -5 0 0" DataContext="{Binding Lines[1].Destinations[1]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -158,38 +156,38 @@
 
                         <Rectangle Fill="{Binding Lines[0].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[0].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Lines[0].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 -5 0 0" DataContext="{Binding Lines[0].Destinations[0]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[0].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                            <TextBlock Text="{Binding Lines[0].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 -5 0 0" DataContext="{Binding Lines[0].Destinations[1]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
                         
                         <Rectangle Fill="{Binding Lines[1].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[1].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Lines[1].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 -5 0 0" DataContext="{Binding Lines[1].Destinations[0]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[1].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                            <TextBlock Text="{Binding Lines[1].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0 -5 0 0" DataContext="{Binding Lines[1].Destinations[1]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
                         
                         <Rectangle Fill="{Binding Lines[2].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="2" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[2].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Lines[2].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 -5 0 0" DataContext="{Binding Lines[2].Destinations[0]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="2" Grid.Column="2" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[2].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                            <TextBlock Text="{Binding Lines[2].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                        <StackPanel Grid.Row="2" Grid.Column="2" Margin="0 -5 0 0" DataContext="{Binding Lines[2].Destinations[1]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -214,55 +212,55 @@
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="15"/>
                             <ColumnDefinition Width="160"/>
-                            <ColumnDefinition Width="140"/>
+                            <ColumnDefinition Width="150"/>
                         </Grid.ColumnDefinitions>
 
                         <Rectangle Fill="{Binding Lines[0].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[0].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Lines[0].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                        <StackPanel Grid.Row="0" Grid.Column="1" Margin="0 -5 0 0" DataContext="{Binding Lines[0].Destinations[0]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[0].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                            <TextBlock Text="{Binding Lines[0].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0 -5 0 0" DataContext="{Binding Lines[0].Destinations[1]}">
+                            <TextBlock Text="{Binding Name]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
-                        
+
                         <Rectangle Fill="{Binding Lines[1].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[1].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Lines[1].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                        <StackPanel Grid.Row="1" Grid.Column="1" Margin="0 -5 0 0" DataContext="{Binding Lines[1].Destinations[0]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[1].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                            <TextBlock Text="{Binding Lines[1].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0 -5 0 0" DataContext="{Binding Lines[1].Destinations[1]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
-                        
+
                         <Rectangle Fill="{Binding Lines[2].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="2" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[2].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Lines[2].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                        <StackPanel Grid.Row="2" Grid.Column="1" Margin="0 -5 0 0" DataContext="{Binding Lines[2].Destinations[0]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="2" Grid.Column="2" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[2].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                            <TextBlock Text="{Binding Lines[2].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                        <StackPanel Grid.Row="2" Grid.Column="2" Margin="0 -5 0 0" DataContext="{Binding Lines[2].Destinatios[1]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
-                        
+
                         <Rectangle Fill="{Binding Lines[3].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="3" Grid.Column="0" />
 
-                        <StackPanel Grid.Row="3" Grid.Column="1" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[3].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                            <TextBlock Text="{Binding Lines[3].Times[0]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                        <StackPanel Grid.Row="3" Grid.Column="1" Margin="0 -5 0 0" DataContext="{Binding Lines[3].Destinatios[0]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
                         </StackPanel>
 
-                        <StackPanel Grid.Row="3" Grid.Column="2" Margin="0 -5 0 0">
-                            <TextBlock Text="{Binding Lines[3].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                            <TextBlock Text="{Binding Lines[3].Times[1]}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                        <StackPanel Grid.Row="3" Grid.Column="2" Margin="0 -5 0 0" DataContext="{Binding Lines[3].Destinatios[1]}">
+                            <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                            <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
                         </StackPanel>
                     </Grid>
                 </Grid>
@@ -428,11 +426,13 @@
                     <Grid Margin="5 0 0 25" VerticalAlignment="Top">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
+                            <RowDefinition Height="60"/>
                             <RowDefinition Height="auto"/>
-                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
 
-                        <ComboBox x:Name="StationsBox" HorizontalAlignment="Stretch" Width="330" Grid.Row="0" ItemsSource="{Binding StationList}" SelectionChanged="ScheduleStationSelected">
+                        <ComboBox x:Name="StationsBox" BorderBrush="#FF575757" BorderThickness="2" HorizontalAlignment="Center" Width="310" Grid.Row="0" 
+                                  ItemsSource="{Binding StationList}" SelectionChanged="ScheduleStationSelected">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <ContentControl Width="480" Content="{Binding Name}"/>
@@ -440,79 +440,81 @@
                             </ComboBox.ItemTemplate>
                         </ComboBox>
 
-                        <TextBlock Text="{Binding Name}"  Style="{StaticResource StationNameStyle}" Margin="0 0 0 0" Grid.Row="0" />                           
-                        
-                        <!--<Grid Grid.Row="1" Background="Transparent" VerticalAlignment="Top" DataContext="{Binding SelectedStation[0]}" >
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="55"/>
-                                        <RowDefinition Height="55"/>
-                                        <RowDefinition Height="55"/>
-                                        <RowDefinition Height="55"/>
-                                    </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding SelectedStation.Name}"  Style="{StaticResource StationNameStyle}" Margin="0 0 0 0" Grid.Row="1" />
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="15"/>
-                                        <ColumnDefinition Width="160"/>
-                                        <ColumnDefinition Width="150"/>
-                                    </Grid.ColumnDefinitions>
-                            
-                                    --><!-- Row 1--><!--
-                                    <Rectangle Fill="{Binding Lines[0].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
+                        <Grid Grid.Row="2" Background="Transparent" VerticalAlignment="Top" DataContext="{Binding SelectedStation}" >
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="55"/>
+                                <RowDefinition Height="55"/>
+                                <RowDefinition Height="55"/>
+                                <RowDefinition Height="55"/>
+                            </Grid.RowDefinitions>
 
-                                    <StackPanel Grid.Row="0" Grid.Column="1">
-                                        <TextBlock Text="{Binding Lines[0].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="{Binding Lines[0].Times[0], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
-                                    </StackPanel>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition Width="160"/>
+                                <ColumnDefinition Width="150"/>
+                            </Grid.ColumnDefinitions>
 
-                                    <StackPanel Grid.Row="0" Grid.Column="2">
-                                        <TextBlock Text="{Binding Lines[0].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                                        <TextBlock Text="{Binding Lines[0].Times[1], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
-                                    </StackPanel>
+                            <!--Row1 -->
+                            <Rectangle Fill="{Binding Lines[0].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="0" Grid.Column="0" />
 
-                                    --><!-- Row 2--><!--
-                                    <Rectangle Fill="{Binding Lines[1].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
+                            <StackPanel Grid.Row="0" Grid.Column="1" DataContext="{Binding Lines[0].Destinations[0]}">
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                            </StackPanel>
 
-                                    <StackPanel Grid.Row="1" Grid.Column="1">
-                                        <TextBlock Text="{Binding Lines[1].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="{Binding Lines[1].Times[0], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
-                                    </StackPanel>
+                            <StackPanel Grid.Row="0" Grid.Column="2" DataContext="{Binding Lines[0].Destinations[1]}">
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                                <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                            </StackPanel>
 
-                                    <StackPanel Grid.Row="1" Grid.Column="2">
-                                        <TextBlock Text="{Binding Lines[1].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                                        <TextBlock Text="{Binding Lines[1].Times[1], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
-                                    </StackPanel>
+                            <!--Row 2-->
+                            <Rectangle Fill="{Binding Lines[1].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="1" Grid.Column="0" />
 
-                                    --><!-- Row 3--><!--
-                                    <Rectangle Fill="{Binding Lines[2].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="2" Grid.Column="0" />
+                            <StackPanel Grid.Row="1" Grid.Column="1" DataContext="{Binding Lines[1].Destinations[0]}">
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                            </StackPanel>
 
-                                    <StackPanel Grid.Row="2" Grid.Column="1">
-                                        <TextBlock Text="{Binding Lines[2].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="{Binding Lines[2].Times[0], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
-                                    </StackPanel>
+                            <StackPanel Grid.Row="1" Grid.Column="2" DataContext="{Binding Lines[1].Destinations[1]}">
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                                <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                            </StackPanel>
 
-                                    <StackPanel Grid.Row="2" Grid.Column="2">
-                                        <TextBlock Text="{Binding Lines[2].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                                        <TextBlock Text="{Binding Lines[2].Times[1], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
-                                    </StackPanel>
+                            <!--Row 3-->
+                            <Rectangle Fill="{Binding Lines[2].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="2" Grid.Column="0" />
 
-                                    --><!-- Row 4--><!--
-                                    <Rectangle Fill="{Binding Lines[3].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="3" Grid.Column="0" />
+                            <StackPanel Grid.Row="2" Grid.Column="1" DataContext="{Binding Lines[2].Destinations[0]}">
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                            </StackPanel>
 
-                                    <StackPanel Grid.Row="3" Grid.Column="1">
-                                        <TextBlock Text="{Binding Lines[3].Destinations[0]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
-                                        <TextBlock Text="{Binding Lines[3].Times[0], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
-                                    </StackPanel>
+                            <StackPanel Grid.Row="2" Grid.Column="2" DataContext="{Binding Lines[2].Destinations[1]}">
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                                <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                            </StackPanel>
 
-                                    <StackPanel Grid.Row="3" Grid.Column="2">
-                                        <TextBlock Text="{Binding Lines[3].Destinations[1]}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
-                                        <TextBlock Text="{Binding Lines[3].Times[1], Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
-                                    </StackPanel>
-                                </Grid>-->                                  
+                            <!--Row 4-->
+                            <Rectangle Fill="{Binding Lines[3].LineColor}" Style="{StaticResource RectangleStyle}" Grid.Row="3" Grid.Column="0" />
 
-                        <!--<Button Click="MoreDetails" Grid.Row="2" Content="More Details" Style="{StaticResource ButtonStyle}" 
-                                HorizontalAlignment="Left" VerticalAlignment="Bottom" Loaded="DetailButtonLoaded" Visibility="Collapsed"/>
-                        <Button Click="RefreshTimes" Grid.Row="2" Content="Refresh Times" HorizontalAlignment="Right" 
-                                Style="{StaticResource ButtonStyle}" Loaded="RefreshButtonLoaded" Visibility="Collapsed"/>-->
+                            <StackPanel Grid.Row="3" Grid.Column="1" DataContext="{Binding Lines[3].Destinations[0]}">
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Left"/>
+                                <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Left"/>
+                            </StackPanel>
+
+                            <StackPanel Grid.Row="3" Grid.Column="2" DataContext="{Binding Lines[3].Destinations[1]}">
+                                <TextBlock Text="{Binding Name}" Style="{StaticResource DestinationStyle}" HorizontalAlignment="Right"/>
+                                <TextBlock Text="{Binding Times, Converter={StaticResource StringFormat}, ConverterParameter=\{0\} mins}" Style="{StaticResource TimeStyle}" HorizontalAlignment="Right"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <Button Click="MoreDetails" Grid.Row="3" Content="More Details" Style="{StaticResource ButtonStyle}" 
+                                HorizontalAlignment="Left" VerticalContentAlignment="Center" VerticalAlignment="Bottom" 
+                                Loaded="DetailButtonLoaded" Visibility="Collapsed"/>
+                        <Button Click="RefreshTimes" Grid.Row="3" Content="Refresh Times" Style="{StaticResource ButtonStyle}"  
+                                HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Bottom"  
+                                Loaded="RefreshButtonLoaded" Visibility="Collapsed"/>
                     </Grid>
                 </DataTemplate>
             </HubSection>

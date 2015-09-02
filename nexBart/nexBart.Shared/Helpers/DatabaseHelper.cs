@@ -5,6 +5,7 @@ using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,9 +14,30 @@ using Windows.Storage;
 
 namespace nexBart.Helpers
 {
-    class DatabaseHelper
+    public delegate void ChangedEventHandler();
+
+    public class DatabaseHelper
     {
-        static string dbPath;
+        private static string dbPath;
+        private static List<Station> _favorites;
+
+        public static List<Station> Favorites
+        {
+            get
+            {
+                return _favorites;
+            }
+            set
+            {
+                _favorites = value;
+                if(FavoritesChanged != null)
+                {
+                    FavoritesChanged();
+                }
+            }
+        }
+        public static ChangedEventHandler FavoritesChanged;
+
         public static async Task CheckDB()
         {
             bool dbExsists;
