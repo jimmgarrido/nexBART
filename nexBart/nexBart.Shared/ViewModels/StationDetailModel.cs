@@ -23,5 +23,10 @@ namespace nexBart.Models
         {
             await DatabaseHelper.AddFavorite(Selection);
         }
+
+        public async Task UnfavoriteStation()
+        {
+            await DatabaseHelper.RemoveFavorite(Selection);
+        }
     }
 }

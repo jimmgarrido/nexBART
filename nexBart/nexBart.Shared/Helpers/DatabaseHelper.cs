@@ -14,7 +14,7 @@ using Windows.Storage;
 
 namespace nexBart.Helpers
 {
-    public delegate void ChangedEventHandler();
+    public delegate Task ChangedEventHandler();
 
     public class DatabaseHelper
     {
@@ -58,6 +58,8 @@ namespace nexBart.Helpers
             {
                 await MakeDB(file);
             }
+
+            if (FavoritesChanged != null) FavoritesChanged();
         }
 
         private static async Task MakeDB(StorageFile file)
@@ -73,26 +75,21 @@ namespace nexBart.Helpers
         public static async Task<List<Station>> GetFavorites()
         {
             SQLiteAsyncConnection favDB = new SQLiteAsyncConnection(dbPath);
-            List<Station> favorites = await favDB.QueryAsync<Station>("SELECT * FROM Favorites");
-
-            return favorites;
+            return await favDB.QueryAsync<Station>("SELECT * FROM Favorites");
         }
 
         public static async Task AddFavorite(Station s)
         {
             SQLiteAsyncConnection conn = new SQLiteAsyncConnection(dbPath);
-            //await conn.InsertAsync(new StationData
-            //{
-            //    Name = s.Name,
-            //    Abbrv = s.Abbrv
-            //});
             await conn.InsertAsync(s);
+            if (FavoritesChanged != null) FavoritesChanged();
         }
 
         public static async Task RemoveFavorite(Station s)
         {
             SQLiteAsyncConnection conn = new SQLiteAsyncConnection(dbPath);
             await conn.DeleteAsync(s);
+            if (FavoritesChanged != null) FavoritesChanged();
         }
     }
 }

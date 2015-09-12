@@ -3,24 +3,11 @@ using nexBart.DataModels;
 using nexBart.ViewModels;
 using nexBart.Views;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.Graphics.Display;
-using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 namespace nexBart
@@ -61,10 +48,6 @@ namespace nexBart
             ScheduleView = new SchedulesModel();
             AlertsView = new AlertsModel();
 
-            //this.DefaultViewModel["Favorites"] = FavoritesView;
-            //this.DefaultViewModel["Schedules"] = ScheduleView;
-            //this.DefaultViewModel["Alerts"] = AlertsView;
-
             FavoritesSection.DataContext = FavoritesView;
             SchedulesSection.DataContext = ScheduleView;
             AlertsSection.DataContext = AlertsView;
@@ -92,12 +75,17 @@ namespace nexBart
         **/
         private async Task LoadData()
         {
+            var statusBar = StatusBar.GetForCurrentView().ProgressIndicator;
+            await statusBar.ShowAsync();
+            statusBar.ProgressValue = null;
+
             await FavoritesView.CheckFavoritesDB();
-            await FavoritesView.RefreshFavorites();
             alertsGroup.Source = await AlertsView.RefreshAlerts();
 
             loaded = true;
-            //alertsGroup.Source = AlertsView.GetGroup();
+
+            statusBar.ProgressValue = 0;
+            await statusBar.HideAsync();
         }
 
         private void StopClicked(object sender, ItemClickEventArgs e)
@@ -116,41 +104,22 @@ namespace nexBart
             detailBtn.Visibility = Visibility.Visible;
         }
 
-        //private void FavButtonClicked(object sender, RoutedEventArgs e)
-        //{
-        //    if(((Button)sender).Content.Equals("Add Favorite"))
-        //    {
-        //        AddFavorite();
-        //    }
-        //    else if(((Button)sender).Content.Equals("Remove Favorite"))
-        //    {
-        //        RemoveFavorite();
-        //    }
-        //}
-
-        //private async void AddFavorite()
-        //{
-        //    FavoritesView.FavoriteStations.Clear();
-        //    await FavoritesView.AddFavorite(ScheduleView.SelectedStation[0]);
-        //    await FavoritesView.RefreshFavorites();
-        //    favBtn.Content = "Remove Favorite";
-        //}
-
-        //private async void RemoveFavorite()
-        //{
-        //    FavoritesView.FavoriteStations.Clear();
-        //    await FavoritesView.RemoveFavorite(ScheduleView.SelectedStation[0]);
-        //    await FavoritesView.RefreshFavorites();
-        //    favBtn.Content = "Add Favorite";
-        //}
-
         private async void RefreshTimes(object sender, RoutedEventArgs e)
         {
-            FavoritesView.FavoriteStations.Clear();
+            var statusBar = StatusBar.GetForCurrentView().ProgressIndicator;
+            await statusBar.ShowAsync();
+            statusBar.Text = "Getting Departure Times";
+            statusBar.ProgressValue = null;
+
             AlertsView.Alerts.Clear();
 
-            await FavoritesView.RefreshFavorites();
+            refreshBtn.IsEnabled = false;
+            await FavoritesView.LoadFavorites();
             alertsGroup.Source = await AlertsView.RefreshAlerts();
+            refreshBtn.IsEnabled = true;
+
+            statusBar.ProgressValue = 0;
+            await statusBar.HideAsync();
         }
 
         private void MoreDetails(object sender, RoutedEventArgs e)

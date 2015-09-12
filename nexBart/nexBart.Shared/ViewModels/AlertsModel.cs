@@ -21,7 +21,7 @@ namespace nexBart.ViewModels
         public async Task<IOrderedEnumerable<IGrouping<string, Alert>>> RefreshAlerts()
         {
             List<Alert> alerts = await WebHelper.GetAlerts();
-
+            Alerts.Clear();
             foreach(Alert a in alerts)
             {
                 Alerts.Add(a);
@@ -30,9 +30,9 @@ namespace nexBart.ViewModels
             return from alert in Alerts group alert by alert.Type into grp orderby grp.Key select grp;
         }
 
-        public IOrderedEnumerable<IGrouping<string, Alert>> GetGroup()
-        {
-            return from alert in Alerts group alert by alert.Type into grp orderby grp.Key select grp;
-        }
+        //public IOrderedEnumerable<IGrouping<string, Alert>> GetGroup()
+        //{
+        //    return from alert in Alerts group alert by alert.Type into grp orderby grp.Key select grp;
+        //}
     }
 }

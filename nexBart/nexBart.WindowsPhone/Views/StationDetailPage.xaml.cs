@@ -28,22 +28,20 @@ namespace nexBart.Views
             Station item = (Station) e.NavigationParameter;
             DetailModel = new StationDetailModel(item);
 
-            //StopHeader.Text = DetailModel.Selection[0].Name;
             StopHeader.Text = DetailModel.Selection.Name;
 
-            //stationList.ItemsSource = DetailModel.Selection[0].Lines;
             DataTemplate sectionTemplate = new DataTemplate();
 
             if (item.Id == 0)
             {
                 FavoriteBtn.Label = "favorite";
-                FavoriteBtn.Icon = new SymbolIcon(Symbol.Add);
+                FavoriteBtn.Icon = new SymbolIcon(Symbol.Favorite);
                 FavoriteBtn.Click += AddFavorite;
             }
             else
             {
                 FavoriteBtn.Label = "unfavorite";
-                FavoriteBtn.Icon = new SymbolIcon(Symbol.Remove);
+                FavoriteBtn.Icon = new SymbolIcon(Symbol.UnFavorite);
                 FavoriteBtn.Click += RemoveFavorite; 
             }
 
@@ -60,24 +58,24 @@ namespace nexBart.Views
 
         private async void AddFavorite(object sender, RoutedEventArgs e)
         {
-            //MainPage.FavoritesView.FavoriteStations.Clear();
-            //await MainPage.FavoritesView.AddFavorite(DetailModel.Selection);
-            //await MainPage.FavoritesView.RefreshFavorites();
+            FavoriteBtn.IsEnabled = false;
+            await DetailModel.FavoriteStation();
             FavoriteBtn.Label = "unfavorite";
-            FavoriteBtn.Icon = new SymbolIcon(Symbol.Remove);
+            FavoriteBtn.Icon = new SymbolIcon(Symbol.UnFavorite);
             FavoriteBtn.Click -= AddFavorite;
             FavoriteBtn.Click += RemoveFavorite;
+            FavoriteBtn.IsEnabled = true;
         }
 
         private async void RemoveFavorite(object sender, RoutedEventArgs e)
         {
-            //MainPage.FavoritesView.FavoriteStations.Clear();
-            //await MainPage.FavoritesView.RemoveFavorite(DetailModel.Selection);
-            //await MainPage.FavoritesView.RefreshFavorites();
+            FavoriteBtn.IsEnabled = false;
+            await DetailModel.UnfavoriteStation();
             FavoriteBtn.Label = "favorite";
-            FavoriteBtn.Icon = new SymbolIcon(Symbol.Add);
+            FavoriteBtn.Icon = new SymbolIcon(Symbol.Favorite);
             FavoriteBtn.Click -= RemoveFavorite;
             FavoriteBtn.Click += AddFavorite;
+            FavoriteBtn.IsEnabled = true;
         }
 
         private async void RefreshTimes(object sender, RoutedEventArgs e)

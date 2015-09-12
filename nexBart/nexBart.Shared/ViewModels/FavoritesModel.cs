@@ -6,31 +6,61 @@ using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using System.Linq;
+using System.ComponentModel;
 
 namespace nexBart.ViewModels
 {
-    public class FavoritesModel
+    public class FavoritesModel : INotifyPropertyChanged
     {
+        private string _noFavsText;
+
         public ObservableCollection<Station> FavoriteStations {get; set;}
+        public string NoFavsText
+        {
+            get
+            {
+                return _noFavsText;
+            }
+            set
+            {
+                _noFavsText = value;
+                NotifyPropertyChanged("NoFavsText");
+            }
+        }
 
         public FavoritesModel()
         {
+            DatabaseHelper.FavoritesChanged += LoadFavorites;
             FavoriteStations = new ObservableCollection<Station>();
         }
 
-        public async Task RefreshFavorites()
+        public async Task LoadFavorites()
         {
-            List<Station> favorites = await DatabaseHelper.GetFavorites();
+            var favorites = await DatabaseHelper.GetFavorites();
 
-            foreach(Station s in favorites)
+            if (favorites.Any())
             {
-                var lines = await WebHelper.GetPredictions(s);
-                s.AddLineList(lines);
+                foreach (Station s in favorites)
+                {
+                    var lines = await WebHelper.GetPredictions(s);
+                    s.AddLineList(lines);
+                }
+
+                while (FavoriteStations.Any())
+                {
+                    FavoriteStations.RemoveAt(FavoriteStations.Count - 1);
+                }
+
+                foreach (Station x in favorites)
+                {
+                    FavoriteStations.Add(x);
+                }
+
+                NoFavsText = "";
             }
-
-            foreach(Station x in favorites)
+            else
             {
-                FavoriteStations.Add(x);
+                NoFavsText = "No favorites yet! Swipe right to select a station and favorite it.";
             }
         }
 
@@ -61,5 +91,18 @@ namespace nexBart.ViewModels
             }
             else return false;
         }
+
+        #region INotify Methods
+        private void NotifyPropertyChanged(string property)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(property));
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        #endregion
+
     }
 }
