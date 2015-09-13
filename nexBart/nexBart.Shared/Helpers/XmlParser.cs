@@ -100,7 +100,7 @@ namespace nexBart.Helpers
             return stationLines;
         }
 
-        public static async Task<List<Alert>> Alerts(XDocument advDoc, XDocument elevDoc)
+        public static List<Alert> ParseAlerts(XDocument advDoc, XDocument elevDoc)
         {
             List<Alert> alerts = new List<Alert>();
             string advType, time, desc;
@@ -160,6 +160,36 @@ namespace nexBart.Helpers
             }
 
             return alerts;
+        }
+
+        public static StationDetails ParseInfo(XDocument infoDoc, XDocument accessDoc)
+        {
+            var details = new StationDetails();
+            var infoElement = infoDoc.Element("root").Element("stations").Element("station");
+            var accessElement = accessDoc.Element("root").Element("stations").Element("station");
+
+            var address = infoElement.Element("address").Value;
+            var city = infoElement.Element("city").Value;
+            string lockers;
+            string bikes;
+            string parking;
+
+            if (accessElement.Attribute("locker_flag").Value == "1") lockers = "Available";
+            else lockers = "Not Available";
+
+            if (accessElement.Attribute("parking_flag").Value == "1") parking = "Available";
+            else parking = "Not Available";
+
+            if (accessElement.Attribute("bike_flag").Value == "1") bikes = "Bike Racks";
+            else if (accessElement.Attribute("bike_station_flag").Value == "1") bikes = "Bike Station";
+            else bikes = "Not Available";
+
+            details.address = string.Format("{0} {1}, CA", address, city);
+            details.lockers = lockers;
+            details.parking = parking;
+            details.bikes = bikes;
+
+            return details;
         }
 
         private static string ToUpperFirstLetter(string source)

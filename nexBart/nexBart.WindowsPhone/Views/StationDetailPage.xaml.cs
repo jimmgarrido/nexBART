@@ -23,14 +23,14 @@ namespace nexBart.Views
             this.navigationHelper.SaveState += this.NavigationHelper_SaveState;
         }
 
-        private void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
+        private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             Station item = (Station) e.NavigationParameter;
+            var sectionTemplate = new DataTemplate();
             DetailModel = new StationDetailModel(item);
+            DataContext = DetailModel.Selection;
 
             StopHeader.Text = DetailModel.Selection.Name;
-
-            DataTemplate sectionTemplate = new DataTemplate();
 
             if (item.Id == 0)
             {
@@ -54,6 +54,8 @@ namespace nexBart.Views
                     Style = HubSectionStyle
                 });
             }
+
+            await DetailModel.LoadStationInfo();
         }
 
         private async void AddFavorite(object sender, RoutedEventArgs e)

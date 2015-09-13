@@ -614,7 +614,7 @@
                             Height="415">
                             <ListView.ItemContainerTransitions>
                                 <TransitionCollection>
-                                    <EntranceThemeTransition/>
+                                    <EntranceThemeTransition FromHorizontalOffset="0" FromVerticalOffset="200"/>
                                     <AddDeleteThemeTransition/>
                                 </TransitionCollection>
                             </ListView.ItemContainerTransitions>

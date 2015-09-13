@@ -13,7 +13,7 @@ namespace nexBart.Helpers
     {
         public static async Task<List<Line>> GetPredictions(Station station)
         {
-            string predictionsUrl = Requests.MakePredictionsURL(station.Abbrv);
+            string predictionsUrl = Requests.MakePredictionsUrl(station.Abbrv);
             var client = new HttpClient();
             var response = new HttpResponseMessage();
             var xmlDoc = new XDocument();
@@ -32,13 +32,16 @@ namespace nexBart.Helpers
                 //ErrorHandler.NetworkError("Error getting predictions. Check network connection and try again.");
             }
 
+            client.Dispose();
+            response.Dispose();
+
             return XmlParser.ParsePredictions(xmlDoc);
         }
 
         public static async Task<List<Alert>> GetAlerts()
         {
-            string advisoryURL = Requests.MakeAdvsURL();
-            string elevURL = Requests.MakeElevURL();
+            string advisoryURL = Requests.MakeAdvsUrl();
+            string elevURL = Requests.MakeElevUrl();
 
             var client = new HttpClient();
             var response = new HttpResponseMessage();
@@ -65,12 +68,46 @@ namespace nexBart.Helpers
 
             }
 
-            return await XmlParser.Alerts(advisoryXml, elevatorXml);
+            client.Dispose();
+            response.Dispose();
+           
+            return await Task.Run(() => XmlParser.ParseAlerts(advisoryXml, elevatorXml));
         }
 
-        public static async Task<Train[]> GetTrainDetails()
+        public static async Task<StationDetails> GetStationInfo(Station station)
         {
-            return new Train[1];
+            string infoUrl = Requests.MakeInfoUrl(station.Abbrv);
+            string accessUrl = Requests.MakeAccessUrl(station.Abbrv);
+
+            var client = new HttpClient();
+            var response = new HttpResponseMessage();
+            XDocument infoXml = new XDocument();
+            XDocument accessXml = new XDocument();
+            string reader;
+
+            //Make sure to pull from network not cache everytime
+            client.DefaultRequestHeaders.IfModifiedSince = DateTime.Now;
+            try
+            {
+                response = await client.GetAsync(new Uri(infoUrl));
+                response.EnsureSuccessStatusCode();
+                reader = await response.Content.ReadAsStringAsync();
+                infoXml = XDocument.Parse(reader);
+
+                response = await client.GetAsync(new Uri(accessUrl));
+                response.EnsureSuccessStatusCode();
+                reader = await response.Content.ReadAsStringAsync();
+                accessXml = XDocument.Parse(reader);
+            }
+            catch (Exception)
+            {
+
+            }
+
+            client.Dispose();
+            response.Dispose();
+
+            return await Task.Run(() => XmlParser.ParseInfo(infoXml, accessXml));
         }
     }
 }

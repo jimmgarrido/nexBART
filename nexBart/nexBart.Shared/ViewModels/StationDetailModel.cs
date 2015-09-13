@@ -19,6 +19,16 @@ namespace nexBart.Models
             Selection = station;
         }
 
+        public async Task LoadStationInfo()
+        {
+            var details = await WebHelper.GetStationInfo(Selection);
+            
+            Selection.Address = details.address;
+            Selection.Bikes = details.bikes;
+            Selection.Parking = details.parking;
+            Selection.Lockers = details.lockers;
+        }
+
         public async Task FavoriteStation()
         {
             await DatabaseHelper.AddFavorite(Selection);

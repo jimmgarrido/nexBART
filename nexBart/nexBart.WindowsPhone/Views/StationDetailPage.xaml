@@ -181,7 +181,7 @@
             <Grid Margin="0 10 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120"/>
-                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="230"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="55"/>
@@ -194,10 +194,11 @@
                 <TextBlock Text="Bikes" Style="{StaticResource LabelStyle}" Grid.Column="0" Grid.Row="1"/>
                 <TextBlock Text="Parking" Style="{StaticResource LabelStyle}" Grid.Column="0" Grid.Row="2"/>
                 <TextBlock Text="Lockers" Style="{StaticResource LabelStyle}" Grid.Column="0" Grid.Row="3"/>
-                <TextBlock Text="2800 Mission Street San Francisco, CA" Style="{StaticResource SubStyle}" Grid.Column="1" Grid.Row="0"/>
-                <TextBlock Text="Racks" Style="{StaticResource SubStyle}" Grid.Column="1" Grid.Row="1"/>
-                <TextBlock Text="Not Available" Style="{StaticResource SubStyle}" Grid.Column="1" Grid.Row="2"/>
-                <TextBlock Text="Not Available" Style="{StaticResource SubStyle}" Grid.Column="1" Grid.Row="3"/>
+                
+                <TextBlock Text="{Binding Address}" Style="{StaticResource SubStyle}" Grid.Column="1" Grid.Row="0"/>
+                <TextBlock Text="{Binding Bikes}" Style="{StaticResource SubStyle}" Grid.Column="1" Grid.Row="1"/>
+                <TextBlock Text="{Binding Parking}" Style="{StaticResource SubStyle}" Grid.Column="1" Grid.Row="2"/>
+                <TextBlock Text="{Binding Lockers}" Style="{StaticResource SubStyle}" Grid.Column="1" Grid.Row="3"/>
             </Grid>
         </StackPanel>
     </Grid>

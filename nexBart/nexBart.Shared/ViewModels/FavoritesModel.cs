@@ -40,15 +40,16 @@ namespace nexBart.ViewModels
 
             if (favorites.Any())
             {
+                while (FavoriteStations.Any())
+                {
+                    FavoriteStations.RemoveAt(FavoriteStations.Count - 1);
+                }
+
                 foreach (Station s in favorites)
                 {
                     var lines = await WebHelper.GetPredictions(s);
                     s.AddLineList(lines);
-                }
-
-                while (FavoriteStations.Any())
-                {
-                    FavoriteStations.RemoveAt(FavoriteStations.Count - 1);
+                    //FavoriteStations.Add(s);
                 }
 
                 foreach (Station x in favorites)

@@ -77,6 +77,7 @@ namespace nexBart
         {
             var statusBar = StatusBar.GetForCurrentView().ProgressIndicator;
             await statusBar.ShowAsync();
+            statusBar.Text = "Loading";
             statusBar.ProgressValue = null;
 
             await FavoritesView.CheckFavoritesDB();
@@ -85,6 +86,7 @@ namespace nexBart
             loaded = true;
 
             statusBar.ProgressValue = 0;
+            statusBar.Text = "";
             await statusBar.HideAsync();
         }
 
