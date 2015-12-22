@@ -14,8 +14,7 @@
             <CollectionViewSource x:Name="alertsGroup" IsSourceGrouped="True"/>
 
             <Style x:Key="ButtonStyle" TargetType="Button">
-                <Setter Property="VerticalAlignment" Value="Bottom"/>
-                <Setter Property="Width" Value="150" />
+                <Setter Property="VerticalContentAlignment" Value="Center"/>
                 <Setter Property="Foreground" Value="#FF575757"/>
                 <Setter Property="BorderBrush" Value="#FF575757"/>
                 <Setter Property="BorderThickness" Value="2"/>
@@ -601,17 +600,21 @@
                         HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}">
                 <DataTemplate>
                     <Grid>
-                        <TextBlock Text="{Binding NoFavsText}" FontSize="20" HorizontalAlignment="Center" Padding="10 0 0 0"
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="{Binding NoFavsText}" Grid.Row="0" FontSize="20" HorizontalAlignment="Center" Padding="10 0 0 0"
                                    Margin="0 -60 0 0" VerticalAlignment="Center" TextAlignment="Center" TextWrapping="WrapWholeWords"/>
                         <ListView
                             ItemsSource="{Binding FavoriteStations}"
+                            Grid.Row="0"
                             IsItemClickEnabled="True"
                             ItemClick="StopClicked"
                             ContinuumNavigationTransitionInfo.ExitElementContainer="True"
                             ItemTemplateSelector="{StaticResource stationTemplateSelector}"
                             Visibility="Visible"
-                            VerticalAlignment="Top"
-                            Height="415">
+                            VerticalAlignment="Stretch">
                             <ListView.ItemContainerTransitions>
                                 <TransitionCollection>
                                     <EntranceThemeTransition FromHorizontalOffset="0" FromVerticalOffset="200"/>
@@ -619,7 +622,7 @@
                                 </TransitionCollection>
                             </ListView.ItemContainerTransitions>
                         </ListView>
-                        <Button Content="Refresh Times" Width="330" Style="{StaticResource ButtonStyle}" Click="RefreshTimes" />
+                        <Button Content="Refresh Times" HorizontalAlignment="Stretch" Grid.Row="1" Style="{StaticResource ButtonStyle}" Click="RefreshTimes" />
                     </Grid>
                 </DataTemplate>
             </HubSection>
@@ -627,16 +630,16 @@
             <HubSection x:Name="SchedulesSection" Header="schedules"
                         DataContext="{Binding Schedules}" HeaderTemplate="{ThemeResource HubSectionHeaderTemplate}" Style="{StaticResource HubSectionStyle}">
                 <DataTemplate>
-                    <Grid Margin="5 0 0 25" VerticalAlignment="Top">
+                    <Grid VerticalAlignment="Stretch">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="50"/>
                             <RowDefinition Height="60"/>
-                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
 
-                        <ComboBox x:Name="StationsBox" Style="{StaticResource ComboBoxStyle}" Width="310" Grid.Row="0"
-                                  HorizontalAlignment="Center" BorderBrush="#FF575757" BorderThickness="2" 
+                        <ComboBox x:Name="StationsBox" Style="{StaticResource ComboBoxStyle}" Grid.Row="0"
+                                  HorizontalAlignment="Stretch" BorderBrush="#FF575757" BorderThickness="2" 
                                   ItemsSource="{Binding StationList}" SelectionChanged="ScheduleStationSelected">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
@@ -647,7 +650,7 @@
 
                         <TextBlock Text="{Binding SelectedStation.Name}"  Style="{StaticResource StationNameStyle}" Margin="0 0 0 0" Grid.Row="1" />
 
-                        <Grid Grid.Row="2" Background="Transparent" VerticalAlignment="Top" DataContext="{Binding SelectedStation}" >
+                        <Grid Grid.Row="2" Background="Transparent" VerticalAlignment="Stretch" DataContext="{Binding SelectedStation}" >
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="55"/>
                                 <RowDefinition Height="55"/>
@@ -714,12 +717,19 @@
                             </StackPanel>
                         </Grid>
 
-                        <Button Click="MoreDetails" Grid.Row="3" Content="More Details" Style="{StaticResource ButtonStyle}" 
-                                HorizontalAlignment="Left" VerticalContentAlignment="Center" VerticalAlignment="Bottom" 
-                                Loaded="DetailButtonLoaded" Visibility="Collapsed"/>
-                        <Button Click="RefreshTimes" Grid.Row="3" Content="Refresh Times" Style="{StaticResource ButtonStyle}"  
-                                HorizontalAlignment="Right" VerticalContentAlignment="Center" VerticalAlignment="Bottom"  
-                                Loaded="RefreshButtonLoaded" Visibility="Collapsed"/>
+                        <Grid Grid.Row="3" HorizontalAlignment="Stretch">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Button Click="MoreDetails" Grid.Column="0" Content="More Details" Style="{StaticResource ButtonStyle}" 
+                                HorizontalAlignment="Stretch" Loaded="DetailButtonLoaded" Visibility="Visible"/>
+                            <Button Click="RefreshTimes" Grid.Column="2" Content="Refresh Times" Style="{StaticResource ButtonStyle}"  
+                                HorizontalAlignment="Stretch" Loaded="RefreshButtonLoaded" Visibility="Visible"/>
+                        </Grid>
+
+                        
                     </Grid>
                 </DataTemplate>
             </HubSection>
@@ -734,7 +744,7 @@
                                 <Grid Margin="0 0 0 25" Visibility="Visible">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="90"/>
-                                        <ColumnDefinition Width="240"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
 
                                     <StackPanel Grid.Column="0">
@@ -742,8 +752,8 @@
                                         <TextBlock Text="{Binding AdvType}" Grid.Column="0"  FontSize="17"  FontFamily="Segoe WP SemiLight"/>
                                     </StackPanel>
 
-                                    <TextBlock Text="{Binding Description}" Grid.Column="1" 
-                                               FontSize="17" Foreground="#FF575757" TextWrapping="WrapWholeWords" FontFamily="Segoe WP SemiLight" />
+                                    <TextBlock Text="{Binding Description}" Grid.Column="1" FontSize="17" Foreground="#FF575757"
+                                               TextWrapping="WrapWholeWords" FontFamily="Segoe WP SemiLight" />
                                 </Grid>
                             </DataTemplate>
                         </ListView.ItemTemplate>

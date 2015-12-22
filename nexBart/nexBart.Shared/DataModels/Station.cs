@@ -14,6 +14,7 @@ namespace nexBart.DataModels
         private string _bikes;
         private string _parking;
         private string _lockers;
+        private string _about;
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -72,6 +73,19 @@ namespace nexBart.DataModels
             {
                 _lockers = value;
                 NotifyPropertyChanged("Lockers");
+            }
+        }
+        [Ignore]
+        public string Info
+        {
+            get
+            {
+                return _about;
+            }
+            set
+            {
+                _about = value;
+                NotifyPropertyChanged("Info");
             }
         }
 

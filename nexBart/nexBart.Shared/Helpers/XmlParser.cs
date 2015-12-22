@@ -130,7 +130,7 @@ namespace nexBart.Helpers
                 }
                 else
                 {
-                    alerts.Add(new Alert("Advisories", "", desc, ""));
+                    alerts.Add(new Alert("Advisories", "", desc + " Enjoy your ride!", ""));
                 }
             }
 
@@ -183,6 +183,8 @@ namespace nexBart.Helpers
             if (accessElement.Attribute("bike_flag").Value == "1") bikes = "Bike Racks";
             else if (accessElement.Attribute("bike_station_flag").Value == "1") bikes = "Bike Station";
             else bikes = "Not Available";
+
+            details.info = infoElement.Element("intro").Value;
 
             details.address = string.Format("{0} {1}, CA", address, city);
             details.lockers = lockers;

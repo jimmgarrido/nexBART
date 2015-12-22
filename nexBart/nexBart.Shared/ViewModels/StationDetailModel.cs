@@ -27,6 +27,7 @@ namespace nexBart.Models
             Selection.Bikes = details.bikes;
             Selection.Parking = details.parking;
             Selection.Lockers = details.lockers;
+            Selection.Info = details.info;
         }
 
         public async Task FavoriteStation()

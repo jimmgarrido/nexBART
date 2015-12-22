@@ -26,13 +26,14 @@
             </Style>
 
             <Style x:Key="DestinationStyle" TargetType="TextBlock">
-                <Setter Property="FontSize" Value="24"/>
+                <Setter Property="FontSize" Value="23"/>
                 <Setter Property="Foreground" Value="#575757"/>
             </Style>
 
             <Style x:Key="LabelStyle" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#575757"/>
                 <Setter Property="FontSize" Value="19"/>
+                <Setter Property="Grid.Column" Value="0"/>
             </Style>
 
             <Style x:Key="TimesStyle" TargetType="TextBlock">
@@ -52,6 +53,7 @@
                 <Setter Property="Foreground" Value="#0083d3"/>
                 <Setter Property="FontSize" Value="19"/>
                 <Setter Property="TextWrapping" Value="WrapWholeWords"/>
+                <Setter Property="Grid.Column" Value="1"/>
             </Style>
 
             <DataTemplate x:Name="HubSectionTemplate">
@@ -168,38 +170,50 @@
                 <GradientStop Color="#FFEDEDED" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <StackPanel Margin="15 30 0 0">
+        <StackPanel Margin="15 25 0 0" Grid.Row="0">
             <TextBlock x:Name="StopHeader" Grid.Row="0" Foreground="#0083d3" Style="{ThemeResource HeaderTextBlockStyle}" 
                        CharacterSpacing="{ThemeResource PivotHeaderItemCharacterSpacing}" FontSize="38"/>
 
-            <TextBlock Text="Departures" Margin="0 5 0 0" Style="{StaticResource HeaderStyle}"/>
+            <TextBlock Text="Departures" Style="{StaticResource HeaderStyle}"/>
             
             <Hub x:Name="DepartHub" Height="240" />
 
-            <TextBlock Text="Station Info" Margin="0 20 0 0" Style="{StaticResource HeaderStyle}"/>
+            <TextBlock Text="Station Info" Margin="0 5 0 0" Style="{StaticResource HeaderStyle}"/>
+
+        </StackPanel>
+
+        <ScrollViewer Grid.Row="1" Padding="15 0 0 55">
             <Grid Margin="0 10 0 0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="120"/>
                     <ColumnDefinition Width="230"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="55"/>
+                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="35"/>
                     <RowDefinition Height="35"/>
+                    <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Text="Address" Style="{StaticResource LabelStyle}" Grid.Column="0" Grid.Row="0"/>
+                <TextBlock Text="Address" Style="{StaticResource LabelStyle}" Margin="0 0 0 15" Grid.Column="0" Grid.Row="0"/>
                 <TextBlock Text="Bikes" Style="{StaticResource LabelStyle}" Grid.Column="0" Grid.Row="1"/>
                 <TextBlock Text="Parking" Style="{StaticResource LabelStyle}" Grid.Column="0" Grid.Row="2"/>
                 <TextBlock Text="Lockers" Style="{StaticResource LabelStyle}" Grid.Column="0" Grid.Row="3"/>
+                <TextBlock Text="Area Info" Style="{StaticResource LabelStyle}" Grid.Column="0" Grid.Row="4"/>
                 
-                <TextBlock Text="{Binding Address}" Style="{StaticResource SubStyle}" Grid.Column="1" Grid.Row="0"/>
+                <TextBlock Text="{Binding Address}" Style="{StaticResource SubStyle}" Margin="0 0 0 15" Grid.Column="1" Grid.Row="0"/>
                 <TextBlock Text="{Binding Bikes}" Style="{StaticResource SubStyle}" Grid.Column="1" Grid.Row="1"/>
                 <TextBlock Text="{Binding Parking}" Style="{StaticResource SubStyle}" Grid.Column="1" Grid.Row="2"/>
                 <TextBlock Text="{Binding Lockers}" Style="{StaticResource SubStyle}" Grid.Column="1" Grid.Row="3"/>
+                <TextBlock Text="{Binding Info}" Style="{StaticResource SubStyle}" Padding="0 0 0 5" Grid.Row="4"/>
             </Grid>
-        </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

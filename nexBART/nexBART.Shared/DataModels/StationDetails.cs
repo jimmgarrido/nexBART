@@ -10,5 +10,6 @@ namespace nexBart.DataModels
         public string bikes;
         public string parking;
         public string lockers;
+        public string info;
     }
 }
