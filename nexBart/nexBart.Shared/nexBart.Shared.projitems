@@ -9,12 +9,6 @@
     <Import_RootNamespace>nexBart</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
-      <SubType>Designer</SubType>
-    </ApplicationDefinition>
-    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
-      <DependentUpon>App.xaml</DependentUpon>
-    </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\Alert.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\Destination.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)DataModels\StationDetails.cs" />
@@ -27,8 +21,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\Requests.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\XmlParser.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\AlertsModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\BaseViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\FavoritesModel.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\SchedulesModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\MenuViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)ViewModels\RealTimeViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StationDetailModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StationTemplateSelector.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)ViewModels\StringFormat.cs" />

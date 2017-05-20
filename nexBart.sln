@@ -1,23 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "nexBart.Shared", "nexBart\nexBart.Shared\nexBart.Shared.shproj", "{813B46CD-3217-4260-B256-BE2A69B8BA9D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nexBart.WindowsPhone", "nexBart\nexBart.WindowsPhone\nexBart.WindowsPhone.csproj", "{850FEDB8-7326-451A-AB19-2704CD166B2D}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{9A027CA1-2318-4FF3-B889-F40D7390DAE6}"
-	ProjectSection(SolutionItems) = preProject
-		.nuget\NuGet.Config = .nuget\NuGet.Config
-		.nuget\NuGet.exe = .nuget\NuGet.exe
-		.nuget\NuGet.targets = .nuget\NuGet.targets
-	EndProjectSection
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nexBart.UWP", "nexBart.UWP\nexBart.UWP.csproj", "{06A9536D-5C3A-4686-8645-4BF5B5A467B0}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		nexBart\nexBart.Shared\nexBart.Shared.projitems*{850fedb8-7326-451a-ab19-2704cd166b2d}*SharedItemsImports = 4
+		nexBart\nexBart.Shared\nexBart.Shared.projitems*{06a9536d-5c3a-4686-8645-4bf5b5a467b0}*SharedItemsImports = 4
 		nexBart\nexBart.Shared\nexBart.Shared.projitems*{813b46cd-3217-4260-b256-be2a69b8ba9d}*SharedItemsImports = 13
+		nexBart\nexBart.Shared\nexBart.Shared.projitems*{850fedb8-7326-451a-ab19-2704cd166b2d}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -50,6 +46,26 @@ Global
 		{850FEDB8-7326-451A-AB19-2704CD166B2D}.Release|x86.ActiveCfg = Release|x86
 		{850FEDB8-7326-451A-AB19-2704CD166B2D}.Release|x86.Build.0 = Release|x86
 		{850FEDB8-7326-451A-AB19-2704CD166B2D}.Release|x86.Deploy.0 = Release|x86
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Debug|ARM.ActiveCfg = Debug|ARM
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Debug|ARM.Build.0 = Debug|ARM
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Debug|ARM.Deploy.0 = Debug|ARM
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Debug|x64.ActiveCfg = Debug|x64
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Debug|x64.Build.0 = Debug|x64
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Debug|x64.Deploy.0 = Debug|x64
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Debug|x86.ActiveCfg = Debug|x86
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Debug|x86.Build.0 = Debug|x86
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Debug|x86.Deploy.0 = Debug|x86
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Release|Any CPU.ActiveCfg = Release|x86
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Release|ARM.ActiveCfg = Release|ARM
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Release|ARM.Build.0 = Release|ARM
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Release|ARM.Deploy.0 = Release|ARM
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Release|x64.ActiveCfg = Release|x64
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Release|x64.Build.0 = Release|x64
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Release|x64.Deploy.0 = Release|x64
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Release|x86.ActiveCfg = Release|x86
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Release|x86.Build.0 = Release|x86
+		{06A9536D-5C3A-4686-8645-4BF5B5A467B0}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

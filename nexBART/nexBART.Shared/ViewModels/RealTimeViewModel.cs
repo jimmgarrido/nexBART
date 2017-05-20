@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace nexBart.ViewModels
 {
-    public class SchedulesModel : INotifyPropertyChanged
+    public class RealTimeViewModel : BaseViewModel
     {
         private Station _selectedStation;
 
@@ -25,11 +25,11 @@ namespace nexBart.ViewModels
             private set
             {
                 _selectedStation = value;
-                NotifyPropertyChanged("SelectedStation");
+                NotifyPropertyChanged();
             }
         }
 
-       public SchedulesModel()
+       public RealTimeViewModel()
        {
            StationList = new List<Station>()
            {
@@ -82,20 +82,8 @@ namespace nexBart.ViewModels
 
        public async Task StationSelected(Station selection)
        {
-           selection.AddLineList(await WebHelper.GetPredictions(selection));
-            SelectedStation = selection;
+			selection.AddLineList(await WebHelper.GetPredictions(selection));
+			SelectedStation = selection;
        }
-
-        #region INotify Methods
-        private void NotifyPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
     }
 }
