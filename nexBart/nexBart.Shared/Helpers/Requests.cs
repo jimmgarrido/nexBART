@@ -6,7 +6,7 @@ namespace nexBart.Helpers
 {
     public class Requests
     {
-        private static readonly string key = "Q9VI-UXQY-I9GQ-DT35";
+        private static readonly string key = "Q9VI-UXQY-I9GQ-DT35"; //public BART api key
 
         private static Dictionary<string, string> Urls = new Dictionary<string, string>()
         {

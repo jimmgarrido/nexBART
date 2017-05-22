@@ -22,8 +22,11 @@ namespace nexBart.ViewModels
             {
                 return _selectedStation;
             }
-            private set
+            set
             {
+				if (_selectedStation == value)
+					return;
+
                 _selectedStation = value;
                 NotifyPropertyChanged();
             }
@@ -80,10 +83,10 @@ namespace nexBart.ViewModels
            };
        }
 
-       public async Task StationSelected(Station selection)
+       public async Task UpdateStationData()
        {
-			selection.AddLineList(await WebHelper.GetPredictions(selection));
-			SelectedStation = selection;
+			var predictions = await Task.Run(() => WebHelper.GetPredictions(SelectedStation));
+			SelectedStation.Lines = predictions;
        }
     }
 }

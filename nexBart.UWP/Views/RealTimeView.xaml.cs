@@ -21,7 +21,8 @@ namespace nexBart.UWP.Views
 		private async void StationSelected(object sender, SelectionChangedEventArgs e)
 		{
 			var selectedStation = ((ComboBox)sender).SelectedItem as Station;
-			await ViewModel.StationSelected(selectedStation);
+			ViewModel.SelectedStation = selectedStation;
+			await ViewModel.UpdateStationData();
 		}
 	}
 }

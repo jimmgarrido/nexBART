@@ -4,12 +4,15 @@ using System;
 using System.Collections.Generic;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-
+using Windows.UI.Xaml.Navigation;
 
 namespace nexBart.UWP
 {
     public sealed partial class MainPage : Page
     {
+		RealTimeView realTime;
+		ScheduleView schedules;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -17,16 +20,32 @@ namespace nexBart.UWP
 			MenuList.DataContext = new MenuViewModel();
         }
 
+		protected override void OnNavigatedTo(NavigationEventArgs e)
+		{
+			base.OnNavigatedTo(e);
+
+			MenuList.SelectedItem = "Real Time";
+		}
+
 		private void MenuList_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
+			UserControl newView;
 			var selection = (string)((ListView)sender).SelectedItem;
 
 			if (selection == "Real Time")
-				ContentGrid.Children[0] = new RealTimeView();
+			{
+				if (realTime == null)
+					realTime = new RealTimeView();
+
+				newView = realTime;
+			}
 			else if (selection == "Schedule")
-				ContentGrid.Children[0] = new ScheduleView();
-			else 
-				ContentGrid.Children[0] = new StackPanel();
+				newView = new ScheduleView();
+			else
+				newView = new UserControl();
+
+			ContentGrid.Children.Clear();
+			ContentGrid.Children.Add(newView);
 		}
 	}
 }

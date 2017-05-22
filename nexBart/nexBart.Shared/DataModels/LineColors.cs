@@ -4,7 +4,7 @@ using System.Text;
 
 namespace nexBart.DataModels
 {
-    class LineColors
+    public class LineColors
     {
         public static Dictionary<string, RGBColor> Colors = new Dictionary<string, RGBColor>()
         {
@@ -18,7 +18,7 @@ namespace nexBart.DataModels
         };
     }
 
-    class RGBColor
+    public class RGBColor
     {
         public byte[] colorBytes = new byte[4];
 

@@ -10,7 +10,7 @@ namespace nexBart.DataModels
 {
     public class Line
     {
-        public Brush LineColor { get; set; }
+        public RGBColor LineColor { get; set; }
         public Destination[] Destinations { get; set; }
 
         public string colorName;
@@ -22,17 +22,17 @@ namespace nexBart.DataModels
 
         public Line(string color)
         {
-            RGBColor rgbColor;
+            //RGBColor rgbColor;
             Destinations = new Destination[2];
 
             //Destinations[0] = new Destination(dest);
 
             if (LineColors.Colors.ContainsKey(color))
-                rgbColor = LineColors.Colors[color];
+                LineColor = LineColors.Colors[color];
             else
-                rgbColor = LineColors.Colors["BLACK"];
+                LineColor = LineColors.Colors["BLACK"];
 
-            LineColor =  new SolidColorBrush(Color.FromArgb(rgbColor.colorBytes[0], rgbColor.colorBytes[1], rgbColor.colorBytes[2], rgbColor.colorBytes[3]));
+            //LineColor =  new SolidColorBrush(Color.FromArgb(rgbColor.colorBytes[0], rgbColor.colorBytes[1], rgbColor.colorBytes[2], rgbColor.colorBytes[3]));
             colorName = color;
         }
     }

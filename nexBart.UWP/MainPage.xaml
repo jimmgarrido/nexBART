@@ -11,7 +11,7 @@
 
     </Page.Resources>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="#FFEAEAEA">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width=".5*"/>
             <ColumnDefinition Width="*"/>
@@ -49,8 +49,7 @@
                     <EntranceThemeTransition/>
                 </TransitionCollection>
             </Grid.ChildrenTransitions>
-
-            <views:RealTimeView />
+            
         </Grid>
 
         <StackPanel Grid.Column="2">

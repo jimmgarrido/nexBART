@@ -9,13 +9,14 @@ using System.Text;
 namespace nexBart.DataModels
 {
     [Table("Favorites")]
-    public class Station : INotifyPropertyChanged
+    public class Station : BaseObject
     {
         private string _address;
         private string _bikes;
         private string _parking;
         private string _lockers;
         private string _about;
+		private List<Line> _lines;
 
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -23,7 +24,19 @@ namespace nexBart.DataModels
         public string Abbrv { get; set; }
 
         [Ignore]
-        public ObservableCollection<Line> Lines { get; set; }
+        public List<Line> Lines {
+			get {
+				return _lines;
+			}
+			set
+			{
+				if (_lines == value)
+					return;
+
+				_lines = value;
+				NotifyPropertyChanged();
+			}
+		}
         [Ignore]
         public string Address
         {
@@ -34,7 +47,7 @@ namespace nexBart.DataModels
             set
             {
                 _address = value;
-                NotifyPropertyChanged("Address");
+                NotifyPropertyChanged();
             }
         }
         [Ignore]
@@ -47,7 +60,7 @@ namespace nexBart.DataModels
             set
             {
                 _bikes = value;
-                NotifyPropertyChanged("Bikes");
+                NotifyPropertyChanged();
             }
         }
         [Ignore]
@@ -60,7 +73,7 @@ namespace nexBart.DataModels
             set
             {
                 _parking = value;
-                NotifyPropertyChanged("Parking");
+                NotifyPropertyChanged();
             }
         }
         [Ignore]
@@ -73,7 +86,7 @@ namespace nexBart.DataModels
             set
             {
                 _lockers = value;
-                NotifyPropertyChanged("Lockers");
+                NotifyPropertyChanged();
             }
         }
         [Ignore]
@@ -86,18 +99,14 @@ namespace nexBart.DataModels
             set
             {
                 _about = value;
-                NotifyPropertyChanged("Info");
+                NotifyPropertyChanged();
             }
         }
 
-        public Station() 
-        {
-            Lines = new ObservableCollection<Line>();
-        }
+		public Station() { }
 
         public Station(string _name, string _abbrv)
         {
-            Lines = new ObservableCollection<Line>();
             Name = _name;
             Abbrv = _abbrv;
         }
@@ -109,17 +118,5 @@ namespace nexBart.DataModels
                 Lines.Add(l);
             }
         }
-
-        #region INotify Methods
-        private void NotifyPropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        #endregion
     }
 }

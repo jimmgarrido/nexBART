@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Data;
 
-namespace nexBart.ViewModels
+namespace nexBart.Helpers
 {
     public class StringFormat : IValueConverter
     {
