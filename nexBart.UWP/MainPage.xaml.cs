@@ -1,4 +1,5 @@
-﻿using nexBart.UWP.Views;
+﻿using nexBart.Helpers;
+using nexBart.UWP.Views;
 using nexBart.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -17,14 +18,15 @@ namespace nexBart.UWP
         {
             this.InitializeComponent();
 
-			MenuList.DataContext = new MenuViewModel();
+			//MenuList.DataContext = new MenuViewModel();
+			FavoritesManager.Init();
         }
 
 		protected override void OnNavigatedTo(NavigationEventArgs e)
 		{
 			base.OnNavigatedTo(e);
 
-			MenuList.SelectedItem = "Real Time";
+			//MenuList.SelectedItem = "Real Time";
 		}
 
 		private void MenuList_SelectionChanged(object sender, SelectionChangedEventArgs e)

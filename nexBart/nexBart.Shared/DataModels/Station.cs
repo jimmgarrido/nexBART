@@ -105,10 +105,11 @@ namespace nexBart.DataModels
 
 		public Station() { }
 
-        public Station(string _name, string _abbrv)
+        public Station(string name, string abbrv)
         {
-            Name = _name;
-            Abbrv = _abbrv;
+            Name = name;
+            Abbrv = abbrv;
+			Lines = new List<Line>();
         }
 
         public void AddLineList(List<Line> lines)

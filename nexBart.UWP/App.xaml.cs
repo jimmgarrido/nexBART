@@ -5,8 +5,13 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Core;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Foundation.Metadata;
+using Windows.UI;
+using Windows.UI.Core;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -50,7 +55,22 @@ namespace nexBart.UWP
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
 
-                if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
+				CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = true;
+				if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.ApplicationView"))
+				{
+					var titleBar = ApplicationView.GetForCurrentView().TitleBar;
+					if (titleBar != null)
+					{
+						titleBar.ButtonBackgroundColor = Colors.Transparent;
+						titleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
+						//titleBar.BackgroundColor = Color.FromArgb(255, 0, 131, 211);
+						//titleBar.InactiveBackgroundColor = Color.FromArgb(255, 0, 131, 211);
+						//titleBar.ButtonBackgroundColor = Color.FromArgb(255, 0, 131, 211);
+						//titleBar.ButtonInactiveBackgroundColor = Color.FromArgb(255, 0, 131, 211);
+					}
+				}
+
+				if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     //TODO: Load state from previously suspended application
                 }

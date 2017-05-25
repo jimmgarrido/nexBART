@@ -14,9 +14,7 @@ using Windows.Storage;
 
 namespace nexBart.Helpers
 {
-    public delegate Task ChangedEventHandler();
-
-    public class DatabaseHelper
+    public static class DatabaseHelper
     {
         private static string dbPath;
         private static List<Station> _favorites;
@@ -30,15 +28,10 @@ namespace nexBart.Helpers
             set
             {
                 _favorites = value;
-                if(FavoritesChanged != null)
-                {
-                    FavoritesChanged();
-                }
             }
         }
-        public static ChangedEventHandler FavoritesChanged;
 
-        public static async Task CheckDB()
+        public static async Task InitDatabase()
         {
             bool dbExsists;
             StorageFile file = null;
@@ -58,8 +51,6 @@ namespace nexBart.Helpers
             {
                 await MakeDB(file);
             }
-
-            if (FavoritesChanged != null) FavoritesChanged();
         }
 
         private static async Task MakeDB(StorageFile file)
@@ -72,24 +63,22 @@ namespace nexBart.Helpers
             await favDB.CreateTableAsync<Station>();
         }
 
-        public static async Task<List<Station>> GetFavorites()
+        public static async Task<List<Station>> GetFavoritesAsync()
         {
             SQLiteAsyncConnection favDB = new SQLiteAsyncConnection(dbPath);
             return await favDB.QueryAsync<Station>("SELECT * FROM Favorites");
         }
 
-        public static async Task AddFavorite(Station s)
+        public static async Task AddFavoriteAsync(Station s)
         {
             SQLiteAsyncConnection conn = new SQLiteAsyncConnection(dbPath);
             await conn.InsertAsync(s);
-            if (FavoritesChanged != null) FavoritesChanged();
         }
 
         public static async Task RemoveFavorite(Station s)
         {
             SQLiteAsyncConnection conn = new SQLiteAsyncConnection(dbPath);
             await conn.DeleteAsync(s);
-            if (FavoritesChanged != null) FavoritesChanged();
         }
     }
 }

@@ -30,13 +30,44 @@ namespace nexBart.ViewModels
 
         public FavoritesModel()
         {
-            DatabaseHelper.FavoritesChanged += LoadFavorites;
             FavoriteStations = new ObservableCollection<Station>();
+			FavoritesManager.FavoritesChanged += FavoritesManager_FavoritesChanged;
         }
 
-        public async Task LoadFavorites()
+		private async void FavoritesManager_FavoritesChanged(object sender, EventArgs e)
+		{
+			var favorites = FavoritesManager.Favorites;
+
+			if (favorites.Any())
+			{
+				while (FavoriteStations.Any())
+				{
+					FavoriteStations.RemoveAt(FavoriteStations.Count - 1);
+				}
+
+				foreach (Station s in favorites)
+				{
+					var lines = await WebHelper.GetPredictions(s);
+					s.Lines = lines;
+					//FavoriteStations.Add(s);
+				}
+
+				foreach (Station x in favorites)
+				{
+					FavoriteStations.Add(x);
+				}
+
+				NoFavsText = "";
+			}
+			else
+			{
+				NoFavsText = "No favorites yet! Swipe right to select a station and favorite it.";
+			}
+		}
+
+		public async Task LoadFavorites()
         {
-            var favorites = await DatabaseHelper.GetFavorites();
+            var favorites = await DatabaseHelper.GetFavoritesAsync();
 
             if (favorites.Any())
             {
@@ -67,7 +98,7 @@ namespace nexBart.ViewModels
 
         public async Task AddFavorite(Station favorite)
         {
-            await DatabaseHelper.AddFavorite(favorite);
+            await DatabaseHelper.AddFavoriteAsync(favorite);
         }
 
         public async Task RemoveFavorite(Station favorite)
@@ -77,7 +108,7 @@ namespace nexBart.ViewModels
 
         public async Task CheckFavoritesDB()
         {
-            await DatabaseHelper.CheckDB();
+            await DatabaseHelper.InitDatabase();
         }
 
         public bool IsFavorite(Station selection)

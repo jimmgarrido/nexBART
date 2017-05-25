@@ -3,6 +3,7 @@ using Windows.UI.Xaml.Controls;
 
 using nexBart.ViewModels;
 using nexBart.DataModels;
+using nexBart.Helpers;
 
 namespace nexBart.UWP.Views
 {
@@ -23,6 +24,12 @@ namespace nexBart.UWP.Views
 			var selectedStation = ((ComboBox)sender).SelectedItem as Station;
 			ViewModel.SelectedStation = selectedStation;
 			await ViewModel.UpdateStationData();
+		}
+
+		private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+		{
+			var currentStation = ViewModel.SelectedStation;
+			FavoritesManager.FavoriteStation(currentStation);
 		}
 	}
 }

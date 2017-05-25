@@ -8,25 +8,24 @@
     mc:Ignorable="d">
 
     <Page.Resources>
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="AppColor">#FF0083d3</SolidColorBrush>
 
+            <Style x:Key="ContentGridStyle" TargetType="Grid">
+                <Setter Property="Padding" Value="30,15"/>
+            </Style>
+        </ResourceDictionary>
     </Page.Resources>
 
     <Grid Background="#FFEAEAEA">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width=".5*"/>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width=".75*"/>
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-        <Grid Grid.Column="0" Background="#FF0083d3">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            
 
-            <TextBlock x:Name="HeaderText" Text="nexBART" Style="{StaticResource TitleText}"/>
-
-            <ListView x:Name="MenuList" 
+            <!--<ListView x:Name="MenuList" 
                       Grid.Row="1"
                       ItemsSource="{Binding MenuItems}"
                       SelectedItem="{Binding CurrentItem, Mode=TwoWay}"
@@ -36,24 +35,34 @@
                         <TextBlock Text="{Binding}" Foreground="White"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
-        </Grid>
+            </ListView>-->
 
-        <Grid x:Name="ContentGrid" Grid.Column="1">
+        <Rectangle Fill="{StaticResource AppColor}" Grid.ColumnSpan="2" Height="60"/>
+        <TextBlock x:Name="HeaderText" Text="nexBART" Style="{StaticResource AppTitleText}"/>
+
+        <Grid x:Name="ContentGrid" Grid.Row="1" Style="{StaticResource ContentGridStyle}" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height=".75*"/>
             </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
             <Grid.ChildrenTransitions>
                 <TransitionCollection>
                     <EntranceThemeTransition/>
                 </TransitionCollection>
             </Grid.ChildrenTransitions>
-            
-        </Grid>
 
-        <StackPanel Grid.Column="2">
-            <views:AlertsView />
-        </StackPanel>
+            <views:FavoritesView />
+            <views:AlertsView Grid.Row="1"/>
+
+            <views:RealTimeView x:Name="RealView" Grid.Column="2"/>
+
+        </Grid>
     </Grid>
 </Page>

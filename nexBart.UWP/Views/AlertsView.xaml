@@ -9,12 +9,58 @@
     d:DesignHeight="700"
     d:DesignWidth="400">
 
-    <Grid>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <CollectionViewSource x:Name="alertsGroup" IsSourceGrouped="True"/>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid Padding="10,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <TextBlock x:Name="HeaderText" Text="Alerts" Style="{StaticResource HeaderText}"/>
+
+        <ListView ItemsSource="{Binding Source={StaticResource alertsGroup }}"
+                  Grid.Row="1"
+                  VerticalAlignment="Stretch" 
+                  HorizontalAlignment="Stretch"
+                  SelectionMode="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid Margin="0 0 0 25" Visibility="Visible">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Grid.Column="0">
+                            <TextBlock Text="{Binding Time}" Grid.Column="0"  FontSize="16"  FontFamily="Segoe WP SemiLight"/>
+                            <TextBlock Text="{Binding AdvType}" Grid.Column="0"  FontSize="16"  FontFamily="Segoe WP SemiLight"/>
+                        </StackPanel>
+
+                        <TextBlock Text="{Binding Description}" Grid.Column="1" FontSize="16" Foreground="#FF575757"
+                                               TextWrapping="WrapWholeWords" FontFamily="Segoe WP SemiLight" />
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.GroupStyle>
+                <GroupStyle HidesIfEmpty="False">
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Key}" FontSize="17"/>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                </GroupStyle>
+            </ListView.GroupStyle>
+            <ListView.ItemContainerTransitions>
+                <TransitionCollection>
+                    <EntranceThemeTransition/>
+                    <AddDeleteThemeTransition/>
+                </TransitionCollection>
+            </ListView.ItemContainerTransitions>
+        </ListView>
     </Grid>
 </UserControl>
