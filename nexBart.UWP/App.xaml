@@ -39,24 +39,7 @@
                 <Setter Property="VerticalAlignment" Value="Center"/>
             </Style>
 
-            <Style x:Key="DestinationStyle" TargetType="TextBlock">
-                <Setter Property="Foreground" Value="#FF575757"/>
-                <Setter Property="FontSize" Value="17"/>
-                <Setter Property="VerticalAlignment" Value="Top"/>
-                <Setter Property="TextWrapping" Value="Wrap"/>
-            </Style>
 
-            <Style x:Key="TimeStyle" TargetType="TextBlock">
-                <Setter Property="Foreground" Value="#0083d3"/>
-                <Setter Property="FontSize" Value="17"/>
-                <Setter Property="VerticalAlignment" Value="Top"/>
-            </Style>
-
-            <Style x:Key="RectangleStyle" TargetType="Rectangle">
-                <Setter Property="Width" Value="6"/>
-                <Setter Property="HorizontalAlignment" Value="Center"/>
-                <Setter Property="VerticalAlignment" Value="Stretch"/>
-            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

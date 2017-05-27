@@ -58,10 +58,10 @@
                 </TransitionCollection>
             </Grid.ChildrenTransitions>
 
-            <views:FavoritesView />
-            <views:AlertsView Grid.Row="1"/>
+            <views:FavoritesView Grid.RowSpan="2"/>
 
             <views:RealTimeView x:Name="RealView" Grid.Column="2"/>
+            <views:AlertsView Grid.Row="1" Grid.Column="2"/>
 
         </Grid>
     </Grid>
