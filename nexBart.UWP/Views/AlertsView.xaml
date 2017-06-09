@@ -25,24 +25,25 @@
 
         <ListView ItemsSource="{Binding Source={StaticResource alertsGroup }}"
                   Grid.Row="1"
+                  Padding="-2,0"
                   VerticalAlignment="Stretch" 
                   HorizontalAlignment="Stretch"
                   SelectionMode="None">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Grid Margin="0 0 0 25" Visibility="Visible">
+                    <Grid Margin="20,0,0,10">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="90"/>
+                            <ColumnDefinition Width="85"/>
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                         <StackPanel Grid.Column="0">
-                            <TextBlock Text="{Binding Time}" Grid.Column="0"  FontSize="16"  FontFamily="Segoe WP SemiLight"/>
-                            <TextBlock Text="{Binding AdvType}" Grid.Column="0"  FontSize="16"  FontFamily="Segoe WP SemiLight"/>
+                            <TextBlock Text="{Binding Time}" Grid.Column="0"  FontSize="14"/>
+                            <TextBlock Text="{Binding AdvType}" Grid.Column="0"  FontSize="14"/>
                         </StackPanel>
 
-                        <TextBlock Text="{Binding Description}" Grid.Column="1" FontSize="16" Foreground="#FF575757"
-                                               TextWrapping="WrapWholeWords" FontFamily="Segoe WP SemiLight" />
+                        <TextBlock Text="{Binding Description}" Grid.Column="1" FontSize="15" Foreground="#FF575757"
+                                               TextWrapping="WrapWholeWords"/>
                     </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
@@ -50,7 +51,7 @@
                 <GroupStyle HidesIfEmpty="False">
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Key}" FontSize="17"/>
+                            <TextBlock Text="{Binding Key}" FontSize="16"/>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>

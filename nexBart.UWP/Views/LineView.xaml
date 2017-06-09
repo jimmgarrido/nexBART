@@ -19,14 +19,14 @@
             
             <Style x:Key="DestinationStyle" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#FF575757"/>
-                <Setter Property="FontSize" Value="17"/>
+                <Setter Property="FontSize" Value="16"/>
                 <Setter Property="VerticalAlignment" Value="Top"/>
                 <Setter Property="TextWrapping" Value="Wrap"/>
             </Style>
 
             <Style x:Key="TimeStyle" TargetType="TextBlock">
                 <Setter Property="Foreground" Value="#0083d3"/>
-                <Setter Property="FontSize" Value="17"/>
+                <Setter Property="FontSize" Value="16"/>
                 <Setter Property="VerticalAlignment" Value="Top"/>
                 <Setter Property="TextWrapping" Value="Wrap"/>
             </Style>
@@ -43,6 +43,7 @@
             <ColumnDefinition Width="15"/>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="15"/>
         </Grid.ColumnDefinitions>
 
         <Rectangle Fill="{Binding LineColor, Converter={StaticResource LineColorConverter}}" 
