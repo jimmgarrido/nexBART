@@ -13,21 +13,26 @@ namespace nexBart.UWP
     {
 		RealTimeView realTime;
 		ScheduleView schedules;
+        bool isLoaded = false;
 
         public MainPage()
         {
             this.InitializeComponent();
 
 			//MenuList.DataContext = new MenuViewModel();
-			FavoritesManager.Init();
         }
 
 		protected override void OnNavigatedTo(NavigationEventArgs e)
 		{
 			base.OnNavigatedTo(e);
 
-			//MenuList.SelectedItem = "Real Time";
-		}
+            if(!isLoaded)
+            {
+                FavoritesManager.Init();
+                isLoaded = true;
+            }
+            //MenuList.SelectedItem = "Real Time";
+        }
 
 		private void MenuList_SelectionChanged(object sender, SelectionChangedEventArgs e)
 		{
