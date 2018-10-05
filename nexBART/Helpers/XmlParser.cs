@@ -146,10 +146,13 @@ namespace nexBart.Helpers
 
                     //Format time from given value to friendly AM/PM
                     time = e.Element("posted").Value;
-                    time = time.Substring(0, time.Length - 4);
+                    if (time.Length > 0)
+                    {
+                        time = time.Substring(0, time.Length - 4);
 
-                    fullTime = DateTime.Parse(time);
-                    time = fullTime.ToString("hh:mm tt");
+                        fullTime = DateTime.Parse(time);
+                        time = fullTime.ToString("hh:mm tt");
+                    }
 
                     alerts.Add(new Alert("Elevators", "", desc, time));
                 }
